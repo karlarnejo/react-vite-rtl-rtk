@@ -1,0 +1,16 @@
+{
+    "name": "vite-typescript-rtk",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "app/*"
+    ],
+    "scripts": {
+        "frontend": "cd app/frontend && npm start",
+        "mocks": "cd app/mocks && npm start",
+        "start": "concurrently \"npm run frontend\" \"npm run mocks\""
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
