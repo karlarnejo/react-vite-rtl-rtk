@@ -1,7 +1,8 @@
 {
-    "name": "vite-typescript-json-server",
+    "name": "vite-typescript-mocks",
     "version": "1.0.0",
     "private": true,
+    "type": "module",
     "scripts": {
         "start": "json-server --watch db.json --port 5000"
     },

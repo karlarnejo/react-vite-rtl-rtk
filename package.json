@@ -2,13 +2,15 @@
     "name": "vite-typescript-rtk",
     "version": "1.0.0",
     "private": true,
-    "workspaces": [
-        "app/*"
-    ],
+    "workspaces": {
+        "packages": ["app/*"]
+    },
     "scripts": {
         "frontend": "cd app/frontend && npm start",
         "mocks": "cd app/mocks && npm start",
-        "start": "concurrently \"npm run frontend\" \"npm run mocks\""
+        "server": "cd app/server && npm start",
+        "start": "concurrently \"npm run frontend\" \"npm run mocks\" \"npm run server\"",
+        "test": "cd app/frontend && npm test"
     },
     "devDependencies": {
         "concurrently": "^8.2.2"

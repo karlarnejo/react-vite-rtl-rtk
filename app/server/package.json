@@ -1,0 +1,26 @@
+{
+    "name": "vite-typescript-server",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "compile": "tsc",
+        "start": "npm run compile && node ./dist/index.js"
+    },
+    "dependencies": {
+        "@apollo/datasource-rest": "6.2.2",
+        "@apollo/server": "4.9.5",
+        "concurrently": "8.2.2",
+        "graphql": "16.8.1",
+        "@types/node": "20.8.10",
+        "@types/jest": "29.5.7",
+        "@types/graphql-depth-limit": "1.1.5"
+    },
+    "devDependencies": {
+        "@babel/core": "7.23.2",
+        "@babel/node": "7.22.19",
+        "ts-loader": "9.5.0",
+        "typescript": "5.2.2",
+        "nodemon": "3.0.1"
+    }
+}
