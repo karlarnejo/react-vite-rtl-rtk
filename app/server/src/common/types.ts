@@ -7,11 +7,14 @@ export interface IProducts {
 }
 
 export interface IRequestContext {
-    headers: IncomingHttpHeaders
+    headers: IncomingHttpHeaders;
+    datasources: IDataSources;
+    // TODO: Add logger type here
+    // logger: string;
 }
 
 export interface IDataSourceContext {
-    dataSources: IDataSources
+    contextValue?: IRequestContext
 }
 
 export type IBaseDataSource = IRequestContext & IDataSourceContext
