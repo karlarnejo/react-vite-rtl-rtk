@@ -7,12 +7,19 @@
     },
     "scripts": {
         "frontend": "cd app/frontend && npm start",
+        "frontend-test": "cd app/frontend && npm test",
         "mocks": "cd app/mocks && npm start",
         "server": "cd app/server && npm start",
+        "server-test": "cd app/server && npm test",
         "start": "concurrently \"npm run frontend\" \"npm run mocks\" \"npm run server\"",
-        "test": "cd app/frontend && npm test"
+        "test": "concurrently \"npm run frontend-test\" \"npm run server-test\""
     },
     "devDependencies": {
-        "concurrently": "^8.2.2"
+        "concurrently": "^8.2.2",
+        "vitest": "^0.34.6",
+        "vite": "^5.0.2",
+        "@vitejs/plugin-react": "^4.0.0",
+        "@vitest/coverage-istanbul": "^0.34.6",
+        "@types/node": "20.8.10"
     }
 }

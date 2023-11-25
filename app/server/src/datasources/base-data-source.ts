@@ -14,7 +14,9 @@ export class BaseDataSource extends RESTDataSource {
             throw new Error("Request context not available");
         }
 
+        // TODO: Retrieve token from localstorae or cookies and pass to Authorization header
         const jwtToken: string = "mockToken";
+        request.headers['Content-Type']  = 'application/json';
         request.headers['Authorization'] = `Bearer ${jwtToken}`;
 
         // Add more headers if needed

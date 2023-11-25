@@ -1,4 +1,4 @@
 export enum AdditionalHeaderKey {
-    SAMPLE_ADDITIONAL_HEADER = 'MyAdditionalHeader',
-    LOGGER_HEADER_UUID = 'loggerHeaderUuid'
+    SAMPLE_ADDITIONAL_HEADER = 'my-additional-header',
+    LOGGER_HEADER_UUID = 'logger-header-uuid'
 }

@@ -43,6 +43,8 @@ describe("FSample", () => {
         
         await waitFor(() => {
             mockSampleComponentWithPropsProps.btnOnClick()
+            // Do this when you are trying to cover event changes like onBlur/onChange with a mocked component.
+            // mockSampleComponentWithPropsProps.onBlur('123456')
             expect(mockUseDispatch).toHaveBeenCalledWith({
                 payload: 'Updated inner object',
                 type: 'sampleSlice/setFirstObject'

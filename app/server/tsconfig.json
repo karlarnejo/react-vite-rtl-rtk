@@ -5,8 +5,12 @@
       "lib": ["es2020"],
       "target": "es2020",
       "module": "esnext",
+      "typeRoots": ["../../node_modules/@types"],
       "moduleResolution": "node",
       "esModuleInterop": true,
-      "types": ["node"]
-    }
+      "types": ["node"],
+      "skipLibCheck": true,
+    },
+    "include": ["src"],
+    "references": [{ "path": "./tsconfig.node.json" }]
   }
