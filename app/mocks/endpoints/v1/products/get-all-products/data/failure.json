@@ -1,0 +1,12 @@
+{
+    "errorId": "Product not found",
+    "message": "No product was found",
+    "details": [
+        {
+            "field": "id",
+            "value": "123456",
+            "issue": "not found",
+            "location": "body"
+        }
+    ]
+}

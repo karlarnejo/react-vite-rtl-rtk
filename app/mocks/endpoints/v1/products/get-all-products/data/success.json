@@ -1,0 +1,14 @@
+[
+    {
+        "productName": "mockProduct1",
+        "description": "mockDescription1"
+    },
+    {
+        "productName": "mockProduct2",
+        "description": "mockDescription2"
+    },
+    {
+        "productName": "mockProduct2",
+        "description": "mockDescription2"
+    }
+]
