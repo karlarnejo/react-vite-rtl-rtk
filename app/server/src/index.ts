@@ -20,6 +20,9 @@ const server = new ApolloServer<IRequestContext>({
     typeDefs,
     resolvers,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    formatError: (err) => {
+        return err;
+      },
 });
 
 await server.start();
@@ -28,8 +31,6 @@ app.use(
     graphqlPath,
     cors<cors.CorsRequest>(),
     express.json(),
-    // expressMiddleware accepts the same arguments:
-    // an Apollo Server instance and optional configuration options
     expressMiddleware(server, {
         context: async ({ req }): Promise<any> => {
             const { headers = {} } = req;

@@ -21,5 +21,8 @@
         "@vitejs/plugin-react": "^4.0.0",
         "@vitest/coverage-istanbul": "^0.34.6",
         "@types/node": "20.8.10"
+    },
+    "resolutions": {
+        "graphql": "^16.8.1"
     }
 }
