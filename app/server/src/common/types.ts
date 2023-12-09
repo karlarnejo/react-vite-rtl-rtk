@@ -6,6 +6,21 @@ export interface IProducts {
     description: string;
 }
 
+export interface IGetProductParams {
+    productId: string;
+}
+
+export interface IAddProductParams {
+    userId: string;
+    product: IProducts;
+}
+
+export interface IEditProductParams {
+    userId: string;
+    productId: string;
+    product: IProducts;
+}
+
 export interface IRequestContext {
     headers: IncomingHttpHeaders;
     datasources: IDataSources;
@@ -14,7 +29,23 @@ export interface IRequestContext {
 }
 
 export interface IDataSourceContext {
-    contextValue?: IRequestContext
+    contextValue?: IRequestContext;
 }
 
-export type IBaseDataSource = IRequestContext & IDataSourceContext
+export type IBaseDataSource = IRequestContext & IDataSourceContext;
+
+export interface IGetLimitParams {
+    limit: number;
+}
+
+export interface IResponseStatus {
+    status: string;
+}
+
+export interface IResponseAddProduct extends IResponseStatus {
+    productId: string;
+}
+
+export interface IResponseEditProduct extends IResponseStatus {
+    productId: string;
+}

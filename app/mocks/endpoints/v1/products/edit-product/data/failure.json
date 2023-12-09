@@ -1,0 +1,12 @@
+{
+    "errorId": "Cannot edit product",
+    "message": "Unable to edit product",
+    "details": [
+        {
+            "field": "id",
+            "value": "123",
+            "issue": "userId not found",
+            "location": "body"
+        }
+    ]
+}

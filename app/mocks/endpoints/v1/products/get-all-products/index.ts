@@ -24,7 +24,7 @@ export const handler = (req) => {
     }
 }
 
-export const path = "/product-list";
+export const path = "/products";
 
 export default {
     requestMethod: "GET",

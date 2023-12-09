@@ -34,7 +34,7 @@ export const handler = (req) => {
     }
 }
 
-export const path = "/product/:userId";
+export const path = "/users/:userId/products";
 
 export default {
     requestMethod: "POST",
