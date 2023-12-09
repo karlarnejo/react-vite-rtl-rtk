@@ -10,6 +10,10 @@ export interface IGetProductParams {
     productId: string;
 }
 
+export interface IDeleteProductParams {
+    productId: string;
+}
+
 export interface IAddProductParams {
     userId: string;
     product: IProducts;
@@ -47,5 +51,9 @@ export interface IResponseAddProduct extends IResponseStatus {
 }
 
 export interface IResponseEditProduct extends IResponseStatus {
+    productId: string;
+}
+
+export interface IResponseDeleteProduct extends IResponseStatus {
     productId: string;
 }

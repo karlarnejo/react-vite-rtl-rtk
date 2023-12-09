@@ -1,0 +1,12 @@
+{
+    "errorId": "Cannot delete product",
+    "message": "Unable to delete product",
+    "details": [
+        {
+            "field": "id",
+            "value": "123",
+            "issue": "userId not found",
+            "location": "body"
+        }
+    ]
+}

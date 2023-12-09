@@ -22,6 +22,11 @@ export const typeDefs = gql`
         productId: String
     }
 
+    type DeleteProductResponseStatus {
+        status: String
+        productId: String
+    }
+
     type Query {
         getAllProducts: [Products]
         getProduct(productId: String): Products
@@ -29,6 +34,7 @@ export const typeDefs = gql`
 
     type Mutation {
         addProduct(userId: String, product: ProductInput): AddProductResponseStatus,
-        editProduct(userId: String, productId: String, product: ProductInput): AddProductResponseStatus,
+        editProduct(userId: String, productId: String, product: ProductInput): EditProductResponseStatus,
+        deleteProduct(productId: String): DeleteProductResponseStatus
     }
 `;
