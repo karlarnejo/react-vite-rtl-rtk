@@ -1,0 +1,12 @@
+{
+    "errorId": "Cannot add new product",
+    "message": "Unable to add new product",
+    "details": [
+        {
+            "field": "id",
+            "value": "123",
+            "issue": "userId not found",
+            "location": "body"
+        }
+    ]
+}
