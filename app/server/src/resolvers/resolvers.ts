@@ -1,4 +1,4 @@
-import { IAddProductParams, IDeleteProductParams, IEditProductParams, IGetProductParams } from "../common/types";
+import { IAddProductParams, IDeleteProductParams, IEditProductParams, IGetProductParams, IProducts, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../common/types";
 import { IDataSources } from "../datasources";
 
 // TODO: Figure out how to import using index without using ts-loader and webpack
@@ -8,14 +8,14 @@ export const resolvers = {
             _: any,
             {}: any,
             { dataSources }: { dataSources: IDataSources }
-        ) => {
+        ): Promise<IProducts[]> => {
             return dataSources.productApi.getAllProducts();
         },
         getProduct: async (
             _: any,
             { productId }: IGetProductParams,
             { dataSources }: { dataSources: IDataSources }
-        ) => {
+        ): Promise<IProducts> => {
             return dataSources.productApi.getProduct(productId);
         }
     },
@@ -24,21 +24,21 @@ export const resolvers = {
             _: any,
             { userId, product }: IAddProductParams,
             { dataSources }: { dataSources: IDataSources }
-        ) => {
+        ): Promise<IResponseAddProduct> => {
             return dataSources.productApi.addProduct(userId, product);
         },
         editProduct: async (
             _: any,
             { userId, productId, product }: IEditProductParams,
             { dataSources }: { dataSources: IDataSources }
-        ) => {
+        ): Promise<IResponseEditProduct> => {
             return dataSources.productApi.editProduct(userId, productId, product);
         },
         deleteProduct: async (
             _: any,
             { productId }: IDeleteProductParams,
             { dataSources }: { dataSources: IDataSources }
-        ) => {
+        ): Promise<IResponseDeleteProduct> => {
             return dataSources.productApi.deleteProduct(productId);
         }
     }

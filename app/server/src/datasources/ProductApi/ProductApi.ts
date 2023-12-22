@@ -1,7 +1,6 @@
 import { DownStreamApi } from "../../common/enums.js";
 import { IProducts, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../../common/types";
 import { BaseDataSource } from "../base-data-source.js";
-import { ApolloError } from "apollo-server-express";
 
 // TODO: Figure out how to import using index without using ts-loader and webpack
 class ProductApi extends BaseDataSource {
@@ -18,7 +17,7 @@ class ProductApi extends BaseDataSource {
         }
     }
 
-    public async getProduct(productId: string): Promise<IProducts[]> {
+    public async getProduct(productId: string): Promise<IProducts> {
         try {
             // No need to check for productId because it will throw 404 in downstream anyways.
             const getProductDownstream: string = DownStreamApi.GetProduct.replace(':productId', productId);
