@@ -8,11 +8,13 @@ const App: React.FC = (): React.JSX.Element => {
   return (
     <>
         {/* TODO: Add more provider if necessary */}
-        <Provider store={store}>
-            <BrowserRouter>
-                <AppRoute/>
-            </BrowserRouter>
-        </Provider>
+        <div className="min-w-[200px] min-h-[50px] mr-40 ml-40 mt-12">
+            <Provider store={store}>
+                <BrowserRouter>
+                    <AppRoute/>
+                </BrowserRouter>
+            </Provider>
+        </div>
     </>
   )
 }
