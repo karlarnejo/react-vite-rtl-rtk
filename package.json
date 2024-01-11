@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "private": true,
     "workspaces": {
-        "packages": ["app/*"]
+        "packages": [
+            "app/*"
+        ]
     },
     "scripts": {
         "frontend": "cd app/frontend && npm start",
@@ -15,12 +17,12 @@
         "test": "concurrently \"npm run frontend-test\" \"npm run server-test\""
     },
     "devDependencies": {
-        "concurrently": "^8.2.2",
-        "vitest": "^0.34.6",
-        "vite": "^5.0.2",
+        "@types/node": "20.8.10",
         "@vitejs/plugin-react": "^4.0.0",
         "@vitest/coverage-istanbul": "^0.34.6",
-        "@types/node": "20.8.10"
+        "concurrently": "^8.2.2",
+        "vite": "^5.0.2",
+        "vitest": "^0.34.6"
     },
     "resolutions": {
         "graphql": "^16.8.1"

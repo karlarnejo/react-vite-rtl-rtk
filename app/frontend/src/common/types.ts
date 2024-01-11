@@ -33,3 +33,19 @@ export interface IFormValidationsProps {
     message: string;
     expression?: (value: string) => boolean;
 }
+
+export interface IActions {
+    editItem: Function;
+    deleteItem: Function;
+}
+
+export interface IProductData {
+    img: string;
+    productId: string;
+    productName: string;
+    productType: string;
+    availability: string;
+    qty: number;
+    price: string;
+    actions: IActions
+};
