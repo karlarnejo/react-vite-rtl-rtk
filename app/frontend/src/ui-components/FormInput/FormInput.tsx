@@ -17,8 +17,6 @@ export interface IFormInputProps {
 
 export const FormInput: React.FC<IFormInputProps> = ({ name, label, placeholder, description, validations, disabled, required = false }) => {
     const { register, formState: { errors }, trigger } = useFormContext()
-
-    console.log("aaa ", errors, required)
     
     return (
         <div className="flex flex-col">
