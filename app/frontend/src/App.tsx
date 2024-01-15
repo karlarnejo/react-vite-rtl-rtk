@@ -8,7 +8,7 @@ const App: React.FC = (): React.JSX.Element => {
   return (
     <>
         {/* TODO: Add more provider if necessary */}
-        <div className="min-w-[200px] min-h-[50px] mr-40 ml-40 mt-12">
+        <div className="min-w-[200px] min-h-[50px] mr-20 ml-20 mt-12 mb-12 md:mr-40 md:ml-40">
             <Provider store={store}>
                 <BrowserRouter>
                     <AppRoute/>

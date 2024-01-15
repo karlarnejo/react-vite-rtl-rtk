@@ -35,6 +35,7 @@ export interface IFormValidationsProps {
 }
 
 export interface IActions {
+    viewItem: Function;
     editItem: Function;
     deleteItem: Function;
 }
@@ -44,7 +45,6 @@ export interface IProductData {
     productId: string;
     productName: string;
     productType: string;
-    availability: string;
     qty: number;
     price: string;
     actions: IActions

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from '../../ui-components';
+import { Button, List, ListItem } from '../../ui-components';
 import { FormProvider, useForm } from 'react-hook-form';
-import { ProducTable, SearchProduct } from '../../components';
+import { ProducTable, ProductList, SearchProduct } from '../../components';
 import { IProductData } from '../../common/types';
 
 export interface IFormValues {
@@ -20,6 +20,10 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         handleSubmit(handleOnSubmit)()
     }
 
+    const handleView = (productData: IProductData) => {
+        console.log("view has been clicked ", productData)
+    }
+
     const handleEdit = (productData: IProductData) => {
         console.log("edit has been clicked ", productData)
     }
@@ -34,10 +38,10 @@ export const FProducts: React.FC = (): React.JSX.Element => {
             productId: 'P81B37AC',
             productName: 'Single Room',
             productType: 'Room',
-            availability: 'In stock',
             qty: 3,
             price: '$599',
             actions: {
+                viewItem: handleView,
                 editItem: handleEdit,
                 deleteItem: handleDelete
             }
@@ -47,10 +51,10 @@ export const FProducts: React.FC = (): React.JSX.Element => {
             productId: 'P81B37AD',
             productName: 'Double Room',
             productType: 'Room',
-            availability: 'In stock',
             qty: 4,
             price: '$654',
             actions: {
+                viewItem: handleView,
                 editItem: handleEdit,
                 deleteItem: handleDelete
             }
@@ -60,10 +64,10 @@ export const FProducts: React.FC = (): React.JSX.Element => {
             productId: 'P81B37AE',
             productName: 'Family Suite',
             productType: 'Room',
-            availability: 'In stock',
             qty: 5,
             price: '$693',
             actions: {
+                viewItem: handleView,
                 editItem: handleEdit,
                 deleteItem: handleDelete
             }
@@ -73,7 +77,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
     return (
         <>
             <div className="flex flex-col md:flex-row">
-                <div className='md:mr-4 md:w-auto md:w-80'>
+                <div className='md:mr-4 md:w-96'>
                     {/* TODO: Find a way to abstract FormProvider and form together and expose handleSubmit */}
                     <FormProvider {...form}>
                         <form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -94,24 +98,13 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                 <div className="hidden md:block md:mt-4 md:w-full">
                     {/* The table */}
                     <div className="relative overflow-x-auto shadow-md rounded-lg">
-                        <ProducTable tableData={tableData} />
+                        <ProducTable tableData={tableData}/>
                     </div>
                 </div>
                 <div className='mt-4 md:hidden'>
                     {/* The list */}
                     <div className=" bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <a href="#" aria-current="true" className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                            Profile
-                        </a>
-                        <a href="#" className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                            Settings
-                        </a>
-                        <a href="#" className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                            Messages
-                        </a>
-                        <a href="#" className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                            Download
-                        </a>
+                        <ProductList listData={tableData} />
                     </div>
                 </div>
             </div>
