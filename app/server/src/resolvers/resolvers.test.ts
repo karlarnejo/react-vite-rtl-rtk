@@ -1,6 +1,6 @@
 import { Mock } from 'vitest'
 import { resolvers } from './resolvers';
-import { IGetLimitParams, IGetProductParams, IProducts } from '../common/types';
+import { IGetLimitParams, IGetProductParams, IProduct } from '../common/types';
 
 const mockGetAllProducts: Mock = vi.fn();
 const mockGetProduct: Mock = vi.fn();
@@ -8,14 +8,22 @@ const mockAddProduct: Mock = vi.fn();
 const mockEditProduct: Mock = vi.fn();
 const mockDeleteProduct: Mock = vi.fn();
 
-const mockGetProductApi: IProducts[] = [
+const mockGetProductApi: IProduct[] = [
     {
+        img: "Hello World",
+        productId: "Hello World",
         productName: "Hello World",
-        description: "Hello World"
+        productType: "Hello World",
+        qty: 12345,
+        price: "Hello World"
     },
     {
+        img: "Hello World",
+        productId: "Hello World",
         productName: "Hello World",
-        description: "Hello World"
+        productType: "Hello World",
+        qty: 12345,
+        price: "Hello World"
     }
 ];
 

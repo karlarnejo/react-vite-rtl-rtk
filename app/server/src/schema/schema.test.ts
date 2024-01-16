@@ -1,4 +1,4 @@
-import { IProducts } from "../common/types";
+import { IProduct } from "../common/types";
 import { typeDefs } from "./schema";
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { addMocksToSchema, mockServer } from '@graphql-tools/mock';
@@ -7,20 +7,32 @@ import { graphql } from "graphql/index.js";
 const getAllProductsQuery = `
     query {
         getAllProducts {
+            img
+            productId
             productName
-            description
+            productType
+            qty
+            price
         }
     }
 `;
 
-const getAllProductsResult: IProducts[] = [
+const getAllProductsResult: IProduct[] = [
     {
+        img: "Hello World",
+        productId: "Hello World",
         productName: "Hello World",
-        description: "Hello World"
+        productType: "Hello World",
+        qty: 12345,
+        price: "Hello World"
     },
     {
+        img: "Hello World",
+        productId: "Hello World",
         productName: "Hello World",
-        description: "Hello World"
+        productType: "Hello World",
+        qty: 12345,
+        price: "Hello World"
     }
 ];
 

@@ -1,5 +1,6 @@
 import getAllProductsSuccess from './data/success.json' assert { type: "json" };
 import getAllProductsFailure from './data/failure.json' assert { type: "json" };
+import { IProduct } from '../../../../common/types'
 
 // Just return appropriate status according to your needs i.e. 404, 200, 202, 405, etc.
 export const requestHandler = (req) => {
@@ -8,7 +9,7 @@ export const requestHandler = (req) => {
     // Write your conditions here in switch depending on what you want to return
     return {
         status: 200,
-        data: [...getAllProductsSuccess]
+        data: [...getAllProductsSuccess] as IProduct[]
     }
 }
 

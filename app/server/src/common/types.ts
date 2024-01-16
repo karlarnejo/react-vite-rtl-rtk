@@ -1,9 +1,14 @@
 import { IncomingHttpHeaders } from "http";
 import { IDataSources } from "../datasources";
 
-export interface IProducts {
+export interface IProduct {
+    img: string;
+    productId: string;
     productName: string;
-    description: string;
+    productType: string;
+    qty: number;
+    price: string;
+    description?: string;
 }
 
 export interface IGetProductParams {
@@ -16,13 +21,13 @@ export interface IDeleteProductParams {
 
 export interface IAddProductParams {
     userId: string;
-    product: IProducts;
+    product: IProduct;
 }
 
 export interface IEditProductParams {
     userId: string;
     productId: string;
-    product: IProducts;
+    product: IProduct;
 }
 
 export interface IRequestContext {

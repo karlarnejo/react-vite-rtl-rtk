@@ -1,16 +1,24 @@
 import { dataSources } from "..";
 import { AdditionalHeaderKey } from "../../common/enums";
-import { IDataSourceContext, IProducts, IRequestContext, IResponseDeleteProduct } from "../../common/types";
+import { IDataSourceContext, IProduct, IRequestContext, IResponseDeleteProduct } from "../../common/types";
 import ProductApi from "./ProductApi";
 
-const mockGetProductApi: IProducts[] = [
+const mockGetProductApi: IProduct[] = [
     {
+        img: "Hello World",
+        productId: "Hello World",
         productName: "Hello World",
-        description: "Hello World"
+        productType: "Hello World",
+        qty: 2,
+        price: "Hello World"
     },
     {
+        img: "Hello World",
+        productId: "Hello World",
         productName: "Hello World",
-        description: "Hello World"
+        productType: "Hello World",
+        qty: 2,
+        price: "Hello World"
     }
 ];
 
@@ -75,10 +83,14 @@ describe("ProductApi", () => {
             mockGet.mockResolvedValue(mockGetProductApi[0]);
 
             expect(sourceProductApi).toBeTruthy();
-            const product: IProducts = await sourceProductApi.getProduct('12345');
+            const product: IProduct = await sourceProductApi.getProduct('12345');
             expect(product).toEqual({
+                img: "Hello World",
+                productId: "Hello World",
                 productName: "Hello World",
-                description: "Hello World"
+                productType: "Hello World",
+                qty: 2,
+                price: "Hello World"
             })
             expect(mockGet).toHaveBeenCalledWith('/products/12345');
         });
@@ -105,8 +117,12 @@ describe("ProductApi", () => {
             expect(mockAdd).toHaveBeenCalledWith('/users/12345/products', {
                 body: { 
                     product: {
+                        img: "Hello World",
+                        productId: "Hello World",
                         productName: "Hello World",
-                        description: "Hello World"
+                        productType: "Hello World",
+                        qty: 2,
+                        price: "Hello World"
                     }
                 }
             })
@@ -144,8 +160,12 @@ describe("ProductApi", () => {
             expect(mockEdit).toHaveBeenCalledWith('/users/123/products/12345', {
                 body: { 
                     product: {
+                        img: "Hello World",
+                        productId: "Hello World",
                         productName: "Hello World",
-                        description: "Hello World"
+                        productType: "Hello World",
+                        qty: 2,
+                        price: "Hello World"
                     }
                 }
             })

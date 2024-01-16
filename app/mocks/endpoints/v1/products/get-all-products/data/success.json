@@ -1,14 +1,26 @@
 [
     {
-        "productName": "mockProduct1",
-        "description": "mockDescription1"
+        "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/c56a0c0d-8454-431a-9b3e-f420c72e82e3.jpg?auto=format,compress&fit=crop&crop=entropy",
+        "productId": "P81B37AC",
+        "productName": "Single Room",
+        "productType": "Room",
+        "qty": 3,
+        "price": "$599"
     },
     {
-        "productName": "mockProduct2",
-        "description": "mockDescription2"
+        "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/7421591e-1ef6-4e85-b93c-94e5a105d39b.jpg?auto=format,compress&fit=crop&crop=entropy&w=1536",
+        "productId": "P81B37AD",
+        "productName": "Double Room",
+        "productType": "Room",
+        "qty": 4,
+        "price": "$654"
     },
     {
-        "productName": "mockProduct2",
-        "description": "mockDescription2"
+        "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/a92f9ff0-237d-41ea-b48c-58a92f61995e.jpg?auto=format,compress&fit=crop&crop=entropy&w=1536",
+        "productId": "P81B37AE",
+        "productName": "Family Suite",
+        "productType": "Room",
+        "qty": 5,
+        "price": "$693"
     }
 ]

@@ -1,12 +1,12 @@
 import { DownStreamApi } from "../../common/enums.js";
-import { IProducts, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../../common/types";
+import { IProduct, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../../common/types";
 import { BaseDataSource } from "../base-data-source.js";
 
 // TODO: Figure out how to import using index without using ts-loader and webpack
 class ProductApi extends BaseDataSource {
     override baseURL = "http://localhost:5000/";
 
-    public async getAllProducts(): Promise<IProducts[]> {
+    public async getAllProducts(): Promise<IProduct[]> {
         try {
             const productsDownstream: string = DownStreamApi.GetAllProducts;
             return await this.get(productsDownstream);
@@ -17,7 +17,7 @@ class ProductApi extends BaseDataSource {
         }
     }
 
-    public async getProduct(productId: string): Promise<IProducts> {
+    public async getProduct(productId: string): Promise<IProduct> {
         try {
             // No need to check for productId because it will throw 404 in downstream anyways.
             const getProductDownstream: string = DownStreamApi.GetProduct.replace(':productId', productId);
@@ -29,7 +29,7 @@ class ProductApi extends BaseDataSource {
         }
     }
 
-    public async addProduct(userId: string, product: IProducts): Promise<IResponseAddProduct> {
+    public async addProduct(userId: string, product: IProduct): Promise<IResponseAddProduct> {
         try {
             // No need to check for userId, productId because it will throw 404 in downstream anyways.
             if(!product) {
@@ -44,7 +44,7 @@ class ProductApi extends BaseDataSource {
         }
     }
 
-    public async editProduct(userId: string, productId: string, product: IProducts): Promise<IResponseEditProduct> {
+    public async editProduct(userId: string, productId: string, product: IProduct): Promise<IResponseEditProduct> {
         try {
             // No need to check for userId, productId because it will throw 404 in downstream anyways.
             if(!product) {
