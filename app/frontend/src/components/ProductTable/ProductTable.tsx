@@ -1,11 +1,11 @@
-import { IProductData } from "../../common/types";
+import { IProduct } from "../../common/types";
 import { Table, THead, Th, TBody, Tr, Td, Button } from "../../ui-components";
 
 export interface IProductTableProps {
-    tableData: IProductData[]
+    tableData: IProduct[]
 }
 
-export const ProducTable: React.FC<IProductTableProps> = ({ tableData }): React.JSX.Element => {
+export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React.JSX.Element => {
     return (
         <Table>
             <THead>
@@ -18,15 +18,17 @@ export const ProducTable: React.FC<IProductTableProps> = ({ tableData }): React.
                 <Th>Action</Th>
             </THead>
             <TBody>
-                {tableData.map(( product: IProductData ) => {
+                {tableData && tableData.length > 0 ? tableData.map(( product: IProduct ) => {
                     const {
                         productId,
                         img,
                         productName, productType,
                         qty,
                         price,
-                        actions: { viewItem, editItem, deleteItem }
+                        actions
                     } = product;
+
+                    const { viewItem, editItem, deleteItem } = actions || {}
                     
                     return (    
                         <Tr key={productId}>
@@ -40,20 +42,20 @@ export const ProducTable: React.FC<IProductTableProps> = ({ tableData }): React.
                                 <Td variant='text'>
                                     <div className="flex flex-row gap-x-3">
                                         <div>
-                                            <Button name='view' label='View' variant='primary' onClick={() => viewItem(product)}/>
+                                            <Button name='view' label='View' variant='primary' onClick={() => viewItem && viewItem(product)}/>
                                         </div>
                                         <div>
-                                            <Button name='edit' label='Edit' variant='secondary' onClick={() => editItem(product)}/>
+                                            <Button name='edit' label='Edit' variant='secondary' onClick={() => editItem && editItem(product)}/>
                                         </div>
                                         <div>
-                                            <Button name='delete' label='Delete' variant='secondary' onClick={() => deleteItem(product)}/>
+                                            <Button name='delete' label='Delete' variant='secondary' onClick={() => deleteItem && deleteItem(product)}/>
                                         </div>
                                     </div>
                                 </Td>
                             </>
                         </Tr>
                     )
-                })}
+                }): <Tr><Td variant='text'>No products found.</Td></Tr>}
             </TBody>
         </Table>
     );

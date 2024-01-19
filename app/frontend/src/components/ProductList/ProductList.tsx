@@ -1,25 +1,27 @@
-import { IProductData } from "../../common/types";
+import { IProduct } from "../../common/types";
 import { List, ListItem } from "../../ui-components";
 
 export interface IProductListProps {
-    listData: IProductData[];
+    listData: IProduct[];
 }
 
 export const ProductList: React.FC<IProductListProps> = ({ listData }): React.JSX.Element => {
     return (
         <List>
-            {listData.map(( product: IProductData ) => {
+            {listData && listData.length > 0 ? listData.map(( product: IProduct ) => {
                 const {
                     productId,
                     img,
                     productName, productType,
                     qty,
                     price,
-                    actions: { viewItem }
+                    actions
                 } = product;
 
+                const { viewItem } = actions || {}
+
                 return (
-                    <ListItem key={productId} onClick={() => viewItem(product)}>
+                    <ListItem key={productId} onClick={() => viewItem && viewItem(product)}>
                         <div className="flex flex-row gap-x-2 justify-between">
                             <div className="min-w-[100px]">
                                 <span>{productName}</span>
@@ -35,7 +37,7 @@ export const ProductList: React.FC<IProductListProps> = ({ listData }): React.JS
                         </div>
                     </ListItem>
                 );
-            })}
+            }): <ListItem>No products found.</ListItem>}
         </List>
     );
 }
