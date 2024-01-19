@@ -14,12 +14,12 @@ export class BaseDataSource extends RESTDataSource {
             throw new Error("Request context not available");
         }
 
-        // TODO: Retrieve token from localstorae or cookies and pass to Authorization header
-        const jwtToken: string = "mockToken";
+        // TODO: Retrieve token from saved in App.tsx i.e. localstorage or cookies and pass to Authorization header
+        const jwtToken: string = this.contextValue.headers['authorization'];
         request.headers['Content-Type']  = 'application/json';
-        request.headers['Authorization'] = `Bearer ${jwtToken}`;
+        request.headers['Authorization'] = jwtToken;
 
-        // Add more headers if needed
+        // Add more headers if needed. Cross check in useApolloClient which header is being added
         if(this.contextValue.headers[AdditionalHeaderKey.SAMPLE_ADDITIONAL_HEADER]) {
             request.headers[AdditionalHeaderKey.SAMPLE_ADDITIONAL_HEADER] = this.contextValue.headers[AdditionalHeaderKey.SAMPLE_ADDITIONAL_HEADER] as string;
         }

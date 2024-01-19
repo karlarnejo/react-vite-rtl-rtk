@@ -36,16 +36,23 @@ export interface IFormValidationsProps {
 
 export interface IActions {
     viewItem: Function;
-    editItem: Function;
-    deleteItem: Function;
+    editItem?: Function;
+    deleteItem?: Function;
 }
 
-export interface IProductData {
+export interface IProduct {
     img: string;
     productId: string;
     productName: string;
     productType: string;
     qty: number;
     price: string;
-    actions: IActions
+    actions?: IActions
 };
+
+export interface Token {
+    id?: string;
+    sessionId?: string;
+    expires?: number;
+    tokenValue: string;
+}

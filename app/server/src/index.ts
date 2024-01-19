@@ -9,12 +9,11 @@ import { typeDefs } from "./schema/schema.js";
 import { dataSources } from "./datasources/index.js";
 import { resolvers } from "./resolvers/resolvers.js";
 import { AdditionalHeaderKey } from "./common/enums.js";
+import { graphqlPath, port } from "./common/constants.js";
 
 // TODO: Figure out how to import using index without using ts-loader and webpack
 const app = express();
 const httpServer = http.createServer(app);
-const graphqlPath = '/';
-const port = 4000;
 
 const server = new ApolloServer<IRequestContext>({
     typeDefs,
@@ -22,7 +21,7 @@ const server = new ApolloServer<IRequestContext>({
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     formatError: (err) => {
         return err;
-      },
+    },
 });
 
 await server.start();

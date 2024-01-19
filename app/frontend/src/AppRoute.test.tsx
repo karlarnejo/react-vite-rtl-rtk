@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react"
 import { AppRoute } from "./AppRoute"
 import { BrowserRouter } from "react-router-dom"
+import { Token } from "./common/types";
 
 vi.mock('./utils', () => ({
     PrivateRoutes: () => <>PrivateRoutes</>
@@ -10,11 +11,12 @@ vi.mock('./common/Error404', () => ({
     Error404: () => <>Error404</>
 })) 
 
+const mockToken: Token = { tokenValue: 'mockToken' };
 export const renderComponent = () => {
     return(
         render(
             <BrowserRouter>
-                <AppRoute/>
+                <AppRoute token={mockToken}/>
             </BrowserRouter>
         )
     )
