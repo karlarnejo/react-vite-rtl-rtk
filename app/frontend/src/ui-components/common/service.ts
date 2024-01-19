@@ -1,9 +1,5 @@
 import { IFormValidationsProps, IReactHookFormValidateProps } from "./types";
 
-export const customClassName = (defaultClassName: string, className?: string) => {
-    return className ? `${className} ${defaultClassName}` : defaultClassName;
-};
-
 export const validationMapper = (validations: IFormValidationsProps[], required: boolean): IReactHookFormValidateProps => {
     let validationObject: IReactHookFormValidateProps = {}
 
