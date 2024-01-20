@@ -9,7 +9,8 @@ const mockDataSources: IDataSources = {
 
 const mockDefaultContext: IRequestContext = {
     headers: {
-        'my-additional-header': 'test-my-additional-header'
+        'my-additional-header': 'test-my-additional-header',
+        authorization: 'Bearer mockToken'
     },
     datasources: mockDataSources
 };
@@ -29,11 +30,7 @@ vi.mock('@apollo/datasource-rest', () => {
 });
 
 describe('base-data-source', () => {
-    const mockHeader = {
-        Authorization: 'Bearer mockToken',
-        'Content-Type': 'application/json',
-        'my-additional-header': 'test-my-additional-header'
-    };
+    let mockHeader = {};
 
     const callWillSendRequest = async (dataSource: BaseDataSource): Promise<void> => {
         await dataSource.willSendRequest('http://test/url', {
@@ -43,9 +40,10 @@ describe('base-data-source', () => {
         });
     };
 
-    describe('base data source with context', () => {
-        beforeAll(() => {
-            mockContext = { ...mockDefaultContext }
+    describe('base data source with full context', () => {
+        beforeEach(() => {
+            mockHeader = {};
+            mockContext = { ...mockDefaultContext };
         });
 
         afterEach(() => {
@@ -58,49 +56,49 @@ describe('base-data-source', () => {
 
             await callWillSendRequest(dataSource);
             expect(mockHeader).toEqual({
-                Authorization: 'Bearer mockToken',
-                'Content-Type': 'application/json',
+                authorization: 'Bearer mockToken',
+                'content-type': 'application/json',
                 'my-additional-header': 'test-my-additional-header'
             });
         });
     });
+
     describe('base data source without context', () => {
-        beforeAll(() => {
+        beforeEach(() => {
+            mockHeader = {};
             mockContext = { ...mockDefaultContext };
         });
+
         afterEach(() => {
             vi.resetAllMocks();
         });
 
         it('should throw an error', async () => {
             const dataSource = new BaseDataSource({});
-            try {
-                await callWillSendRequest(dataSource);
-            } catch (error) {
-                expect((error as Error).message).toBe('Request context not available');
-            }
+            await expect(callWillSendRequest(dataSource)).rejects.toThrow('Request context not available');
         });
     });
+
     describe('base data source with partial auth only context', () => {
-        beforeAll(() => {
+        beforeEach(() => {
+            mockHeader = {};
             mockContext = {
-                headers: { Authorization: 'Bearer mockToken', 'Content-Type': 'application/json' },
-                datasources: mockDataSources
-            }
+              headers: { authorization: 'Bearer mockToken', 'content-type': 'application/json' },
+              datasources: mockDataSources,
+            };
         });
 
-        afterAll(() => {
+        afterEach(() => {
             vi.resetAllMocks();
-        })
+        });
 
         it('should instantiate data and set headers', async () => {
             const dataSource = new BaseDataSource({ contextValue: mockContext });
             expect(dataSource).toBeTruthy();
             await callWillSendRequest(dataSource);
             expect(mockHeader).toEqual({
-                Authorization: 'Bearer mockToken',
-                'Content-Type': 'application/json',
-                'my-additional-header': 'test-my-additional-header'
+                authorization: 'Bearer mockToken',
+                'content-type': 'application/json'
             });
         });
     });

@@ -4,7 +4,7 @@ import { IProduct } from '../../../../common/types'
 
 // Just return appropriate status according to your needs i.e. 404, 200, 202, 405, etc.
 export const requestHandler = (req) => {
-    const { params, query, path } = req;
+    const { params, query, path, headers } = req;
 
     // Write your conditions here in switch depending on what you want to return
     return {

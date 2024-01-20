@@ -15,9 +15,10 @@ export class BaseDataSource extends RESTDataSource {
         }
 
         // TODO: Retrieve token from saved in App.tsx i.e. localstorage or cookies and pass to Authorization header
+        // All headers should be in lower case http/2.
         const jwtToken: string = this.contextValue.headers['authorization'];
-        request.headers['Content-Type']  = 'application/json';
-        request.headers['Authorization'] = jwtToken;
+        request.headers['content-type']  = 'application/json';
+        request.headers['authorization'] = jwtToken;
 
         // Add more headers if needed. Cross check in useApolloClient which header is being added
         if(this.contextValue.headers[AdditionalHeaderKey.SAMPLE_ADDITIONAL_HEADER]) {
