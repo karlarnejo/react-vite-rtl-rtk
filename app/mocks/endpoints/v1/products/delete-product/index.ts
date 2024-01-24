@@ -9,7 +9,7 @@ export const requestHandler = (req) => {
 
     // Write your conditions here in switch depending on what you want to return
     switch(productId) {
-        case '123':
+        case 'P81B37AD':
             return {
                 status: 404,
                 data: {...deleteProductFailure}

@@ -55,4 +55,12 @@ export interface Token {
     sessionId?: string;
     expires?: number;
     tokenValue: string;
+};
+
+export interface IResponseStatus {
+    status: string;
+};
+
+export interface IResponseDeleteProduct extends IResponseStatus {
+    productId: string;
 }

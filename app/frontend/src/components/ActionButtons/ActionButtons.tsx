@@ -8,17 +8,17 @@ export interface IActionButtonsProps {
 
 export const ActionButtons: React.FC<IActionButtonsProps> = ({ actionButtons }: IActionButtonsProps): React.JSX.Element => {
     return (
-        <div className="flex flex-col mt-4 gap-4 md:flex-row">
-                {
-                    actionButtons.map(({ label, onClick, variant, name }: IActionButtonProps) => (
-                        <Button
-                            key={name}
-                            name={name}
-                            variant={variant}
-                            label={label}
-                            onClick={onClick}
-                        />
-                    ))
+        <div className="flex flex-col gap-4 md:flex-row">
+            {
+                actionButtons.map(({ label, onClick, variant, name }: IActionButtonProps) => (
+                    <Button
+                        key={name}
+                        name={name}
+                        variant={variant}
+                        label={label}
+                        onClick={onClick}
+                    />
+                ))
             }
         </div>
     );

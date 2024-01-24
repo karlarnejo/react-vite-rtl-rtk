@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, LoadingSpinner, Notification } from '../../ui-components';
 import { FormProvider, useForm } from 'react-hook-form';
-import { ProductTable, ProductList, SearchProduct, ActionButtons } from '../../components';
+import { ProductTable, ProductList, SearchProduct, DeleteModal } from '../../components';
 import { IProduct } from '../../common/types';
-import { useGetAllProducts } from '../../hooks';
+import { useDeleteProduct, useGetAllProducts } from '../../hooks';
 import { handleActionMapper } from './FProducts.service';
+import { useDispatch } from 'react-redux';
+import { setDeleteProduct } from '../../store/ProductSlice';
 
 export interface IFormValues {
     searchProduct: string;
 }
 
 export const FProducts: React.FC = (): React.JSX.Element => {
+    const dispatch = useDispatch();
+    const [open, setOpen] = useState(false)
+    const [idSelected, setIdSelected] = useState<string>('')
+
     const form = useForm<IFormValues>();
     const { handleSubmit, formState: { isValid } } = form;
 
     const { data, error, loading } = useGetAllProducts();
+    const { deleteProductFn, error: deleteError, loading: deleteLoading } = useDeleteProduct();
 
     const handleOnSubmit = (values: IFormValues): void => {
         console.log("Form Submitted: ", values, isValid)
@@ -34,9 +41,24 @@ export const FProducts: React.FC = (): React.JSX.Element => {
 
     const handleDelete = (productData: IProduct) => {
         console.log("delete has been clicked ", productData)
+        setOpen(true)
+        setIdSelected(productData.productId);
     }
 
-    if(loading) {
+    const onDelete = async (): Promise<void> => {
+        await deleteProductFn({
+            variables: { productId: idSelected },
+            onCompleted: (): void => {
+                dispatch(setDeleteProduct({ status: 'SUCCESS', productId: idSelected }));
+            },
+            onError: (): void => {
+                dispatch(setDeleteProduct({ status: 'FAILED', productId: idSelected }));
+            }
+        });
+        setOpen(false);
+    }
+
+    if(loading || deleteLoading) {
         return (<LoadingSpinner/>);
     }
 
@@ -82,6 +104,11 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                     </div>
                 </div>
             </div>
+            <DeleteModal
+                open={open}
+                setOpen={setOpen}
+                onDelete={onDelete}
+            />
         </>
     );
 }

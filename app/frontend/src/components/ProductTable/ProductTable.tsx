@@ -3,7 +3,7 @@ import { Table, THead, Th, TBody, Tr, Td, Button } from "../../ui-components";
 
 export interface IProductTableProps {
     tableData: IProduct[]
-}
+};
 
 export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React.JSX.Element => {
     return (
