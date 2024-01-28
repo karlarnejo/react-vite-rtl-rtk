@@ -156,7 +156,7 @@ describe("ProductApi", () => {
     describe('editProduct source success', () => {
         it('should call editProduct api and return its data', async () => {
             expect(sourceProductApi).toBeTruthy();
-            await sourceProductApi.editProduct('123', '12345', mockGetProductApi[0]);
+            await sourceProductApi.editProduct('12345', mockGetProductApi[0]);
             expect(mockEdit).toHaveBeenCalledWith('/users/123/products/12345', {
                 body: { 
                     product: {
@@ -178,7 +178,7 @@ describe("ProductApi", () => {
 
             try {
                 const productApi: ProductApi = new ProductApi(mockContext);
-                await productApi.editProduct('123', '12345', mockGetProductApi[0]);
+                await productApi.editProduct('12345', mockGetProductApi[0]);
             } catch (error) {
                 expect(error).toBe('error');
             }
@@ -189,7 +189,7 @@ describe("ProductApi", () => {
 
             try {
                 const productApi: ProductApi = new ProductApi(mockContext);
-                await productApi.editProduct('123', '12345', undefined);
+                await productApi.editProduct('12345', undefined);
             } catch (error) {
                 expect(error).toEqual(Error('Product is required!'));
             }

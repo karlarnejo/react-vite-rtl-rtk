@@ -9,10 +9,15 @@ export const typeDefs = gql`
         productType: String
         qty: Int
         price: String
+        description: String
     }
 
     input ProductInput {
+        img: String
         productName: String
+        productType: String
+        qty: Int
+        price: String
         description: String
     }
 
@@ -38,7 +43,7 @@ export const typeDefs = gql`
 
     type Mutation {
         addProduct(userId: String, product: ProductInput): AddProductResponseStatus,
-        editProduct(userId: String, productId: String, product: ProductInput): EditProductResponseStatus,
+        editProduct(productId: String, product: ProductInput): EditProductResponseStatus,
         deleteProduct(productId: String): DeleteProductResponseStatus
     }
 `;

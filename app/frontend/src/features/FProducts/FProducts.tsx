@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, LoadingSpinner, Notification } from '../../ui-components';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ProductTable, ProductList, SearchProduct, DeleteModal } from '../../components';
@@ -7,23 +7,27 @@ import { useDeleteProduct, useGetAllProducts } from '../../hooks';
 import { handleActionMapper } from './FProducts.service';
 import { useDispatch } from 'react-redux';
 import { setDeleteProduct } from '../../store/ProductSlice';
+import { useNavigate } from 'react-router-dom';
+import { ApplicationRoutes } from '../../common/enums';
 
-export interface IFormValues {
+export interface IProductsFormValues {
     searchProduct: string;
 }
 
 export const FProducts: React.FC = (): React.JSX.Element => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [open, setOpen] = useState(false)
     const [idSelected, setIdSelected] = useState<string>('')
 
-    const form = useForm<IFormValues>();
+    const form = useForm<IProductsFormValues>();
     const { handleSubmit, formState: { isValid } } = form;
 
     const { data, error, loading } = useGetAllProducts();
     const { deleteProductFn, error: deleteError, loading: deleteLoading } = useDeleteProduct();
 
-    const handleOnSubmit = (values: IFormValues): void => {
+    const handleOnSubmit = (values: IProductsFormValues): void => {
         console.log("Form Submitted: ", values, isValid)
     }
 
@@ -31,13 +35,13 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         handleSubmit(handleOnSubmit)()
     }
 
-    const handleView = (productData: IProduct) => {
-        console.log("view has been clicked ", productData)
-    }
+    const handleView = useCallback((productData: IProduct) => {
+        navigate(`${ApplicationRoutes.ProductDetail}/${productData.productId}`);
+    }, [navigate])
 
-    const handleEdit = (productData: IProduct) => {
-        console.log("edit has been clicked ", productData)
-    }
+    const handleEdit = useCallback((productData: IProduct) => {
+        navigate(`${ApplicationRoutes.EditProductDetail}/${productData.productId}`);
+    }, [navigate])
 
     const handleDelete = (productData: IProduct) => {
         console.log("delete has been clicked ", productData)

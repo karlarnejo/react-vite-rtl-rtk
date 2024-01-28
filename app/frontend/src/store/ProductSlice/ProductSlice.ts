@@ -1,15 +1,20 @@
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
-import { IResponseDeleteProduct } from "../../common/types";
+import { IResponseDeleteProduct, IResponseEditProduct } from "../../common/types";
 import { RootState } from "..";
 
 export const sliceName: string = 'productSlice';
 
 export interface IProductSlice {
-    deleteProduct: IResponseDeleteProduct
+    deleteProduct: IResponseDeleteProduct;
+    editProduct: IResponseEditProduct;
 }
 
 export const initialState: IProductSlice = {
     deleteProduct: {
+        status: '',
+        productId: ''
+    },
+    editProduct: {
         status: '',
         productId: ''
     }
@@ -22,6 +27,9 @@ export const productSlice: Slice = createSlice<IProductSlice, any>({
         setDeleteProduct: (state: IProductSlice, { payload }: PayloadAction<IResponseDeleteProduct>) => {
             state.deleteProduct = payload;
         },
+        setEditProduct: (state: IProductSlice, { payload }: PayloadAction<IResponseEditProduct>) => {
+            state.editProduct = payload;
+        },
         setResetProductSlice: () => {
             return initialState;
         }
@@ -32,5 +40,6 @@ export const getProductSlice = (state: RootState) => state.productStore;
 
 export const {
     setDeleteProduct,
-    setResetProductSlice
+    setResetProductSlice,
+    setEditProduct
 } = productSlice.actions;

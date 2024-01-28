@@ -3,15 +3,19 @@ import { Header, Link } from "../../components";
 import { FProducts } from "../../features";
 import { Notification } from "../../ui-components";
 import { IProductSlice, getProductSlice } from "../../store/ProductSlice";
-import { ProductNotifications } from "../../common/enums";
-import React from 'react'
+import { ApplicationRoutes, ProductNotifications } from "../../common/enums";
+import React, { useCallback } from 'react'
+import { useNavigate } from "react-router-dom";
+import { IProduct } from "../../common/types";
 
 export const PProducts: React.FC = (): React.JSX.Element => {
+    const navigate = useNavigate();
+
     const { deleteProduct: { status: deleteStatus, productId } }  = useSelector(getProductSlice) as IProductSlice;
 
-    const handleAddProduct = () => {
-        console.log("add product")
-    }
+    const handleAddProduct = useCallback((productData: IProduct) => {
+        navigate(ApplicationRoutes.AddProduct);
+    }, [navigate])
 
     return (
         <>
@@ -23,7 +27,7 @@ export const PProducts: React.FC = (): React.JSX.Element => {
                         // Math.random() is O(1). Shouldn't have any problems. Fix if better solution is found.
                         key={Math.random()}
                         variant='success'
-                        message={`${ProductNotifications.success} ${productId}`}
+                        message={`${ProductNotifications.successDelete} ${productId}`}
                         closeable
                     />
                     <div className="mb-4"/>
@@ -34,7 +38,7 @@ export const PProducts: React.FC = (): React.JSX.Element => {
                     <Notification
                         key={Math.random()}
                         variant='danger'
-                        message={`${ProductNotifications.error} ${productId} ${ProductNotifications.tryAgain}`}
+                        message={`${ProductNotifications.errorDelete} ${productId} ${ProductNotifications.tryAgain}`}
                         closeable
                     />
                     <div className="mb-4"/>
@@ -48,7 +52,7 @@ export const PProducts: React.FC = (): React.JSX.Element => {
                     name: 'addProduct', onClick: handleAddProduct, variant: 'primary', label: 'Add Product'
                 }}
             />
-            <div className="mt-4"/>
+            <div className="mt-10"/>
             <FProducts/>
         </>
     );

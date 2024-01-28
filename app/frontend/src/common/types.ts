@@ -9,7 +9,6 @@ export interface IFormParams<T> {
 }
 
 export interface IButtonProps {
-    className?: string;
     name: string;
     label: string;
     onClick: Function;
@@ -47,8 +46,26 @@ export interface IProduct {
     productType: string;
     qty: number;
     price: string;
+    description?: string;
     actions?: IActions
 };
+
+export interface IEditProductDetailsFormValues {
+    img: string;
+    productName: string;
+    productType: string;
+    qty: string;
+    price: string;
+    description: string;
+}
+
+export interface IAddProductDetailsFormValues {
+    productName: string;
+    productType: string;
+    qty: string;
+    price: string;
+    description: string;
+}
 
 export interface Token {
     id?: string;
@@ -62,5 +79,9 @@ export interface IResponseStatus {
 };
 
 export interface IResponseDeleteProduct extends IResponseStatus {
+    productId: string;
+}
+
+export interface IResponseEditProduct extends IResponseStatus {
     productId: string;
 }

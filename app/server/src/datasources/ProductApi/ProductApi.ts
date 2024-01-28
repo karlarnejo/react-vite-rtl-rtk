@@ -44,13 +44,15 @@ class ProductApi extends BaseDataSource {
         }
     }
 
-    public async editProduct(userId: string, productId: string, product: IProduct): Promise<IResponseEditProduct> {
+    public async editProduct(productId: string, product: IProduct): Promise<IResponseEditProduct> {
         try {
             // No need to check for userId, productId because it will throw 404 in downstream anyways.
             if(!product) {
                 throw new Error('Product is required!')
             }
-            const editProductDownstream: string = DownStreamApi.EditProduct.replace(':userId', userId).replace(':productId', productId);
+
+            console.log("aaaa ", product)
+            const editProductDownstream: string = DownStreamApi.EditProduct.replace(':productId', productId);
             return await this.put(editProductDownstream, { body: { product } });
         } catch (error) {
             //TODO: Add logger

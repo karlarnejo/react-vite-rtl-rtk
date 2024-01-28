@@ -29,10 +29,10 @@ export const resolvers = {
         },
         editProduct: async (
             _: any,
-            { userId, productId, product }: IEditProductParams,
+            { productId, product }: IEditProductParams,
             { dataSources }: { dataSources: IDataSources }
         ): Promise<IResponseEditProduct> => {
-            return dataSources.productApi.editProduct(userId, productId, product);
+            return dataSources.productApi.editProduct(productId, product);
         },
         deleteProduct: async (
             _: any,
