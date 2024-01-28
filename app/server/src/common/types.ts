@@ -1,13 +1,18 @@
 import { IncomingHttpHeaders } from "http";
 import { IDataSources } from "../datasources";
 
+export interface IPrice {
+    currencyCode: string;
+    value: number;
+}
+
 export interface IProduct {
     img: string;
     productId: string;
     productName: string;
     productType: string;
     qty: number;
-    price: string;
+    price: IPrice;
     description?: string;
 }
 
@@ -20,12 +25,10 @@ export interface IDeleteProductParams {
 }
 
 export interface IAddProductParams {
-    userId: string;
     product: IProduct;
 }
 
 export interface IEditProductParams {
-    userId: string;
     productId: string;
     product: IProduct;
 }

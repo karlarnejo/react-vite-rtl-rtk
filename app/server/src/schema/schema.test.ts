@@ -24,7 +24,7 @@ const getAllProductsResult: IProduct[] = [
         productName: "Hello World",
         productType: "Hello World",
         qty: 12345,
-        price: "Hello World"
+        price: { currencyCode: 'PHP', value: 0 }
     },
     {
         img: "Hello World",
@@ -32,7 +32,7 @@ const getAllProductsResult: IProduct[] = [
         productName: "Hello World",
         productType: "Hello World",
         qty: 12345,
-        price: "Hello World"
+        price: { currencyCode: 'PHP', value: 0 }
     }
 ];
 

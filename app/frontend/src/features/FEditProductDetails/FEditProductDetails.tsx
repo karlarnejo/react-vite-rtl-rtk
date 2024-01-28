@@ -19,6 +19,7 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
 
     const { getProduct } = data || {};
     const { img, productName, productType, qty, price, description } = getProduct || {};
+    const { value } = price || {};
 
     const form = useForm<IEditProductDetailsFormValues>({
         defaultValues: {
@@ -39,7 +40,8 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
                     productId,
                     product: {
                         ...values,
-                        qty: Number(qty)
+                        qty: Number(values.qty),
+                        price: { currencyCode: 'PHP', value: Number(values.price) }
                     }
                 },
                 onCompleted: (): void => {
@@ -68,7 +70,7 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
                 productName,
                 productType,
                 qty: String(qty),
-                price,
+                price: String(value),
                 description
             })
         }

@@ -10,7 +10,7 @@ const mockGetProductApi: IProduct[] = [
         productName: "Hello World",
         productType: "Hello World",
         qty: 2,
-        price: "Hello World"
+        price: { currencyCode: 'PHP', value: 0 },
     },
     {
         img: "Hello World",
@@ -18,7 +18,7 @@ const mockGetProductApi: IProduct[] = [
         productName: "Hello World",
         productType: "Hello World",
         qty: 2,
-        price: "Hello World"
+        price: { currencyCode: 'PHP', value: 0 },
     }
 ];
 
@@ -90,7 +90,7 @@ describe("ProductApi", () => {
                 productName: "Hello World",
                 productType: "Hello World",
                 qty: 2,
-                price: "Hello World"
+                price: { currencyCode: 'PHP', value: 0 }
             })
             expect(mockGet).toHaveBeenCalledWith('/products/12345');
         });
@@ -122,7 +122,7 @@ describe("ProductApi", () => {
                         productName: "Hello World",
                         productType: "Hello World",
                         qty: 2,
-                        price: "Hello World"
+                        price: { currencyCode: 'PHP', value: 0 }
                     }
                 }
             })
@@ -165,7 +165,7 @@ describe("ProductApi", () => {
                         productName: "Hello World",
                         productType: "Hello World",
                         qty: 2,
-                        price: "Hello World"
+                        price: { currencyCode: 'PHP', value: 0 }
                     }
                 }
             })

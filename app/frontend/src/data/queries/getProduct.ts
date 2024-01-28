@@ -8,7 +8,10 @@ export const getProduct = gql`
             productName
             productType
             qty
-            price
+            price {
+                currencyCode
+                value
+            }
             description
         }
     }

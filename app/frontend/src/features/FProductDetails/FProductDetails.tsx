@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import { ApplicationRoutes } from "../../common/enums";
 import { useDispatch } from "react-redux";
 import { setDeleteProduct } from "../../store/ProductSlice";
+import { currencyConverter } from "../../common/services";
 
 export interface IProductDetailsFormValues {
     productName: string;
@@ -26,6 +27,7 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
     const { data, loading, error } = useGetProduct({ productId: productId || '' });
     const { getProduct } = data || {};
     const { productName, productType, qty, price, description } = getProduct || {};
+    const { currencyCode, value } = price || {};
     
     const handleEdit = useCallback(() => {
         navigate(`${ApplicationRoutes.EditProductDetail}/${productId}`);
@@ -84,7 +86,9 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
                     <span className="block font-semibold ">
                         Price
                     </span>
-                    {price}
+                    {price && (
+                        `${currencyConverter(price.currencyCode)}${value}`
+                    )}
                 </div>
                 <div>
                     <span className="block font-semibold ">

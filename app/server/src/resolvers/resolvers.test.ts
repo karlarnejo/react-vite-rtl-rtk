@@ -15,7 +15,7 @@ const mockGetProductApi: IProduct[] = [
         productName: "Hello World",
         productType: "Hello World",
         qty: 12345,
-        price: "Hello World"
+        price: { currencyCode: 'PHP', value: 0 }
     },
     {
         img: "Hello World",
@@ -23,7 +23,7 @@ const mockGetProductApi: IProduct[] = [
         productName: "Hello World",
         productType: "Hello World",
         qty: 12345,
-        price: "Hello World"
+        price: { currencyCode: 'PHP', value: 0 }
     }
 ];
 
@@ -60,12 +60,12 @@ describe('resolvers', () => {
         });
 
         it('Mutation - addProduct', async () => {
-            await resolvers.Mutation.addProduct(undefined, { userId: '123', product: mockGetProductApi[0] }, { dataSources } as any);
+            await resolvers.Mutation.addProduct(undefined, { product: mockGetProductApi[0] }, { dataSources } as any);
             expect(dataSources.productApi.addProduct).toHaveBeenCalled();
         });
 
         it('Mutation - editProduct', async () => {
-            await resolvers.Mutation.editProduct(undefined, { userId: '123', productId: '12345', product: mockGetProductApi[0] }, { dataSources } as any);
+            await resolvers.Mutation.editProduct(undefined, { productId: '12345', product: mockGetProductApi[0] }, { dataSources } as any);
             expect(dataSources.productApi.editProduct).toHaveBeenCalled();
         });
 

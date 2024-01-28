@@ -33,7 +33,8 @@ export const FAddProduct: React.FC = (): React.JSX.Element => {
                 variables: {
                     product: {
                         ...values,
-                        qty: Number(values.qty)
+                        qty: Number(values.qty),
+                        price: { currencyCode: 'PHP', value: Number(values.price) }
                     }
                 },
                 onCompleted: (response: IAddProductResponse): void => {

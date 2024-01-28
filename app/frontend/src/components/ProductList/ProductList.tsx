@@ -1,3 +1,4 @@
+import { currencyConverter } from "../../common/services";
 import { IProduct } from "../../common/types";
 import { List, ListItem } from "../../ui-components";
 
@@ -14,7 +15,7 @@ export const ProductList: React.FC<IProductListProps> = ({ listData }): React.JS
                     img,
                     productName, productType,
                     qty,
-                    price,
+                    price: { currencyCode, value },
                     actions
                 } = product;
 
@@ -28,7 +29,7 @@ export const ProductList: React.FC<IProductListProps> = ({ listData }): React.JS
                                 <div className="flex flex-col text-sm text-gray-500">
                                     <span>{`Type: ${productType}`}</span>
                                     <span>{`In stock: ${qty}`}</span>
-                                    <span>{price}</span>
+                                    <span>{`${currencyConverter(currencyCode)}${value}`}</span>
                                 </div>
                             </div>
                             <div>

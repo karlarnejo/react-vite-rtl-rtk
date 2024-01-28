@@ -5,7 +5,10 @@
         "productName": "Single Room",
         "productType": "Room",
         "qty": 3,
-        "price": "$599"
+        "price": {
+            "currencyCode": "PHP",
+            "value": 999
+        }
     },
     {
         "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/7421591e-1ef6-4e85-b93c-94e5a105d39b.jpg?auto=format,compress&fit=crop&crop=entropy&w=1536",
@@ -13,7 +16,10 @@
         "productName": "Double Room",
         "productType": "Room",
         "qty": 4,
-        "price": "$654"
+        "price": {
+            "currencyCode": "PHP",
+            "value": 1999
+        }
     },
     {
         "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/a92f9ff0-237d-41ea-b48c-58a92f61995e.jpg?auto=format,compress&fit=crop&crop=entropy&w=1536",
@@ -21,6 +27,9 @@
         "productName": "Family Suite",
         "productType": "Room",
         "qty": 5,
-        "price": "$693"
+        "price": {
+            "currencyCode": "PHP",
+            "value": 2999
+        }
     }
 ]

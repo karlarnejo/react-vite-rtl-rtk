@@ -8,7 +8,10 @@ export const getAllProducts = gql`
             productName
             productType
             qty
-            price
+            price {
+                currencyCode
+                value
+            }
         }
     }
 `;

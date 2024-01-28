@@ -39,13 +39,18 @@ export interface IActions {
     deleteItem?: Function;
 }
 
+export interface IPrice {
+    currencyCode: string;
+    value: number;
+}
+
 export interface IProduct {
     img: string;
     productId: string;
     productName: string;
     productType: string;
     qty: number;
-    price: string;
+    price: IPrice;
     description?: string;
     actions?: IActions
 };

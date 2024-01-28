@@ -1,3 +1,4 @@
+import { currencyConverter } from "../../common/services";
 import { IProduct } from "../../common/types";
 import { Table, THead, Th, TBody, Tr, Td, Button } from "../../ui-components";
 
@@ -24,7 +25,7 @@ export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React
                         img,
                         productName, productType,
                         qty,
-                        price,
+                        price: { currencyCode, value },
                         actions
                     } = product;
 
@@ -38,7 +39,7 @@ export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React
                                 <Td variant='text'>{productName}</Td>
                                 <Td variant='text'>{productType}</Td>
                                 <Td variant='text'>{qty}</Td>
-                                <Td variant='text'>{price}</Td>
+                                <Td variant='text'>{`${currencyConverter(currencyCode)}${value}`}</Td>
                                 <Td variant='text'>
                                     <div className="flex flex-row gap-x-3">
                                         <div>

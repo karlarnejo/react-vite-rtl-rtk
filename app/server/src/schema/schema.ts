@@ -2,14 +2,24 @@ import gql from 'graphql-tag';
 
 // TODO: Figure out how to import using index without using ts-loader and webpack
 export const typeDefs = gql`
+    type Price {
+        currencyCode: String
+        value: Int
+    }
+
     type Products {
         img: String
         productId: String
         productName: String
         productType: String
         qty: Int
-        price: String
+        price: Price
         description: String
+    }
+
+    input PriceInput {
+        currencyCode: String
+        value: Int
     }
 
     input ProductInput {
@@ -17,7 +27,7 @@ export const typeDefs = gql`
         productName: String
         productType: String
         qty: Int
-        price: String
+        price: PriceInput
         description: String
     }
 
