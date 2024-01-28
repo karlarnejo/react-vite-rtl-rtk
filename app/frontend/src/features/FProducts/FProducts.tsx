@@ -44,7 +44,6 @@ export const FProducts: React.FC = (): React.JSX.Element => {
     }, [navigate])
 
     const handleDelete = (productData: IProduct) => {
-        console.log("delete has been clicked ", productData)
         setOpen(true)
         setIdSelected(productData.productId);
     }

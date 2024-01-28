@@ -22,10 +22,10 @@ export const resolvers = {
     Mutation: {
         addProduct: async (
             _: any,
-            { userId, product }: IAddProductParams,
+            { product }: IAddProductParams,
             { dataSources }: { dataSources: IDataSources }
         ): Promise<IResponseAddProduct> => {
-            return dataSources.productApi.addProduct(userId, product);
+            return dataSources.productApi.addProduct(product);
         },
         editProduct: async (
             _: any,

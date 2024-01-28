@@ -33,7 +33,6 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
     const { handleSubmit, reset, formState: { isValid } } = form;
 
     const handleOnSubmit = async (values: IEditProductDetailsFormValues): Promise<void> => {
-        console.log("Form Submitted: ", values, isValid)
         if(isValid) {
             await editProductFn({
                 variables: {

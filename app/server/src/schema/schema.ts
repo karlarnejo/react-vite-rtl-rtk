@@ -42,7 +42,7 @@ export const typeDefs = gql`
     }
 
     type Mutation {
-        addProduct(userId: String, product: ProductInput): AddProductResponseStatus,
+        addProduct(product: ProductInput): AddProductResponseStatus,
         editProduct(productId: String, product: ProductInput): EditProductResponseStatus,
         deleteProduct(productId: String): DeleteProductResponseStatus
     }

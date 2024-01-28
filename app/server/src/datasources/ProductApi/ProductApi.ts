@@ -29,13 +29,13 @@ class ProductApi extends BaseDataSource {
         }
     }
 
-    public async addProduct(userId: string, product: IProduct): Promise<IResponseAddProduct> {
+    public async addProduct(product: IProduct): Promise<IResponseAddProduct> {
         try {
             // No need to check for userId, productId because it will throw 404 in downstream anyways.
             if(!product) {
                 throw new Error('Product is required!')
             }
-            const addProductDownstream: string = DownStreamApi.AddProduct.replace(':userId', userId);
+            const addProductDownstream: string = DownStreamApi.AddProduct;
             return await this.post(addProductDownstream, { body: { product } });
         } catch (error) {
             //TODO: Add logger
@@ -50,8 +50,6 @@ class ProductApi extends BaseDataSource {
             if(!product) {
                 throw new Error('Product is required!')
             }
-
-            console.log("aaaa ", product)
             const editProductDownstream: string = DownStreamApi.EditProduct.replace(':productId', productId);
             return await this.put(editProductDownstream, { body: { product } });
         } catch (error) {

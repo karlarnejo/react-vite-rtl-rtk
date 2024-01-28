@@ -60,6 +60,7 @@ export interface IEditProductDetailsFormValues {
 }
 
 export interface IAddProductDetailsFormValues {
+    img: string;
     productName: string;
     productType: string;
     qty: string;
@@ -83,5 +84,9 @@ export interface IResponseDeleteProduct extends IResponseStatus {
 }
 
 export interface IResponseEditProduct extends IResponseStatus {
+    productId: string;
+}
+
+export interface IResponseAddProduct extends IResponseStatus {
     productId: string;
 }

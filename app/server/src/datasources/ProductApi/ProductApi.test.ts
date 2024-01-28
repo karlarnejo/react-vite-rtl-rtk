@@ -113,7 +113,7 @@ describe("ProductApi", () => {
     describe('addProduct source success', () => {
         it('should call addProduct api and return its data', async () => {
             expect(sourceProductApi).toBeTruthy();
-            await sourceProductApi.addProduct('12345', mockGetProductApi[0]);
+            await sourceProductApi.addProduct(mockGetProductApi[0]);
             expect(mockAdd).toHaveBeenCalledWith('/users/12345/products', {
                 body: { 
                     product: {
@@ -135,7 +135,7 @@ describe("ProductApi", () => {
 
             try {
                 const productApi: ProductApi = new ProductApi(mockContext);
-                await productApi.addProduct('12345', mockGetProductApi[0]);
+                await productApi.addProduct(mockGetProductApi[0]);
             } catch (error) {
                 expect(error).toBe('error');
             }
@@ -146,7 +146,7 @@ describe("ProductApi", () => {
 
             try {
                 const productApi: ProductApi = new ProductApi(mockContext);
-                await productApi.addProduct('12345', undefined);
+                await productApi.addProduct(undefined);
             } catch (error) {
                 expect(error).toEqual(Error('Product is required!'));
             }

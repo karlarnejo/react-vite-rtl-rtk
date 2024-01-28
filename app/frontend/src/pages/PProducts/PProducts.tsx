@@ -11,7 +11,10 @@ import { IProduct } from "../../common/types";
 export const PProducts: React.FC = (): React.JSX.Element => {
     const navigate = useNavigate();
 
-    const { deleteProduct: { status: deleteStatus, productId } }  = useSelector(getProductSlice) as IProductSlice;
+    const { 
+        deleteProduct: { status: deleteStatus, productId },
+        addProduct: { status: addStatus, productId: addProductId }
+    }  = useSelector(getProductSlice) as IProductSlice;
 
     const handleAddProduct = useCallback((productData: IProduct) => {
         navigate(ApplicationRoutes.AddProduct);
@@ -19,6 +22,31 @@ export const PProducts: React.FC = (): React.JSX.Element => {
 
     return (
         <>
+            {addStatus === 'SUCCESS' && (
+                <>
+                    <Notification
+                        // Math.random to fix Notification not showing again after closing.
+                        // Forces React to render the Notification because key is different from first render and so on.
+                        // Math.random() is O(1). Shouldn't have any problems. Fix if better solution is found.
+                        key={Math.random()}
+                        variant='success'
+                        message={`${ProductNotifications.successAdd} ${addProductId}.`}
+                        closeable
+                    />
+                    <div className="mb-4"/>
+                </>
+            )}
+            {addStatus === 'FAILED' && (
+                <>
+                    <Notification
+                        key={Math.random()}
+                        variant='danger'
+                        message={`${ProductNotifications.errorAdd} ${ProductNotifications.tryAgain}.`}
+                        closeable
+                    />
+                    <div className="mb-4"/>
+                </>
+            )}
             {deleteStatus === 'SUCCESS' && (
                 <>
                     <Notification
@@ -27,7 +55,7 @@ export const PProducts: React.FC = (): React.JSX.Element => {
                         // Math.random() is O(1). Shouldn't have any problems. Fix if better solution is found.
                         key={Math.random()}
                         variant='success'
-                        message={`${ProductNotifications.successDelete} ${productId}`}
+                        message={`${ProductNotifications.successDelete} ${productId}.`}
                         closeable
                     />
                     <div className="mb-4"/>
@@ -38,7 +66,7 @@ export const PProducts: React.FC = (): React.JSX.Element => {
                     <Notification
                         key={Math.random()}
                         variant='danger'
-                        message={`${ProductNotifications.errorDelete} ${productId} ${ProductNotifications.tryAgain}`}
+                        message={`${ProductNotifications.errorDelete} ${productId} ${ProductNotifications.tryAgain}.`}
                         closeable
                     />
                     <div className="mb-4"/>

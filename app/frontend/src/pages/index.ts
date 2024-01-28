@@ -5,3 +5,4 @@ export * from './PSample';
 export * from './Errors';
 export * from './PProductDetails';
 export * from './PEditProductDetails';
+export * from './PAddProduct';
