@@ -3,7 +3,7 @@ import { validationMapper } from "../common/service";
 import { IFormValidationsProps } from "../common/types";
 import { useFormContext } from "react-hook-form";
 
-export interface IFormInputProps {
+export interface IFormInputTextAreaProps {
     name: string;
     label: string;
     validations?: IFormValidationsProps[];
@@ -16,14 +16,14 @@ export interface IFormInputProps {
     // onBlur?: Function; 
 }
 
-export const FormInput: React.FC<IFormInputProps> = ({ name, label, placeholder, description, validations, disabled, required = false }) => {
+export const FormInputTextArea: React.FC<IFormInputTextAreaProps> = ({ name, label, placeholder, description, validations, disabled, required = false }) => {
     const { register, formState: { errors }, trigger } = useFormContext()
 
     return (
         <div className="flex flex-col">
             <TextLabel required name={name} label={label} />
-            <input
-                className={`${errors && errors[name] ? 'border-red-500' : ''} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-200 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none`}
+            <textarea
+                className={`${errors && errors[name] ? 'border-red-500' : ''} resize shadow appearance-none border rounded h-full min-h-32 max-h-32 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-200 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none`}
                 id={name}
                 placeholder={placeholder}
                 {...register(name, {
