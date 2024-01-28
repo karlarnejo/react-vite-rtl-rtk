@@ -7,3 +7,8 @@ export * from './SearchProduct';
 export * from './ProductTable';
 export * from './ProductList';
 export * from './DeleteModal';
+export * from './FormInputProductName';
+export * from './FormInputProductType';
+export * from './FormInputQty';
+export * from './FormInputPrice';
+export * from './FormInputDescription';
