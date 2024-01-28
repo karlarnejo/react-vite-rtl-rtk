@@ -1,4 +1,6 @@
-import getProductSuccess from './data/success.json' assert { type: "json" };
+import successP81B37AC from './data/successP81B37AC.json' assert { type: "json" };
+import successP81B37AD from './data/successP81B37AD.json' assert { type: "json" };
+import successP81B37AE from './data/successP81B37AE.json' assert { type: "json" };
 import getProductFailure from './data/failure.json' assert { type: "json" };
 
 // Just return appropriate status according to your needs i.e. 404, 200, 202, 405, etc.
@@ -9,15 +11,25 @@ export const requestHandler = (req) => {
 
     // Write your conditions here in switch depending on what you want to return
     switch(productId) {
-        case '123':
+        case 'P81B37AC':
             return {
-                status: 404,
-                data: {...getProductFailure}
+                status: 200,
+                data: {...successP81B37AC}
+            }
+        case 'P81B37AD':
+            return {
+                status: 200,
+                data: {...successP81B37AD}
+            }
+        case 'P81B37AE':
+            return {
+                status: 200,
+                data: {...successP81B37AE}
             }
         default:
             return {
-                status: 200,
-                data: {...getProductSuccess}
+                status: 404,
+                data: {...getProductFailure}
             }
     }
 }
