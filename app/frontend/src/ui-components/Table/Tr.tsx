@@ -10,4 +10,4 @@ export const Tr: React.FC<ITrProps> = ({ children }): React.JSX.Element => {
             {children}
         </tr>
     );
-}
+};

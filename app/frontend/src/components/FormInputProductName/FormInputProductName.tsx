@@ -1,4 +1,4 @@
-import { FormInput } from "../../ui-components";
+import { FormInput } from '../../ui-components';
 // import { validationSample } from "./SearchProduct.service";
 
 export const FormInputProductName: React.FC = (): React.JSX.Element => {
@@ -12,4 +12,4 @@ export const FormInputProductName: React.FC = (): React.JSX.Element => {
             required
         />
     );
-}
+};

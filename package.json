@@ -10,10 +10,11 @@
     "scripts": {
         "frontend": "cd app/frontend && npm start",
         "frontend-test": "cd app/frontend && npm test",
+        "frontend-format": "cd app/frontend && npm run format",
         "mocks": "cd app/mocks && npm start",
         "server": "cd app/server && npm start",
         "server-test": "cd app/server && npm test",
-        "start": "concurrently \"npm run frontend\" \"npm run mocks\" \"npm run server\"",
+        "start": "concurrently \"npm run frontend\" \"npm run mocks\" \"npm run server\" \"npm run frontend-format\"",
         "test": "concurrently \"npm run frontend-test\" \"npm run server-test\""
     },
     "devDependencies": {

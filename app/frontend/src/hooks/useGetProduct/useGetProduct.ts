@@ -1,6 +1,6 @@
-import { ApolloError, useQuery } from "@apollo/client";
-import { IProduct } from "../../common/types";
-import { getProduct } from "../../data";
+import { ApolloError, useQuery } from '@apollo/client';
+import { IProduct } from '../../common/types';
+import { getProduct } from '../../data';
 
 export interface IUseGetProductParams {
     productId: string;
@@ -8,7 +8,7 @@ export interface IUseGetProductParams {
 
 export interface IGetProductResponse {
     getProduct: IProduct;
-};
+}
 
 export interface IUseGetProductResponse {
     data?: IGetProductResponse;
@@ -23,6 +23,8 @@ export const useGetProduct = ({ productId }: IUseGetProductParams): IUseGetProdu
 
     return {
         // data, error, loading
-        data, error, loading
-    }
+        data,
+        error,
+        loading
+    };
 };

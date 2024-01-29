@@ -1,1 +1,1 @@
-export * from './PHome'
+export * from './PHome';

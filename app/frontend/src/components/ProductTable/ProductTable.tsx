@@ -1,10 +1,10 @@
-import { currencyConverter } from "../../common/services";
-import { IProduct } from "../../common/types";
-import { Table, THead, Th, TBody, Tr, Td, Button } from "../../ui-components";
+import { currencyConverter } from '../../common/services';
+import { IProduct } from '../../common/types';
+import { Table, THead, Th, TBody, Tr, Td, Button } from '../../ui-components';
 
 export interface IProductTableProps {
-    tableData: IProduct[]
-};
+    tableData: IProduct[];
+}
 
 export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React.JSX.Element => {
     return (
@@ -19,44 +19,66 @@ export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React
                 <Th>Action</Th>
             </THead>
             <TBody>
-                {tableData && tableData.length > 0 ? tableData.map(( product: IProduct ) => {
-                    const {
-                        productId,
-                        img,
-                        productName, productType,
-                        qty,
-                        price: { currencyCode, value },
-                        actions
-                    } = product;
+                {tableData && tableData.length > 0 ? (
+                    tableData.map((product: IProduct) => {
+                        const {
+                            productId,
+                            img,
+                            productName,
+                            productType,
+                            qty,
+                            price: { currencyCode, value },
+                            actions
+                        } = product;
 
-                    const { viewItem, editItem, deleteItem } = actions || {}
-                    
-                    return (    
-                        <Tr key={productId}>
-                            <>
-                                <Td variant='img'>{img}</Td>
-                                <Td variant='text'>{productId}</Td>
-                                <Td variant='text'>{productName}</Td>
-                                <Td variant='text'>{productType}</Td>
-                                <Td variant='text'>{qty}</Td>
-                                <Td variant='text'>{`${currencyConverter(currencyCode)}${value}`}</Td>
-                                <Td variant='text'>
-                                    <div className="flex flex-row gap-x-3">
-                                        <div>
-                                            <Button name='view' label='View' variant='primary' onClick={() => viewItem && viewItem(product)}/>
+                        const { viewItem, editItem, deleteItem } = actions || {};
+
+                        return (
+                            <Tr key={productId}>
+                                <>
+                                    <Td variant="img">{img}</Td>
+                                    <Td variant="text">{productId}</Td>
+                                    <Td variant="text">{productName}</Td>
+                                    <Td variant="text">{productType}</Td>
+                                    <Td variant="text">{qty}</Td>
+                                    <Td variant="text">{`${currencyConverter(currencyCode)}${value}`}</Td>
+                                    <Td variant="text">
+                                        <div className="flex flex-row gap-x-3">
+                                            <div>
+                                                <Button
+                                                    name="view"
+                                                    label="View"
+                                                    variant="primary"
+                                                    onClick={() => viewItem && viewItem(product)}
+                                                />
+                                            </div>
+                                            <div>
+                                                <Button
+                                                    name="edit"
+                                                    label="Edit"
+                                                    variant="secondary"
+                                                    onClick={() => editItem && editItem(product)}
+                                                />
+                                            </div>
+                                            <div>
+                                                <Button
+                                                    name="delete"
+                                                    label="Delete"
+                                                    variant="secondary"
+                                                    onClick={() => deleteItem && deleteItem(product)}
+                                                />
+                                            </div>
                                         </div>
-                                        <div>
-                                            <Button name='edit' label='Edit' variant='secondary' onClick={() => editItem && editItem(product)}/>
-                                        </div>
-                                        <div>
-                                            <Button name='delete' label='Delete' variant='secondary' onClick={() => deleteItem && deleteItem(product)}/>
-                                        </div>
-                                    </div>
-                                </Td>
-                            </>
-                        </Tr>
-                    )
-                }): <Tr><Td variant='text'>No products found.</Td></Tr>}
+                                    </Td>
+                                </>
+                            </Tr>
+                        );
+                    })
+                ) : (
+                    <Tr>
+                        <Td variant="text">No products found.</Td>
+                    </Tr>
+                )}
             </TBody>
         </Table>
     );

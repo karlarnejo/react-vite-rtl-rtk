@@ -2,24 +2,24 @@
 h1 {
     @apply text-4xl;
     /* @apply font-bold; */
-  }
-  h2 {
+}
+h2 {
     @apply text-3xl;
     /* @apply font-bold; */
-  }
-  h3 {
+}
+h3 {
     @apply text-2xl;
     /* @apply font-bold; */
-  }
-  h4 {
+}
+h4 {
     @apply text-xl;
     /* @apply font-semibold; */
-  }
-  h5 {
+}
+h5 {
     @apply text-lg; /*or text-lg */
     /* @apply font-semibold; */
-  }
-  h6 {
+}
+h6 {
     @apply text-sm;
     /* @apply font-semibold; */
 }
@@ -28,15 +28,13 @@ h1 {
 @tailwind utilities;
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

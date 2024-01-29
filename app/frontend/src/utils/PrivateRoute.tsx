@@ -1,5 +1,5 @@
-import { Outlet, Navigate } from 'react-router-dom'
-import { Token } from '../hooks/useApolloClient'
+import { Outlet, Navigate } from 'react-router-dom';
+import { Token } from '../hooks/useApolloClient';
 
 export interface IPrivateRouteProps {
     token: Token;
@@ -7,7 +7,5 @@ export interface IPrivateRouteProps {
 
 export const PrivateRoutes: React.FC<IPrivateRouteProps> = ({ token }): React.JSX.Element => {
     //TODO: add expiration check along with tokenValue
-    return(
-        token.tokenValue ? <Outlet/> : <Navigate to="/login"/>
-    )
-}
+    return token.tokenValue ? <Outlet /> : <Navigate to="/login" />;
+};

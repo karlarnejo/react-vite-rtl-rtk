@@ -8,4 +8,4 @@ export const Th: React.FC<IThProps> = ({ children }): React.JSX.Element => {
             <span className="inline-block">{children}</span>
         </th>
     );
-}
+};

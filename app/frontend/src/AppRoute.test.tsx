@@ -1,7 +1,7 @@
-import { render } from "@testing-library/react"
-import { AppRoute } from "./AppRoute"
-import { BrowserRouter } from "react-router-dom"
-import { Token } from "./common/types";
+import { render } from '@testing-library/react';
+import { AppRoute } from './AppRoute';
+import { BrowserRouter } from 'react-router-dom';
+import { Token } from './common/types';
 
 vi.mock('./utils', () => ({
     PrivateRoutes: () => <>PrivateRoutes</>
@@ -9,22 +9,20 @@ vi.mock('./utils', () => ({
 
 vi.mock('./common/Error404', () => ({
     Error404: () => <>Error404</>
-})) 
+}));
 
 const mockToken: Token = { tokenValue: 'mockToken' };
 export const renderComponent = () => {
-    return(
-        render(
-            <BrowserRouter>
-                <AppRoute token={mockToken}/>
-            </BrowserRouter>
-        )
-    )
-}
+    return render(
+        <BrowserRouter>
+            <AppRoute token={mockToken} />
+        </BrowserRouter>
+    );
+};
 
-describe("AppRoute", () => {
+describe('AppRoute', () => {
     it('should render home properly', () => {
-        const { getByText } = renderComponent()
+        const { getByText } = renderComponent();
         expect(getByText('PrivateRoutes')).toBeInTheDocument();
     });
-})
+});

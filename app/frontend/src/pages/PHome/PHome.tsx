@@ -4,4 +4,4 @@ export const PHome: React.FC = (): React.JSX.Element => {
             <center>This is the home screen</center>
         </h1>
     );
-}
+};

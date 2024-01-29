@@ -1,10 +1,10 @@
-import { ApolloError, useQuery } from "@apollo/client";
-import { IProduct } from "../../common/types";
-import { getAllProducts } from "../../data";
+import { ApolloError, useQuery } from '@apollo/client';
+import { IProduct } from '../../common/types';
+import { getAllProducts } from '../../data';
 
 export interface IGetAllProductsResponse {
     getAllProducts: IProduct[];
-};
+}
 
 export interface IUseGetAllProductsResponse {
     data: IGetAllProductsResponse;
@@ -17,6 +17,8 @@ export const useGetAllProducts = (): IUseGetAllProductsResponse => {
 
     return {
         // data, error, loading
-        data: { getAllProducts: (data && data.getAllProducts) ?? [] }, error, loading
-    }
+        data: { getAllProducts: (data && data.getAllProducts) ?? [] },
+        error,
+        loading
+    };
 };

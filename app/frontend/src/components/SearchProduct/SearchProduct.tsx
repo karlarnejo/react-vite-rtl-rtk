@@ -1,5 +1,5 @@
-import { FormInput } from "../../ui-components";
-import { validationSample } from "./SearchProduct.service";
+import { FormInput } from '../../ui-components';
+import { validationSample } from './SearchProduct.service';
 
 export const SearchProduct: React.FC = (): React.JSX.Element => {
     return (
@@ -12,4 +12,4 @@ export const SearchProduct: React.FC = (): React.JSX.Element => {
             required
         />
     );
-}
+};

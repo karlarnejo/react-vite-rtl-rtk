@@ -1,4 +1,4 @@
-import { FieldValues, FormProvider, useForm } from "react-hook-form"
+import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 
 export interface IFormParams<T> {
     values: T;
@@ -13,13 +13,14 @@ export interface IFormProps {
 
 export const Form: React.FC<IFormProps> = ({ children, onSubmit }): React.JSX.Element => {
     const form = useForm<FieldValues>();
-    const { handleSubmit, formState: { isValid } } = form;
+    const {
+        handleSubmit,
+        formState: { isValid }
+    } = form;
 
     return (
         <FormProvider {...form}>
-            <form onSubmit={handleSubmit(values => onSubmit({ values, isValid }))}>
-                {children}
-            </form>
+            <form onSubmit={handleSubmit((values) => onSubmit({ values, isValid }))}>{children}</form>
         </FormProvider>
-    )
-}
+    );
+};

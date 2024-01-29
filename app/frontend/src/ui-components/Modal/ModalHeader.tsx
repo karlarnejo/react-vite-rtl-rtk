@@ -1,5 +1,5 @@
 export interface IModalHeaderProps {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 export const ModalHeader: React.FC<IModalHeaderProps> = ({ children }): React.JSX.Element => {
@@ -8,4 +8,4 @@ export const ModalHeader: React.FC<IModalHeaderProps> = ({ children }): React.JS
             {children}
         </div>
     );
-}
+};

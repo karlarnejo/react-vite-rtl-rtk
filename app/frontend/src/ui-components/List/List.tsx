@@ -1,6 +1,6 @@
 export interface IListProps {
     children: React.ReactNode;
-};
+}
 
 export const List: React.FC<IListProps> = ({ children }): React.JSX.Element => {
     return (
@@ -8,4 +8,4 @@ export const List: React.FC<IListProps> = ({ children }): React.JSX.Element => {
             {children}
         </div>
     );
-}
+};

@@ -1,6 +1,6 @@
 export interface IModalFooterProps {
-    children: React.ReactNode
-};
+    children: React.ReactNode;
+}
 
 export const ModalFooter: React.FC<IModalFooterProps> = ({ children }): React.JSX.Element => {
     return (

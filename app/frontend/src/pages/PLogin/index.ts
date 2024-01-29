@@ -1,1 +1,1 @@
-export * from './PLogin'
+export * from './PLogin';

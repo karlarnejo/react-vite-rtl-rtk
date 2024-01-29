@@ -1,10 +1,10 @@
-import { ApolloError, useMutation, MutationFunctionOptions, FetchResult } from "@apollo/client";
-import { IResponseEditProduct } from "../../common/types";
-import { editProduct } from "../../data";
+import { ApolloError, useMutation, MutationFunctionOptions, FetchResult } from '@apollo/client';
+import { IResponseEditProduct } from '../../common/types';
+import { editProduct } from '../../data';
 
 export interface IEditProductResponse {
     editProduct: IResponseEditProduct;
-};
+}
 
 export interface IUseEditProductResponse {
     editProductFn: (options?: MutationFunctionOptions) => Promise<FetchResult<IEditProductResponse>>;
@@ -17,6 +17,9 @@ export const useEditProduct = (): IUseEditProductResponse => {
     const [editProductFn, { loading, data, error }] = useMutation<IEditProductResponse>(editProduct);
 
     return {
-        editProductFn, data, error, loading
-    }
-}
+        editProductFn,
+        data,
+        error,
+        loading
+    };
+};

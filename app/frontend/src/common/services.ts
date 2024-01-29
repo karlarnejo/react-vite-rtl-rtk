@@ -1,9 +1,9 @@
 export const currencyConverter = (currencyCode: string) => {
-    switch(currencyCode) {
+    switch (currencyCode) {
         case 'USD':
-            return '$'
+            return '$';
         case 'PHP':
         default:
-            return '₱'
-    };
+            return '₱';
+    }
 };

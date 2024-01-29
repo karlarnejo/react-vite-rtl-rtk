@@ -1,13 +1,20 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { ActionButtons, FormInputDescription, FormInputPrice, FormInputProductName, FormInputProductType, FormInputQty } from "../../components";
-import { useCallback, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { ApplicationRoutes } from "../../common/enums";
-import { useEditProduct, useGetProduct } from "../../hooks";
-import { LoadingSpinner } from "../../ui-components";
-import { IEditProductDetailsFormValues } from "../../common/types";
-import { useDispatch } from "react-redux";
-import { setEditProduct } from "../../store/ProductSlice";
+import { FormProvider, useForm } from 'react-hook-form';
+import {
+    ActionButtons,
+    FormInputDescription,
+    FormInputPrice,
+    FormInputProductName,
+    FormInputProductType,
+    FormInputQty
+} from '../../components';
+import { useCallback, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ApplicationRoutes } from '../../common/enums';
+import { useEditProduct, useGetProduct } from '../../hooks';
+import { LoadingSpinner } from '../../ui-components';
+import { IEditProductDetailsFormValues } from '../../common/types';
+import { useDispatch } from 'react-redux';
+import { setEditProduct } from '../../store/ProductSlice';
 
 export const FEditProductDetails: React.FC = (): React.JSX.Element => {
     const dispatch = useDispatch();
@@ -31,10 +38,14 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
             description: ''
         }
     });
-    const { handleSubmit, reset, formState: { isValid } } = form;
+    const {
+        handleSubmit,
+        reset,
+        formState: { isValid }
+    } = form;
 
     const handleOnSubmit = async (values: IEditProductDetailsFormValues): Promise<void> => {
-        if(isValid) {
+        if (isValid) {
             await editProductFn({
                 variables: {
                     productId,
@@ -53,18 +64,18 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
             });
             navigate(`${ApplicationRoutes.ProductDetail}/${productId}`);
         }
-    }
+    };
 
     const handleSubmitEdit = () => {
-        handleSubmit(handleOnSubmit)()
-    }
+        handleSubmit(handleOnSubmit)();
+    };
 
     const handleBack = useCallback(() => {
         navigate(`${ApplicationRoutes.ProductDetail}/${productId}`);
-    }, [navigate])
+    }, [navigate]);
 
     useEffect(() => {
-        if(getProduct) {
+        if (getProduct) {
             reset({
                 img,
                 productName,
@@ -72,12 +83,12 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
                 qty: String(qty),
                 price: String(value),
                 description
-            })
+            });
         }
-    }, [data, reset])
-    
-    if(loading || editLoading) {
-        return (<LoadingSpinner/>);
+    }, [data, reset]);
+
+    if (loading || editLoading) {
+        return <LoadingSpinner />;
     }
 
     return (
@@ -87,30 +98,38 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
                     <form onSubmit={handleSubmit(handleOnSubmit)}>
                         <div className="md:w-96">
                             <div>
-                                <span className="block font-semibold ">
-                                    Product Id
-                                </span>
+                                <span className="block font-semibold ">Product Id</span>
                                 {productId}
                             </div>
-                            <div className="mt-4"/>
-                            <FormInputProductName/>
-                            <div className="mt-4"/>
-                            <FormInputProductType/>
-                            <div className="mt-4"/>
-                            <FormInputQty/>
-                            <div className="mt-4"/>
-                            <FormInputPrice/>
-                            <div className="mt-4"/>
-                            <FormInputDescription/>
+                            <div className="mt-4" />
+                            <FormInputProductName />
+                            <div className="mt-4" />
+                            <FormInputProductType />
+                            <div className="mt-4" />
+                            <FormInputQty />
+                            <div className="mt-4" />
+                            <FormInputPrice />
+                            <div className="mt-4" />
+                            <FormInputDescription />
                         </div>
                     </form>
                 </FormProvider>
             </div>
-            <div className="mt-10"/>
+            <div className="mt-10" />
             <ActionButtons
                 actionButtons={[
-                    { variant: 'secondary', name: 'productDetailSubmit', label: 'Submit', onClick: handleSubmitEdit},
-                    { variant: 'primary', name: 'productDetailBack', label: 'Back', onClick: handleBack}
+                    {
+                        variant: 'secondary',
+                        name: 'productDetailSubmit',
+                        label: 'Submit',
+                        onClick: handleSubmitEdit
+                    },
+                    {
+                        variant: 'primary',
+                        name: 'productDetailBack',
+                        label: 'Back',
+                        onClick: handleBack
+                    }
                 ]}
             />
         </>

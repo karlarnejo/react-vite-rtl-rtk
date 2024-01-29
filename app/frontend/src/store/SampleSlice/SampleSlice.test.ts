@@ -1,22 +1,37 @@
-import { IFirstObject, ISampleSlice, ISecondInnerObject, ISecondObject, getSampleSlice, initialState, sampleSlice, setFirstObject, setFirstObjectVar, setSampleSlice, setSecondInnerObject, setSecondInnerObjectVarOne, setSecondInnerObjectVarTwo, setSecondObject } from ".";
-import { IStoreAction } from "../../common/types";
+import {
+    IFirstObject,
+    ISampleSlice,
+    ISecondInnerObject,
+    ISecondObject,
+    getSampleSlice,
+    initialState,
+    sampleSlice,
+    setFirstObject,
+    setFirstObjectVar,
+    setSampleSlice,
+    setSecondInnerObject,
+    setSecondInnerObjectVarOne,
+    setSecondInnerObjectVarTwo,
+    setSecondObject
+} from '.';
+import { IStoreAction } from '../../common/types';
 
-describe("SampleSlice", () => {
-    it("should return state when getSampleSlice is called", () => {
-        expect(getSampleSlice({ sampleStore: initialState })).toEqual(initialState)
+describe('SampleSlice', () => {
+    it('should return state when getSampleSlice is called', () => {
+        expect(getSampleSlice({ sampleStore: initialState })).toEqual(initialState);
     });
 
-    it("should have a default state", () => {
+    it('should have a default state', () => {
         const newState: ISampleSlice = sampleSlice.reducer(undefined, {
-            type: "mockType"
+            type: 'mockType'
         });
 
         expect(newState).toEqual(initialState);
     });
 
-    it("should update sampleSlice with correct value when setFirstObject is dispatched", () => {
+    it('should update sampleSlice with correct value when setFirstObject is dispatched', () => {
         const payload: IFirstObject = {
-            firstObjectVar: "mockUpdate"
+            firstObjectVar: 'mockUpdate'
         };
         const action: IStoreAction = {
             type: setFirstObject.type,
@@ -30,8 +45,8 @@ describe("SampleSlice", () => {
         });
     });
 
-    it("should update sampleSlice with correct value when setFirstObjectVar is dispatched", () => {
-        const payload: string = "mockUpdate";
+    it('should update sampleSlice with correct value when setFirstObjectVar is dispatched', () => {
+        const payload: string = 'mockUpdate';
         const action: IStoreAction = {
             type: setFirstObjectVar.type,
             payload: payload
@@ -40,15 +55,15 @@ describe("SampleSlice", () => {
 
         expect(newState).toEqual({
             ...initialState,
-            firstObject: { firstObjectVar: payload } 
+            firstObject: { firstObjectVar: payload }
         });
     });
 
-    it("should update sampleSlice with correct value when setSecondObject is dispatched", () => {
+    it('should update sampleSlice with correct value when setSecondObject is dispatched', () => {
         const secondInnerObject: ISecondInnerObject = {
-            secondInnerObjectVarOne: "mockFirstVar",
-            secondInnerObjectVarTwo: "mockSecondVar"
-        }
+            secondInnerObjectVarOne: 'mockFirstVar',
+            secondInnerObjectVarTwo: 'mockSecondVar'
+        };
         const payload: ISecondObject = {
             secondInnerObject: secondInnerObject
         };
@@ -64,10 +79,10 @@ describe("SampleSlice", () => {
         });
     });
 
-    it("should update sampleSlice with correct value when setSecondInnerObject is dispatched", () => {
+    it('should update sampleSlice with correct value when setSecondInnerObject is dispatched', () => {
         const payload: ISecondInnerObject = {
-            secondInnerObjectVarOne: "mockFirstVar",
-            secondInnerObjectVarTwo: "mockSecondVar"
+            secondInnerObjectVarOne: 'mockFirstVar',
+            secondInnerObjectVarTwo: 'mockSecondVar'
         };
         const action: IStoreAction = {
             type: setSecondInnerObject.type,
@@ -81,8 +96,8 @@ describe("SampleSlice", () => {
         });
     });
 
-    it("should update sampleSlice with correct value when setSecondInnerObjectVarOne is dispatched", () => {
-        const payload: string = "mockUpdate";
+    it('should update sampleSlice with correct value when setSecondInnerObjectVarOne is dispatched', () => {
+        const payload: string = 'mockUpdate';
         const action: IStoreAction = {
             type: setSecondInnerObjectVarOne.type,
             payload: payload
@@ -91,12 +106,17 @@ describe("SampleSlice", () => {
 
         expect(newState).toEqual({
             ...initialState,
-            secondObject: { secondInnerObject: { ...initialState.secondObject.secondInnerObject, secondInnerObjectVarOne: payload } } 
+            secondObject: {
+                secondInnerObject: {
+                    ...initialState.secondObject.secondInnerObject,
+                    secondInnerObjectVarOne: payload
+                }
+            }
         });
     });
 
-    it("should update sampleSlice with correct value when setSecondInnerObjectVarOne is dispatched", () => {
-        const payload: string = "mockUpdate";
+    it('should update sampleSlice with correct value when setSecondInnerObjectVarOne is dispatched', () => {
+        const payload: string = 'mockUpdate';
         const action: IStoreAction = {
             type: setSecondInnerObjectVarTwo.type,
             payload: payload
@@ -105,17 +125,22 @@ describe("SampleSlice", () => {
 
         expect(newState).toEqual({
             ...initialState,
-            secondObject: { secondInnerObject: { ...initialState.secondObject.secondInnerObject, secondInnerObjectVarTwo: payload } } 
+            secondObject: {
+                secondInnerObject: {
+                    ...initialState.secondObject.secondInnerObject,
+                    secondInnerObjectVarTwo: payload
+                }
+            }
         });
     });
 
-    it("should update sampleSlice with correct value when setSampleSlice is dispatched", () => {
+    it('should update sampleSlice with correct value when setSampleSlice is dispatched', () => {
         const firstObject: IFirstObject = {
-            firstObjectVar: "mockFirstObjectVar"
+            firstObjectVar: 'mockFirstObjectVar'
         };
         const secondInnerObject: ISecondInnerObject = {
-            secondInnerObjectVarOne: "mockSecondInnerObjectVarOne",
-            secondInnerObjectVarTwo: "mockSecondInnerObjectVarTwo"
+            secondInnerObjectVarOne: 'mockSecondInnerObjectVarOne',
+            secondInnerObjectVarTwo: 'mockSecondInnerObjectVarTwo'
         };
         const secondObject: ISecondObject = {
             secondInnerObject: secondInnerObject

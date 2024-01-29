@@ -1,7 +1,7 @@
-import { render, waitFor } from "@testing-library/react"
-import { FSample } from "."
-import { ISampleComponentWithProps } from "../../components";
-import { mockUseDispatch } from "../../setupTests";
+import { render, waitFor } from '@testing-library/react';
+import { FSample } from '.';
+import { ISampleComponentWithProps } from '../../components';
+import { mockUseDispatch } from '../../setupTests';
 
 const mockUseNavigate = vi.fn();
 vi.mock('react-router-dom', () => {
@@ -9,7 +9,7 @@ vi.mock('react-router-dom', () => {
     return {
         ...reactRouterDom,
         useNavigate: () => mockUseNavigate
-    }
+    };
 });
 
 const mockSampleComponentWithProps = vi.fn();
@@ -18,38 +18,38 @@ vi.mock('../../components', () => ({
     SampleComponentWithProps: (props: ISampleComponentWithProps) => {
         mockSampleComponentWithPropsProps = props;
         mockSampleComponentWithProps(props);
-        return <>SampleComponentWithProps</>
+        return <>SampleComponentWithProps</>;
     },
     SampleComponent: () => {
-        return <>SampleComponent</>
+        return <>SampleComponent</>;
     }
 }));
 
-describe("FSample", () => {
+describe('FSample', () => {
     afterEach(() => {
         vi.clearAllMocks();
-    })
+    });
 
-    it("should display this is a sample feature", () => {
-        const { getByText } = render(<FSample/>)
+    it('should display this is a sample feature', () => {
+        const { getByText } = render(<FSample />);
 
-        expect(getByText("This is a sample feature")).toBeInTheDocument();
+        expect(getByText('This is a sample feature')).toBeInTheDocument();
         expect(getByText(/SampleComponentWithProps/i)).toBeInTheDocument();
         expect(getByText(/SampleComponent/i)).toBeInTheDocument();
     });
 
-    it.only("should redirect to home page and call dispatch", async () => {
-        render(<FSample/>)
-        
+    it.only('should redirect to home page and call dispatch', async () => {
+        render(<FSample />);
+
         await waitFor(() => {
-            mockSampleComponentWithPropsProps.btnOnClick()
+            mockSampleComponentWithPropsProps.btnOnClick();
             // Do this when you are trying to cover event changes like onBlur/onChange with a mocked component.
             // mockSampleComponentWithPropsProps.onBlur('123456')
             expect(mockUseDispatch).toHaveBeenCalledWith({
                 payload: 'Updated inner object',
                 type: 'sampleSlice/setFirstObject'
             });
-            expect(mockUseNavigate).toHaveBeenCalledWith('/')
-        })
-    })
-})
+            expect(mockUseNavigate).toHaveBeenCalledWith('/');
+        });
+    });
+});

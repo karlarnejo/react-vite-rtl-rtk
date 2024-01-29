@@ -1,24 +1,24 @@
-import { render } from "@testing-library/react";
-import { PProducts } from "..";
+import { render } from '@testing-library/react';
+import { PProducts } from '..';
 
-vi.mock("../../features", () => ({
+vi.mock('../../features', () => ({
     FProducts: () => {
-        return <>FProducts</>
+        return <>FProducts</>;
     }
 }));
 
-vi.mock("../../components", () => ({
+vi.mock('../../components', () => ({
     Header: () => {
-        return <>Header</>
+        return <>Header</>;
     },
     Link: () => {
-        return <>Link</>
+        return <>Link</>;
     }
 }));
 
-describe("PProducts", () => {
-    it("should display properly", () => {
-        const { getByText } = render(<PProducts/>)
+describe('PProducts', () => {
+    it('should display properly', () => {
+        const { getByText } = render(<PProducts />);
 
         expect(getByText(/FProducts/i)).toBeInTheDocument();
         expect(getByText(/Header/i)).toBeInTheDocument();

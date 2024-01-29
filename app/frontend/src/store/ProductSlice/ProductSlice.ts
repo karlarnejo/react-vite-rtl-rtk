@@ -1,6 +1,6 @@
-import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
-import { IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../../common/types";
-import { RootState } from "..";
+import { PayloadAction, Slice, createSlice } from '@reduxjs/toolkit';
+import { IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from '../../common/types';
+import { RootState } from '..';
 
 export const sliceName: string = 'productSlice';
 
@@ -46,9 +46,4 @@ export const productSlice: Slice = createSlice<IProductSlice, any>({
 
 export const getProductSlice = (state: RootState) => state.productStore;
 
-export const {
-    setDeleteProduct,
-    setResetProductSlice,
-    setEditProduct,
-    setAddProduct
-} = productSlice.actions;
+export const { setDeleteProduct, setResetProductSlice, setEditProduct, setAddProduct } = productSlice.actions;

@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
-import "@testing-library/jest-dom"
+import '@testing-library/jest-dom';
 
-export const mockUseDispatch = vi.fn()
+export const mockUseDispatch = vi.fn();
 vi.mock('react-redux', () => ({
     ...vi.importActual<object>('react-redux'),
     useDispatch: () => mockUseDispatch

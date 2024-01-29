@@ -1,7 +1,7 @@
-import { InlineError, InputDescription, TextLabel } from "../common/components";
-import { validationMapper } from "../common/service";
-import { IFormValidationsProps } from "../common/types";
-import { useFormContext } from "react-hook-form";
+import { InlineError, InputDescription, TextLabel } from '../common/components';
+import { validationMapper } from '../common/service';
+import { IFormValidationsProps } from '../common/types';
+import { useFormContext } from 'react-hook-form';
 
 export interface IFormInputTextAreaProps {
     name: string;
@@ -13,11 +13,23 @@ export interface IFormInputTextAreaProps {
     required?: boolean;
     // TODO: when custom onChange and onBlur
     // onChange?: Function;
-    // onBlur?: Function; 
+    // onBlur?: Function;
 }
 
-export const FormInputTextArea: React.FC<IFormInputTextAreaProps> = ({ name, label, placeholder, description, validations, disabled, required = false }) => {
-    const { register, formState: { errors }, trigger } = useFormContext()
+export const FormInputTextArea: React.FC<IFormInputTextAreaProps> = ({
+    name,
+    label,
+    placeholder,
+    description,
+    validations,
+    disabled,
+    required = false
+}) => {
+    const {
+        register,
+        formState: { errors },
+        trigger
+    } = useFormContext();
 
     return (
         <div className="flex flex-col">
@@ -34,21 +46,15 @@ export const FormInputTextArea: React.FC<IFormInputTextAreaProps> = ({ name, lab
                             // that the validation array is uniform.
                             // The required message can be overriden. Just pass require and message.
                             // weird falsy !value is not working
-                            return (
-                                required ? ((value !== '') ||  "This field is required") : undefined
-                            );
+                            return required ? value !== '' || 'This field is required' : undefined;
                         },
                         ...(validations && validationMapper(validations, required))
-                    },
+                    }
                 })}
                 onBlur={() => trigger(name)}
             />
-            {description && (
-                <InputDescription description={description} />
-            )}
-            {errors && errors[name] && (
-                <InlineError errors={errors} name={name} />
-            )}
+            {description && <InputDescription description={description} />}
+            {errors && errors[name] && <InlineError errors={errors} name={name} />}
         </div>
     );
 };

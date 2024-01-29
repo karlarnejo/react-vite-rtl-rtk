@@ -1,11 +1,11 @@
-import React from "react";
-import { buttonVariantChecker } from "./Button.service";
+import React from 'react';
+import { buttonVariantChecker } from './Button.service';
 
 export interface IButtonProps {
     name: string;
     label: string;
     onClick: Function;
-    variant: 'primary' | 'secondary'
+    variant: 'primary' | 'secondary';
 }
 
 export const Button: React.FC<IButtonProps> = ({ name, label, onClick, variant }: IButtonProps): React.JSX.Element => {
@@ -18,5 +18,5 @@ export const Button: React.FC<IButtonProps> = ({ name, label, onClick, variant }
         >
             {label}
         </button>
-    )
-}
+    );
+};

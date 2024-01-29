@@ -8,3 +8,14 @@ npm test
 
 # This is a work in progress
 - To add "start": "concurrently \"cd reactjs && npm start\" \"cd bff && npm start\" \"cd jsonServer && json-server --watch db.json --port 3001\""
+
+# TODO:
+- Add lint and auto format
+- Add input validations
+- Add error handling
+- Add pagination to products page
+- Add search feature
+- Add/Fix tests
+- Add custom onChange, onBlur
+- Add logger
+- Add JSON decoder

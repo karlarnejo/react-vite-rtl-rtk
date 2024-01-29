@@ -12,7 +12,7 @@ export interface IButtonProps {
     name: string;
     label: string;
     onClick: Function;
-    variant: 'primary' | 'secondary'
+    variant: 'primary' | 'secondary';
 }
 
 export interface IActionButtonProps {
@@ -23,7 +23,7 @@ export interface IActionButtonProps {
 }
 
 export interface IValidationProps {
-    value: string
+    value: string;
     message: string;
 }
 
@@ -52,8 +52,8 @@ export interface IProduct {
     qty: number;
     price: IPrice;
     description?: string;
-    actions?: IActions
-};
+    actions?: IActions;
+}
 
 export interface IEditProductDetailsFormValues {
     img: string;
@@ -78,11 +78,11 @@ export interface Token {
     sessionId?: string;
     expires?: number;
     tokenValue: string;
-};
+}
 
 export interface IResponseStatus {
     status: string;
-};
+}
 
 export interface IResponseDeleteProduct extends IResponseStatus {
     productId: string;

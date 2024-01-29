@@ -1,11 +1,11 @@
 export enum ApplicationRoutes {
-    EverythingElse = "*",
-    Home = "/",
-    Sample = "/sample",
-    Login = "/login",
-    Products = "/products",
-    ProductDetail = "/product-detail",
-    EditProductDetail = "/edit-product-detail",
+    EverythingElse = '*',
+    Home = '/',
+    Sample = '/sample',
+    Login = '/login',
+    Products = '/products',
+    ProductDetail = '/product-detail',
+    EditProductDetail = '/edit-product-detail',
     AddProduct = '/add-product'
 }
 
