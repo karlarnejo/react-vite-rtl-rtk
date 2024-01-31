@@ -26,11 +26,11 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
     const { data, loading, error } = useGetProduct({ productId: productId || '' });
     const { getProduct } = data || {};
     const { productName, productType, qty, price, description } = getProduct || {};
-    const { currencyCode, value } = price || {};
+    const { value } = price || {};
 
     const handleEdit = useCallback(() => {
         navigate(`${ApplicationRoutes.EditProductDetail}/${productId}`);
-    }, [navigate]);
+    }, [navigate, productId]);
 
     const handleOnDelete = async (): Promise<void> => {
         await deleteProductFn({

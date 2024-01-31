@@ -14,7 +14,7 @@
         "mocks": "cd app/mocks && npm start",
         "server": "cd app/server && npm start",
         "server-test": "cd app/server && npm test",
-        "start": "concurrently \"npm run frontend\" \"npm run mocks\" \"npm run server\" \"npm run frontend-format\"",
+        "start": "concurrently \"npm run frontend\" \"npm run mocks\" \"npm run server\"",
         "test": "concurrently \"npm run frontend-test\" \"npm run server-test\""
     },
     "devDependencies": {

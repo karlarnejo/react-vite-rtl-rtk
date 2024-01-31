@@ -36,7 +36,7 @@ export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React
                         return (
                             <Tr key={productId}>
                                 <>
-                                    <Td variant="img">{img}</Td>
+                                    <Td alt={productName} variant="img">{img}</Td>
                                     <Td variant="text">{productId}</Td>
                                     <Td variant="text">{productName}</Td>
                                     <Td variant="text">{productType}</Td>

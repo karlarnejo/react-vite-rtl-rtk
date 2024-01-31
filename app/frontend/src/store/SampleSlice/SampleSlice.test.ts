@@ -115,7 +115,7 @@ describe('SampleSlice', () => {
         });
     });
 
-    it('should update sampleSlice with correct value when setSecondInnerObjectVarOne is dispatched', () => {
+    it('should update sampleSlice with correct value when setSecondInnerObjectVarTwo is dispatched', () => {
         const payload: string = 'mockUpdate';
         const action: IStoreAction = {
             type: setSecondInnerObjectVarTwo.type,

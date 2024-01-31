@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { PHome } from '..';
 
 describe('PHome', () => {
     it('should display properly', () => {
-        const { getByText } = render(<PHome />);
+        render(<PHome />);
 
-        expect(getByText('This is the home screen')).toBeInTheDocument();
+        expect(screen.getByText('This is the home screen')).toBeInTheDocument();
     });
 });

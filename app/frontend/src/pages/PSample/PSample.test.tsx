@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { PSample } from '..';
 
 vi.mock('../../features', () => ({
@@ -9,9 +9,9 @@ vi.mock('../../features', () => ({
 
 describe('PSample', () => {
     it('should display properly', () => {
-        const { getByText } = render(<PSample />);
+        render(<PSample />);
 
-        expect(getByText('This is a sample page')).toBeInTheDocument();
-        expect(getByText('FSample')).toBeInTheDocument();
+        expect(screen.getByText('This is a sample page')).toBeInTheDocument();
+        expect(screen.getByText('FSample')).toBeInTheDocument();
     });
 });

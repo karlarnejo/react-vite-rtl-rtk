@@ -1,0 +1,12 @@
+coverage
+build
+dist
+module
+temp
+node_modules
+*.d.ts
+*.d.js
+./*.js
+public
+*.config.js
+*.json

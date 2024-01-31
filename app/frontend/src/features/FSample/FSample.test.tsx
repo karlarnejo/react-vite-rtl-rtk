@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import { FSample } from '.';
 import { ISampleComponentWithProps } from '../../components';
 import { mockUseDispatch } from '../../setupTests';
@@ -31,14 +31,14 @@ describe('FSample', () => {
     });
 
     it('should display this is a sample feature', () => {
-        const { getByText } = render(<FSample />);
+        render(<FSample />);
 
-        expect(getByText('This is a sample feature')).toBeInTheDocument();
-        expect(getByText(/SampleComponentWithProps/i)).toBeInTheDocument();
-        expect(getByText(/SampleComponent/i)).toBeInTheDocument();
+        expect(screen.getByText('This is a sample feature')).toBeInTheDocument();
+        expect(screen.getByText(/SampleComponentWithProps/i)).toBeInTheDocument();
+        expect(screen.getByText(/SampleComponent/i)).toBeInTheDocument();
     });
 
-    it.only('should redirect to home page and call dispatch', async () => {
+    it('should redirect to home page and call dispatch', async () => {
         render(<FSample />);
 
         await waitFor(() => {
@@ -49,7 +49,7 @@ describe('FSample', () => {
                 payload: 'Updated inner object',
                 type: 'sampleSlice/setFirstObject'
             });
-            expect(mockUseNavigate).toHaveBeenCalledWith('/');
         });
+        expect(mockUseNavigate).toHaveBeenCalledWith('/');
     });
 });

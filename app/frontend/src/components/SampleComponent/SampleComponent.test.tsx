@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { SampleComponent } from '.';
 
 describe('SampleComponent', () => {
     it('should display properly', () => {
-        const { getByText } = render(<SampleComponent />);
+        render(<SampleComponent />);
 
-        expect(getByText('This is a sample component')).toBeInTheDocument();
+        expect(screen.getByText('This is a sample component')).toBeInTheDocument();
     });
 });

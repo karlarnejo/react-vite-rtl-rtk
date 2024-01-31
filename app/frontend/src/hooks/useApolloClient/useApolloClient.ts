@@ -44,7 +44,7 @@ export const createHeaderLink = (token: Token): ApolloLink => {
         operation.setContext({
             headers: {
                 Authorization: `Bearer ${token.tokenValue}`,
-                ['my-additional-header']: 'my-additional-header',
+                'my-additional-header': 'my-additional-header',
                 notAddedToBaseDataSource: 'notAddedToBaseDataSource'
             }
         });

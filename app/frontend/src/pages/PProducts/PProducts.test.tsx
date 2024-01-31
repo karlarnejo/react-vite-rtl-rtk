@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { PProducts } from '..';
 
 vi.mock('../../features', () => ({
@@ -18,10 +18,10 @@ vi.mock('../../components', () => ({
 
 describe('PProducts', () => {
     it('should display properly', () => {
-        const { getByText } = render(<PProducts />);
+        render(<PProducts />);
 
-        expect(getByText(/FProducts/i)).toBeInTheDocument();
-        expect(getByText(/Header/i)).toBeInTheDocument();
-        expect(getByText(/Link/i)).toBeInTheDocument();
+        expect(screen.getByText(/FProducts/i)).toBeInTheDocument();
+        expect(screen.getByText(/Header/i)).toBeInTheDocument();
+        expect(screen.getByText(/Link/i)).toBeInTheDocument();
     });
 });

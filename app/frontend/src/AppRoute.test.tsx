@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { AppRoute } from './AppRoute';
 import { BrowserRouter } from 'react-router-dom';
 import { Token } from './common/types';
@@ -22,7 +22,7 @@ export const renderComponent = () => {
 
 describe('AppRoute', () => {
     it('should render home properly', () => {
-        const { getByText } = renderComponent();
-        expect(getByText('PrivateRoutes')).toBeInTheDocument();
+        renderComponent();
+        expect(screen.getByText('PrivateRoutes')).toBeInTheDocument();
     });
 });

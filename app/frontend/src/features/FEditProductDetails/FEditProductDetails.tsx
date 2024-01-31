@@ -24,10 +24,6 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
     const { data, loading, error } = useGetProduct({ productId: productId || '' });
     const { editProductFn, data: editData, loading: editLoading, error: editError } = useEditProduct();
 
-    const { getProduct } = data || {};
-    const { img, productName, productType, qty, price, description } = getProduct || {};
-    const { value } = price || {};
-
     const form = useForm<IEditProductDetailsFormValues>({
         defaultValues: {
             img: '',
@@ -72,10 +68,15 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
 
     const handleBack = useCallback(() => {
         navigate(`${ApplicationRoutes.ProductDetail}/${productId}`);
-    }, [navigate]);
+    }, [navigate, productId]);
 
     useEffect(() => {
-        if (getProduct) {
+        if (data && data.getProduct) {
+
+            const { getProduct } = data || {};
+            const { img, productName, productType, qty, price, description } = getProduct || {};
+            const { value } = price || {};
+
             reset({
                 img,
                 productName,

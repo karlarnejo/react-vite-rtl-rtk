@@ -35,7 +35,7 @@ export const ProductList: React.FC<IProductListProps> = ({ listData }): React.JS
                                     </div>
                                 </div>
                                 <div>
-                                    <img className="w-32 border-solid border-2 border-blue-500" src={img as string} />
+                                    <img className="w-32 border-solid border-2 border-blue-500" alt="of product" src={img as string} />
                                 </div>
                             </div>
                         </ListItem>

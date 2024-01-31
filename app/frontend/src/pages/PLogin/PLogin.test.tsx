@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { PLogin } from '..';
 
 describe('PLogin', () => {
     it('should display properly', () => {
-        const { getByText } = render(<PLogin />);
+        render(<PLogin />);
 
-        expect(getByText('This is the login screen')).toBeInTheDocument();
+        expect(screen.getByText('This is the login screen')).toBeInTheDocument();
     });
 });
