@@ -19,7 +19,7 @@ export const typeDefs = gql`
 
     input PriceInput {
         currencyCode: String
-        value: Int
+        value: Float
     }
 
     input ProductInput {

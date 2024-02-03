@@ -1,15 +1,15 @@
 import { FormInputTextArea } from '../../ui-components';
-// import { validationSample } from "./SearchProduct.service";
+import { descriptionValidation } from "./FormInputDescription.service";
 
 export const FormInputDescription: React.FC = (): React.JSX.Element => {
     return (
         <FormInputTextArea
             name="description"
             label="Description"
-            // validations={validationSample}
+            validations={descriptionValidation}
             placeholder="Description"
-            description="Enter product description"
             required
+            maxInput={300}
         />
     );
 };

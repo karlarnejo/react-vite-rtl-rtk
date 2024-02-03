@@ -28,7 +28,8 @@ export const FormInput: React.FC<IFormInputProps> = ({
     const {
         register,
         formState: { errors },
-        trigger
+        trigger,
+        setValue
     } = useFormContext();
 
     return (
@@ -45,13 +46,15 @@ export const FormInput: React.FC<IFormInputProps> = ({
                             // Not utilizing the built in required so
                             // that the validation array is uniform.
                             // The required message can be overriden. Just pass require and message.
-                            // weird falsy !value is not working
+                            // weird falsy !value is not working. Night already, cant think straight.
+                            // Will return once have the time but low prio.
                             return required ? value !== '' || 'This field is required' : undefined;
                         },
                         ...(validations && validationMapper(validations, required))
                     }
                 })}
                 onBlur={() => trigger(name)}
+                onChange={(event) => setValue(name, event.target.value)}
             />
             {description && <InputDescription description={description} />}
             {errors && errors[name] && <InlineError errors={errors} name={name} />}

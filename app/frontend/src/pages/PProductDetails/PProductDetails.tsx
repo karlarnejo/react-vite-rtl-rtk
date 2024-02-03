@@ -15,10 +15,6 @@ export const PProductDetails: React.FC = (): React.JSX.Element => {
             {editStatus === 'SUCCESS' && (
                 <>
                     <Notification
-                        // Math.random to fix Notification not showing again after closing.
-                        // Forces React to render the Notification because key is different from first render and so on.
-                        // Math.random() is O(1). Shouldn't have any problems. Fix if better solution is found.
-                        key={Math.random()}
                         variant="success"
                         message={`${ProductNotifications.successEdit} ${productId}`}
                         closeable
@@ -29,7 +25,6 @@ export const PProductDetails: React.FC = (): React.JSX.Element => {
             {editStatus === 'FAILED' && (
                 <>
                     <Notification
-                        key={Math.random()}
                         variant="danger"
                         message={`${ProductNotifications.errorEdit} ${productId} ${ProductNotifications.tryAgain}`}
                         closeable

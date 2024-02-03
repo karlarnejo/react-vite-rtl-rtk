@@ -28,10 +28,6 @@ export const PProducts: React.FC = (): React.JSX.Element => {
             {addStatus === 'SUCCESS' && (
                 <>
                     <Notification
-                        // Math.random to fix Notification not showing again after closing.
-                        // Forces React to render the Notification because key is different from first render and so on.
-                        // Math.random() is O(1). Shouldn't have any problems. Fix if better solution is found.
-                        key={Math.random()}
                         variant="success"
                         message={`${ProductNotifications.successAdd} ${addProductId}.`}
                         closeable
@@ -42,7 +38,6 @@ export const PProducts: React.FC = (): React.JSX.Element => {
             {addStatus === 'FAILED' && (
                 <>
                     <Notification
-                        key={Math.random()}
                         variant="danger"
                         message={`${ProductNotifications.errorAdd} ${ProductNotifications.tryAgain}.`}
                         closeable
@@ -53,10 +48,6 @@ export const PProducts: React.FC = (): React.JSX.Element => {
             {deleteStatus === 'SUCCESS' && (
                 <>
                     <Notification
-                        // Math.random to fix Notification not showing again after closing.
-                        // Forces React to render the Notification because key is different from first render and so on.
-                        // Math.random() is O(1). Shouldn't have any problems. Fix if better solution is found.
-                        key={Math.random()}
                         variant="success"
                         message={`${ProductNotifications.successDelete} ${productId}.`}
                         closeable
