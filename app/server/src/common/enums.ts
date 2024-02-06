@@ -4,7 +4,7 @@ export enum AdditionalHeaderKey {
 }
 
 export enum DownStreamApi {
-    GetAllProducts = 'products',
+    GetAllProducts = '/products',
     GetProduct = '/products/:productId',
     AddProduct = '/users/:userId/products',
     EditProduct = '/users/:userId/products/:productId',
