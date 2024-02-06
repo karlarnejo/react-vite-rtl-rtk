@@ -1,4 +1,4 @@
-import { regExpLettersOnly } from '../../common/constants';
+import { regExpAlphanumericWithSpacesOnly } from '../../common/constants';
 import { IFormValidationsProps } from '../../common/types';
 
 export const validationSample: IFormValidationsProps[] = [
@@ -9,7 +9,7 @@ export const validationSample: IFormValidationsProps[] = [
     {
         name: 'alphaNumeric',
         expression: (value: string) => {
-            return !value || regExpLettersOnly.test(value);
+            return !value || regExpAlphanumericWithSpacesOnly.test(value);
         },
         message: 'Input should be letters only'
     },

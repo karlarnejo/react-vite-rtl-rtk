@@ -9,7 +9,7 @@ export const FormInputDescription: React.FC = (): React.JSX.Element => {
             validations={descriptionValidation}
             placeholder="Description"
             required
-            maxInput={300}
+            maxInput={500}
         />
     );
 };

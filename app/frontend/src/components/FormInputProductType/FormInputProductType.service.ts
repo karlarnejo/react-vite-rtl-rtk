@@ -1,4 +1,4 @@
-import { regExpLettersOnly } from '../../common/constants';
+import { regExpAlphanumericWithSpacesOnly } from '../../common/constants';
 import { IFormValidationsProps } from '../../common/types';
 
 export const productTypeValidation: IFormValidationsProps[] = [
@@ -9,7 +9,7 @@ export const productTypeValidation: IFormValidationsProps[] = [
     {
         name: 'alphaNumeric',
         expression: (value: string) => {
-            return !value || regExpLettersOnly.test(value);
+            return !value || regExpAlphanumericWithSpacesOnly.test(value);
         },
         message: 'Product type should be letters only'
     },
