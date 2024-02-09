@@ -2,7 +2,7 @@
     "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/c56a0c0d-8454-431a-9b3e-f420c72e82e3.jpg?auto=format,compress&fit=crop&crop=entropy",
     "productId": "P81B37AC",
     "productName": "Single Room",
-    "productType": "Room",
+    "productType": "room",
     "qty": 3,
     "price": {
         "currencyCode": "PHP",

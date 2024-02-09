@@ -1,6 +1,7 @@
 import { Mock } from 'vitest'
 import { resolvers } from './resolvers';
 import { IGetLimitParams, IGetProductParams, IProduct } from '../common/types';
+import { ProductType } from '../common/enums';
 
 const mockGetAllProducts: Mock = vi.fn();
 const mockGetProduct: Mock = vi.fn();
@@ -13,7 +14,7 @@ const mockGetProductApi: IProduct[] = [
         img: "Hello World",
         productId: "Hello World",
         productName: "Hello World",
-        productType: "Hello World",
+        productType: ProductType.Breakfast,
         qty: 12345,
         price: { currencyCode: 'PHP', value: 0 }
     },
@@ -21,7 +22,7 @@ const mockGetProductApi: IProduct[] = [
         img: "Hello World",
         productId: "Hello World",
         productName: "Hello World",
-        productType: "Hello World",
+        productType: ProductType.Breakfast,
         qty: 12345,
         price: { currencyCode: 'PHP', value: 0 }
     }

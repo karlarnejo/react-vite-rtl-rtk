@@ -1,3 +1,5 @@
+import { ProductType } from "./enums";
+
 export interface IStoreAction {
     type: string;
     payload: any;
@@ -48,7 +50,7 @@ export interface IProduct {
     img: string;
     productId: string;
     productName: string;
-    productType: string;
+    productType: ProductType;
     qty: number;
     price: IPrice;
     description?: string;

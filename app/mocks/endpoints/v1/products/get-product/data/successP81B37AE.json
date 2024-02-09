@@ -2,7 +2,7 @@
     "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/a92f9ff0-237d-41ea-b48c-58a92f61995e.jpg?auto=format,compress&fit=crop&crop=entropy&w=1536",
     "productId": "P81B37AE",
     "productName": "Family Suite",
-    "productType": "Room",
+    "productType": "room",
     "qty": 5,
     "price": {
         "currencyCode": "PHP",

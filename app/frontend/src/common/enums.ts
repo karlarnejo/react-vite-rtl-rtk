@@ -18,3 +18,11 @@ export enum ProductNotifications {
     errorEdit = 'There is an error editing the product.',
     tryAgain = 'Please contact the administrator and try again later.'
 }
+
+export enum ProductType {
+    Room = 'room',
+    Breakfast = 'breakfast',
+    Lunch = 'lunch',
+    Dinner = 'dinner',
+    Msc = 'msc'
+}

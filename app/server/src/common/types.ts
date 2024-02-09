@@ -1,5 +1,6 @@
 import { IncomingHttpHeaders } from "http";
 import { IDataSources } from "../datasources";
+import { ProductType } from "./enums";
 
 export interface IPrice {
     currencyCode: string;
@@ -10,7 +11,7 @@ export interface IProduct {
     img: string;
     productId: string;
     productName: string;
-    productType: string;
+    productType: ProductType;
     qty: number;
     price: IPrice;
     description?: string;

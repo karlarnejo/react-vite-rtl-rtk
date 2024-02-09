@@ -34,7 +34,7 @@ export const handler = (req) => {
     }
 }
 
-export const path = "/users/:userId/products/:productId";
+export const path = "/products/:productId";
 
 export default {
     requestMethod: "PUT",

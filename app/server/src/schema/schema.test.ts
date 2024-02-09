@@ -3,6 +3,7 @@ import { typeDefs } from "./schema";
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { addMocksToSchema, mockServer } from '@graphql-tools/mock';
 import { graphql } from "graphql/index.js";
+import { ProductType } from "../common/enums";
 
 const getAllProductsQuery = `
     query {
@@ -22,7 +23,7 @@ const getAllProductsResult: IProduct[] = [
         img: "Hello World",
         productId: "Hello World",
         productName: "Hello World",
-        productType: "Hello World",
+        productType: ProductType.Breakfast,
         qty: 12345,
         price: { currencyCode: 'PHP', value: 0 }
     },
@@ -30,7 +31,7 @@ const getAllProductsResult: IProduct[] = [
         img: "Hello World",
         productId: "Hello World",
         productName: "Hello World",
-        productType: "Hello World",
+        productType: ProductType.Breakfast,
         qty: 12345,
         price: { currencyCode: 'PHP', value: 0 }
     }

@@ -3,7 +3,7 @@ import { validationMapper } from '../common/service';
 import { IFormValidationsProps } from '../common/types';
 import { useFormContext } from 'react-hook-form';
 
-export interface IFormInputProps {
+export interface IFormSelectProps {
     name: string;
     label: string;
     validations?: IFormValidationsProps[];
@@ -13,18 +13,20 @@ export interface IFormInputProps {
     required?: boolean;
     onChange?: Function;
     onBlur?: Function;
+    children: React.ReactNode;
 }
 
-export const FormInput: React.FC<IFormInputProps> = ({
+export const FormSelect: React.FC<IFormSelectProps> = ({
     name,
     label,
-    placeholder,
+    placeholder = "Please select...",
     description,
     validations,
     disabled,
     required = false,
     onChange,
-    onBlur
+    onBlur,
+    children
 }) => {
     const {
         register,
@@ -36,10 +38,10 @@ export const FormInput: React.FC<IFormInputProps> = ({
     return (
         <div className="flex flex-col">
             <TextLabel required name={name} label={label} />
-            <input
-                className={`${errors && errors[name] ? 'border-red-500 focus:ring-red-500' : 'border-gray-50 focus:ring-gray-500'} shadow appearance-none border rounded bg-gray-100 w-full py-2 px-3 text-gray-700 leading-tight transition focus:outline-none duration-300 rounded-md focus:ring-2`}
+            <select
+                className={`${errors && errors[name] ? 'border-red-500 focus:ring-red-500' : 'border-gray-50 focus:ring-gray-500'} appearance-none custom-arrow-select shadow border rounded bg-gray-100 w-full px-2 py-2 text-gray-700 leading-tight transition focus:outline-none duration-300 px-4 py-2 rounded-md focus:ring-2`}
                 id={name}
-                placeholder={placeholder}
+                defaultValue=""
                 {...register(name, {
                     disabled: disabled,
                     validate: {
@@ -56,7 +58,10 @@ export const FormInput: React.FC<IFormInputProps> = ({
                 })}
                 onBlur={onBlur ? () => onBlur() : () => trigger(name)}
                 onChange={onChange ? () => onChange() : (event) => setValue(name, event.target.value)}
-            />
+            >
+                <option value="">{placeholder}</option>
+                {children}
+            </select>
             {description && <InputDescription description={description} />}
             {errors && errors[name] && <InlineError errors={errors} name={name} />}
         </div>

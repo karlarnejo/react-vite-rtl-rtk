@@ -1,5 +1,5 @@
 import { dataSources } from "..";
-import { AdditionalHeaderKey } from "../../common/enums";
+import { AdditionalHeaderKey, ProductType } from "../../common/enums";
 import { IDataSourceContext, IProduct, IRequestContext, IResponseDeleteProduct } from "../../common/types";
 import ProductApi from "./ProductApi";
 
@@ -8,7 +8,7 @@ const mockGetProductApi: IProduct[] = [
         img: "Hello World",
         productId: "Hello World",
         productName: "Hello World",
-        productType: "Hello World",
+        productType: ProductType.Breakfast,
         qty: 2,
         price: { currencyCode: 'PHP', value: 0 },
     },
@@ -16,7 +16,7 @@ const mockGetProductApi: IProduct[] = [
         img: "Hello World",
         productId: "Hello World",
         productName: "Hello World",
-        productType: "Hello World",
+        productType: ProductType.Breakfast,
         qty: 2,
         price: { currencyCode: 'PHP', value: 0 },
     }
@@ -88,7 +88,7 @@ describe("ProductApi", () => {
                 img: "Hello World",
                 productId: "Hello World",
                 productName: "Hello World",
-                productType: "Hello World",
+                productType: ProductType.Breakfast,
                 qty: 2,
                 price: { currencyCode: 'PHP', value: 0 }
             })
@@ -120,7 +120,7 @@ describe("ProductApi", () => {
                         img: "Hello World",
                         productId: "Hello World",
                         productName: "Hello World",
-                        productType: "Hello World",
+                        productType: ProductType.Breakfast,
                         qty: 2,
                         price: { currencyCode: 'PHP', value: 0 }
                     }
@@ -163,7 +163,7 @@ describe("ProductApi", () => {
                         img: "Hello World",
                         productId: "Hello World",
                         productName: "Hello World",
-                        productType: "Hello World",
+                        productType: ProductType.Breakfast,
                         qty: 2,
                         price: { currencyCode: 'PHP', value: 0 }
                     }

@@ -13,6 +13,10 @@ npm test
 - Add lint and auto format (done)
 - Add input validations (done)
 - Add text count in Textarea (done)
+- Add Filechooser
+- Add Select (done)
+- Add Radio button
+- Add Checkbox
 - Add error handling
 - Add pagination to products page
 - Add search feature

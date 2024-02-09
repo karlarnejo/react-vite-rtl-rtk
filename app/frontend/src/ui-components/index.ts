@@ -7,3 +7,4 @@ export * from './LoadingSpinner';
 export * from './Notification';
 export * from './Modal';
 export * from './FormInputTextArea';
+export * from './FormSelect';

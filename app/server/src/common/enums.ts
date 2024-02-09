@@ -6,7 +6,15 @@ export enum AdditionalHeaderKey {
 export enum DownStreamApi {
     GetAllProducts = '/products',
     GetProduct = '/products/:productId',
-    AddProduct = '/users/:userId/products',
-    EditProduct = '/users/:userId/products/:productId',
+    AddProduct = '/products',
+    EditProduct = '/products/:productId',
     DeleteProduct = '/products/:productId',
+}
+
+export enum ProductType {
+    Room = 'room',
+    Breakfast = 'breakfast',
+    Lunch = 'lunch',
+    Dinner = 'dinner',
+    Msc = 'msc'
 }

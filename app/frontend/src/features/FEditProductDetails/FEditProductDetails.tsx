@@ -70,6 +70,7 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
         navigate(`${ApplicationRoutes.ProductDetail}/${productId}`);
     }, [navigate, productId]);
 
+    // TODO: Transfer to a custom hook
     useEffect(() => {
         if (data && data.getProduct) {
 

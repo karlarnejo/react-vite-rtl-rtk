@@ -2,7 +2,7 @@
     "img": "https://webbox.imgix.net/images/owvecfmxulwbfvxm/7421591e-1ef6-4e85-b93c-94e5a105d39b.jpg?auto=format,compress&fit=crop&crop=entropy&w=1536",
     "productId": "P81B37AD",
     "productName": "Double Room",
-    "productType": "Room",
+    "productType": "room",
     "qty": 4,
     "price": {
         "currencyCode": "PHP",
