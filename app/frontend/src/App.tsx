@@ -19,7 +19,7 @@ const App: React.FC = (): React.JSX.Element => {
     return (
         <>
             {/* TODO: Add more provider if necessary */}
-            <div className="min-w-[200px] min-h-[50px] mr-20 ml-20 mt-12 mb-12 md:mr-40 md:ml-40">
+            <div className="font-serif min-w-[200px] min-h-[50px] mr-20 ml-20 mt-12 mb-12 md:mr-40 md:ml-40">
                 <ApolloProvider client={client}>
                     <Provider store={store}>
                         <BrowserRouter>

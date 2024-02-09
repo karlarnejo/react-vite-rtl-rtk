@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { ActionButtons, DeleteModal } from '../../components';
+import { ActionButtons, DeleteModal, Header } from '../../components';
 import { useDeleteProduct, useGetProduct } from '../../hooks';
 import { LoadingSpinner } from '../../ui-components';
 import { useCallback, useState } from 'react';
 import { ApplicationRoutes } from '../../common/enums';
 import { useDispatch } from 'react-redux';
 import { setDeleteProduct } from '../../store/ProductSlice';
-import { currencyConverter } from '../../common/services';
+import { currencyConverter, toUppercaseFirstLetter } from '../../common/services';
 
 export interface IProductDetailsFormValues {
     productName: string;
@@ -25,7 +25,7 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
     const { deleteProductFn, error: deleteError, loading: deleteLoading } = useDeleteProduct();
     const { data, loading, error } = useGetProduct({ productId: productId || '' });
     const { getProduct } = data || {};
-    const { productName, productType, qty, price, description } = getProduct || {};
+    const { productName, img, productType, qty, price, description } = getProduct || {};
     const { value } = price || {};
 
     const handleEdit = useCallback(() => {
@@ -56,30 +56,29 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
 
     return (
         <>
-            <div className="flex flex-col gap-y-4">
+            <Header headerTitle={productName ?? ''} />
+            <div className="mt-10" />
+            <div className="grid grid-cols-1 md:inline-grid md:grid-cols-2 gap-4 bg-blue-100 rounded-lg">
                 <div>
-                    <span className="block font-semibold ">Product Id</span>
-                    {productId}
+                    <img className='shadow border object-cover rounded-l-lg w-full h-full' src={img}></img>
                 </div>
-                <div>
-                    <span className="block font-semibold ">Product name</span>
-                    {productName}
-                </div>
-                <div>
-                    <span className="block font-semibold ">Product type</span>
-                    {productType}
-                </div>
-                <div>
-                    <span className="block font-semibold ">Quantity</span>
-                    {qty}
-                </div>
-                <div>
-                    <span className="block font-semibold ">Price</span>
-                    {price && `${currencyConverter(price.currencyCode)}${value}`}
-                </div>
-                <div>
-                    <span className="block font-semibold ">Description</span>
-                    {description}
+                <div className="flex flex-col gap-y-4 p-2">
+                    <div>
+                        <span className="block font-semibold ">Description</span>
+                        {description}
+                    </div>
+                    <div>
+                        <span className="block font-semibold ">Product type</span>
+                        {toUppercaseFirstLetter(String(productType))}
+                    </div>
+                    <div>
+                        <span className="block font-semibold ">Quantity</span>
+                        {qty}
+                    </div>
+                    <div>
+                        <span className="block font-semibold ">Price</span>
+                        {price && `${currencyConverter(price.currencyCode)}${value}`}
+                    </div>
                 </div>
             </div>
             <div className="mt-10" />

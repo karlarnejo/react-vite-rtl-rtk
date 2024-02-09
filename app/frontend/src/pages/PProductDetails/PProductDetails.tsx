@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Header, Link } from '../../components';
+import { Link } from '../../components';
 import { FProductDetails } from '../../features';
 import { IProductSlice, getProductSlice } from '../../store/ProductSlice';
 import { Notification } from '../../ui-components';
@@ -34,8 +34,6 @@ export const PProductDetails: React.FC = (): React.JSX.Element => {
             )}
             <Link icon="M13 5H1m0 0 4 4M1 5l4-4" label="Back to Products" routeTo="/products" />
             <div className="mb-12" />
-            <Header headerTitle="Product detail" />
-            <div className="mt-10" />
             <FProductDetails />
         </>
     );

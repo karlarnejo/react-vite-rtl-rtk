@@ -7,3 +7,7 @@ export const currencyConverter = (currencyCode: string) => {
             return '₱';
     }
 };
+
+export const toUppercaseFirstLetter = (stringToCapitalize: string): string => {
+    return `${stringToCapitalize.charAt(0).toUpperCase()}${stringToCapitalize.slice(1)}`;
+}
