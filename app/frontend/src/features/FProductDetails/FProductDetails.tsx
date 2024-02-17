@@ -58,7 +58,7 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
         <>
             <Header headerTitle={productName ?? ''} />
             <div className="mt-10" />
-            <div className="grid grid-cols-1 md:inline-grid md:grid-cols-2 gap-4 bg-blue-100 rounded-lg">
+            <div className="grid grid-cols-1 md:inline-grid md:grid-cols-2 gap-4 bg-indigo-100 rounded-lg">
                 <div>
                     <img className='shadow border object-cover rounded-l-lg w-full h-full' src={img}></img>
                 </div>

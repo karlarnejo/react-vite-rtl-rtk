@@ -7,6 +7,9 @@ export default {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                'poppins': ['Poppins']
+            },
             margin: {
                 xs: '0.5rem',
                 sm: '1rem',

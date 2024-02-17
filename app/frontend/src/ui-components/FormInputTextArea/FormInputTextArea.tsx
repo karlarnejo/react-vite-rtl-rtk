@@ -42,7 +42,7 @@ export const FormInputTextArea: React.FC<IFormInputTextAreaProps> = ({
         <div className="flex flex-col">
             <TextLabel required name={name} label={label} />
             <textarea
-                className={`${errors && errors[name] ? 'border-red-500 focus:ring-red-500' : 'border-gray-50 focus:ring-gray-500'} resize shadow appearance-none border rounded bg-gray-100 w-full h-full min-h-32 py-2 px-3 text-gray-700 leading-tight transition focus:outline-none duration-300 rounded-md focus:ring-2`}
+                className={`${errors && errors[name] ? 'border-red-500 focus:ring-red-500' : 'border-indigo-300 focus:ring-indigo-500'} resize shadow appearance-none border rounded w-full h-full min-h-32 py-2 px-3 leading-tight transition focus:outline-none duration-300 rounded-md focus:ring-2`}
                 id={name}
                 placeholder={placeholder}
                 {...register(name, {
