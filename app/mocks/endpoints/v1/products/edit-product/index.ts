@@ -1,5 +1,5 @@
-import createProductSuccess from './data/success.json' assert { type: "json" };
-import createProductFailure from './data/failure.json' assert { type: "json" };
+import editProductSuccess from './data/success.json' assert { type: "json" };
+import editProductFailure from './data/failure.json' assert { type: "json" };
 
 // Just return appropriate status according to your needs i.e. 404, 200, 202, 405, etc.
 export const requestHandler = (req) => {
@@ -12,12 +12,12 @@ export const requestHandler = (req) => {
         case '123':
             return {
                 status: 404,
-                data: {...createProductFailure}
+                data: {...editProductFailure}
             }
         default:
             return {
                 status: 200,
-                data: {...createProductSuccess}
+                data: {...editProductSuccess}
             }
     }
 }
@@ -30,7 +30,7 @@ export const handler = (req) => {
         case 'PUT':
             return requestHandler(req)
         default:
-            return { status: 405, data:{ createProductFailure}}
+            return { status: 405, data:{ editProductFailure }}
     }
 }
 

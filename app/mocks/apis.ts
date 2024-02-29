@@ -9,7 +9,7 @@ export const apis = () => {
         getAllProducts,
         getProduct,
         createProduct,
-        editProduct,
-        deleteProduct
+        deleteProduct,
+        editProduct
     ]
 }
