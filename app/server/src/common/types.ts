@@ -9,6 +9,7 @@ export interface IPrice {
 
 export interface IProduct {
     img: string;
+    // img: FileUpload;
     productId: string;
     productName: string;
     productType: ProductType;

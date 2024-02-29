@@ -52,9 +52,7 @@ export const FormInputTextArea: React.FC<IFormInputTextAreaProps> = ({
                             // Not utilizing the built in required so
                             // that the validation array is uniform.
                             // The required message can be overriden. Just pass require and message.
-                            // weird falsy !value is not working. Night already, cant think straight.
-                            // Will return once have the time but low prio.
-                            return required ? value !== '' || 'This field is required' : undefined;
+                            return value ?? 'This field is required';
                         },
                         ...(validations && validationMapper(validations, required))
                     }

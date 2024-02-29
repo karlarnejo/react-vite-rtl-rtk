@@ -24,7 +24,7 @@ export const FAddProduct: React.FC = (): React.JSX.Element => {
 
     const form = useForm<IAddProductDetailsFormValues>({
         defaultValues: {
-            img: 'mockImgLaterWithFileChooser',
+            img: '',
             productName: '',
             productType: '',
             qty: '',
@@ -84,6 +84,9 @@ export const FAddProduct: React.FC = (): React.JSX.Element => {
                             <div className="mt-4" />
                             <FormInputProductName />
                             <div className="mt-4" />
+                            {/* TODO: Figure out best practice for file upload in apollo. Maybe try to have the file upload in another step. */}
+                            {/* <FormInputProductImg />
+                            <div className="mt-4" /> */}
                             <FormInputProductType />
                             <div className="mt-4" />
                             <FormInputQty />

@@ -59,6 +59,7 @@ export interface IProduct {
 
 export interface IEditProductDetailsFormValues {
     img: string;
+    // img: File;
     productName: string;
     productType: string;
     qty: string;
@@ -68,6 +69,7 @@ export interface IEditProductDetailsFormValues {
 
 export interface IAddProductDetailsFormValues {
     img: string;
+    // img: File;
     productName: string;
     productType: string;
     qty: string;

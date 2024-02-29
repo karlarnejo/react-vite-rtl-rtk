@@ -15,6 +15,9 @@ export const useApolloClient = ({ token }: IUseApolloClientProps) => {
         const httpLink: HttpLink = new HttpLink({
             uri: (operation) => `${graphqlPath}/${operation.operationName}`
         });
+        // const httpLink = createUploadLink({
+        //     uri: (operation) => `${graphqlPath}/${operation.operationName}`
+        // });
 
         const onErrorLink: ApolloLink = createErrorLink();
         return new ApolloClient({

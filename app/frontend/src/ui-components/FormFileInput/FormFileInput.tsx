@@ -1,9 +1,10 @@
+import { useRef } from 'react';
 import { InlineError, InputDescription, TextLabel } from '../common/components';
 import { validationMapper } from '../common/service';
 import { IFormValidationsProps } from '../common/types';
 import { useFormContext } from 'react-hook-form';
 
-export interface IFormSelectProps {
+export interface IFormFileInputProps {
     name: string;
     label: string;
     validations?: IFormValidationsProps[];
@@ -13,21 +14,20 @@ export interface IFormSelectProps {
     required?: boolean;
     onChange?: Function;
     onBlur?: Function;
-    children: React.ReactNode;
 }
 
-export const FormSelect: React.FC<IFormSelectProps> = ({
+export const FormFileInput: React.FC<IFormFileInputProps> = ({
     name,
     label,
-    placeholder = "Please select...",
     description,
     validations,
     disabled,
     required = false,
     onChange,
-    onBlur,
-    children
+    onBlur
 }) => {
+    // TODO: Check why overriding the register ref fixes the UI not reflecting the chosen file name
+    const fileInputRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
     const {
         register,
         formState: { errors },
@@ -35,13 +35,19 @@ export const FormSelect: React.FC<IFormSelectProps> = ({
         setValue
     } = useFormContext();
 
+    const handleValueSetter = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            setValue(name, event.target.files[0])
+        }
+    }
+
     return (
         <div className="flex flex-col">
             <TextLabel required name={name} label={label} />
-            <select
-                className={`${errors && errors[name] ? 'border-red-500 focus:ring-red-500' : 'border-indigo-300 focus:ring-indigo-500'} appearance-none custom-arrow-select shadow border rounded w-full px-2 py-2 leading-tight transition focus:outline-none duration-300 px-4 py-2 rounded-md focus:ring-2`}
+            <input
+                className={`${errors && errors[name] ? 'border-red-500 focus:ring-red-500' : 'border-indigo-300 focus:ring-indigo-500'} shadow border rounded w-full py-1.5 px-3 transition focus:outline-none duration-300 rounded-md focus:ring-2 file:text-white file:-my-2 file:-mx-3 file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-indigo-500 file:px-6 file:py-2 file:[border-inline-end-width:1px] file:[margin-inline-end:1rem]`}
                 id={name}
-                defaultValue=""
+                type="file"
                 {...register(name, {
                     disabled: disabled,
                     validate: {
@@ -54,12 +60,11 @@ export const FormSelect: React.FC<IFormSelectProps> = ({
                         ...(validations && validationMapper(validations, required))
                     }
                 })}
+                ref={fileInputRef}
+                // TODO: Retain focus on input while file chooser popup is shown to prevent onBlur validation while still choosing file.
                 onBlur={onBlur ? () => onBlur() : () => trigger(name)}
-                onChange={onChange ? () => onChange() : (event) => setValue(name, event.target.value)}
-            >
-                <option value="">{placeholder}</option>
-                {children}
-            </select>
+                onChange={onChange ? () => onChange() : (event) => handleValueSetter(event)}
+            />
             {description && <InputDescription description={description} />}
             {errors && errors[name] && <InlineError errors={errors} name={name} />}
         </div>
