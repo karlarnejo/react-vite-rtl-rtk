@@ -12,7 +12,7 @@ export const ActionButtons: React.FC<IActionButtonsProps> = ({
     return (
         <div className="flex flex-col gap-4 md:flex-row">
             {actionButtons.map(({ label, onClick, variant, name }: IActionButtonProps) => (
-                <Button key={name} name={name} variant={variant} label={label} onClick={onClick} />
+                <Button key={name} name={name} variant={variant} label={label} roundedEdges='all' onClick={onClick} />
             ))}
         </div>
     );

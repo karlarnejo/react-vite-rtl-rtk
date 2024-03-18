@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, LoadingSpinner, Notification } from '../../ui-components';
+import { Button, LoadingSpinner, Notification, Pagination } from '../../ui-components';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ProductTable, ProductList, SearchProduct, DeleteModal } from '../../components';
 import { IProduct } from '../../common/types';
@@ -20,6 +20,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
 
     const [open, setOpen] = useState(false);
     const [idSelected, setIdSelected] = useState<string>('');
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     const form = useForm<IProductsFormValues>();
     const {
@@ -57,6 +58,18 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         setIdSelected(productData.productId);
     };
 
+    const handlePrev = () => {
+        setCurrentPage(currentPage - 1)
+    }
+
+    const handleNext = () => {
+        setCurrentPage(currentPage + 1)
+    }
+
+    const handlePages = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        setCurrentPage(parseInt(event.currentTarget.value))
+    }
+
     const onDelete = async (): Promise<void> => {
         await deleteProductFn({
             variables: { productId: idSelected },
@@ -91,6 +104,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                         label="Search Product"
                         onClick={handleSearchProduct}
                         variant="primary"
+                        roundedEdges='all'
                     />
                 </div>
             </div>
@@ -132,6 +146,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                     </div>
                 </div>
             </div>
+            <Pagination handleNext={handleNext} handlePrev={handlePrev} handlePages={handlePages} itemsPerPage={10} totalPages={20} currentPage={currentPage} />
             <DeleteModal open={open} setOpen={setOpen} onDelete={onDelete} />
         </>
     );

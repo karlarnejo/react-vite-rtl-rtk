@@ -49,6 +49,7 @@ export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React
                                                     name="view"
                                                     label="View"
                                                     variant="primary"
+                                                    roundedEdges='all'
                                                     onClick={() => viewItem && viewItem(product)}
                                                 />
                                             </div>
@@ -57,6 +58,7 @@ export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React
                                                     name="edit"
                                                     label="Edit"
                                                     variant="secondary"
+                                                    roundedEdges='all'
                                                     onClick={() => editItem && editItem(product)}
                                                 />
                                             </div>
@@ -65,6 +67,7 @@ export const ProductTable: React.FC<IProductTableProps> = ({ tableData }): React
                                                     name="delete"
                                                     label="Delete"
                                                     variant="secondary"
+                                                    roundedEdges='all'
                                                     onClick={() => deleteItem && deleteItem(product)}
                                                 />
                                             </div>

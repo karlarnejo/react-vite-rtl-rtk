@@ -13,7 +13,7 @@ export const Header: React.FC<IHeaderProps> = ({ headerTitle, buttonProps }): Re
 
             return (
                 <div className="flex flex-col mt-4 md:ml-auto">
-                    <Button name={name} label={label} onClick={onClick} variant={variant} />
+                    <Button name={name} label={label} onClick={onClick} variant={variant} roundedEdges='all' />
                 </div>
             );
         }
