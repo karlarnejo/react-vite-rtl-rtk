@@ -5,6 +5,7 @@ interface IPaginationProps {
     itemsPerPage: number;
     totalPages: number;
     currentPage: number;
+    siblings?: number;
     handleNext: () => void;
     handlePrev: () => void;
     handlePages: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -14,6 +15,7 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
     itemsPerPage = 10,
     totalPages,
     currentPage,
+    siblings = 2,
     handleNext,
     handlePrev,
     handlePages,
@@ -24,41 +26,39 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
 
     // Memoize the pages array to avoid unnecessary recalculations
     const handleCreatePages: (number | string)[] = useMemo(() => {
-        const adjacentPages: number = 2; // Number of pages to show on each side of the current page
         const pages: (number | string)[] = [];
 
-        // Calculate start and end page numbers based on the current page and adjacent pages
-        let startPage: number = Math.max(1, currentPage - adjacentPages);
-        let endPage: number = Math.min(totalPages, currentPage + adjacentPages);
+        pages.push(1);
 
-        // Add ellipsis or first page if necessary
-        if (startPage > 1) {
-            pages.push(1);
-            if (startPage > 2) {
+        if (totalPages <= 7) {
+            for (let i = 2; i < totalPages; i++) {
+                pages.push(i);
+            }
+        } else {
+            // first page
+            if (currentPage < 4 + siblings) {
+                for (let i = 2; i <= 4 + siblings; i++) {
+                    pages.push(i);
+                }
                 pages.push('...');
+                // last page
+            } else if (totalPages - currentPage < 4) {
+                pages.push('...');
+                for (let i = totalPages - 6 + siblings; i < totalPages; i++) {
+                    pages.push(i);
+                }
+                // middle page
+            } else {
+                pages.push('...');
+                for (let i = Math.max(2, currentPage - siblings); i <= Math.min(totalPages - 1, currentPage + siblings); i++) {
+                    pages.push(i);
+                }
+                pages.push('...');
+
             }
         }
 
-        // Add pages before the current page
-        for (let i = startPage; i < currentPage; i++) {
-            pages.push(i);
-        }
-
-        // Add current page
-        pages.push(currentPage);
-
-        // Add pages after the current page
-        for (let i = currentPage + 1; i <= endPage; i++) {
-            pages.push(i);
-        }
-
-        // Add ellipsis or last page if necessary
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                pages.push('...');
-            }
-            pages.push(totalPages);
-        }
+        pages.push(totalPages);
 
         return pages;
     }, [currentPage, totalPages]);
@@ -92,19 +92,20 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
                         disabled={disablePrev}
                         icon={
                             <svg
-                                className="w-3.5 h-3.5 me-2 rtl:rotate-180"
+                                className="w-6 h-6"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
                                 fill="none"
-                                viewBox="0 0 14 10"
+                                viewBox="0 0 24 24"
                             >
                                 <path
                                     stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M13 5H1m0 0 4 4M1 5l4-4"
-                                />
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m14 8-4 4 4 4" />
                             </svg>
                         }
                     />
@@ -128,7 +129,7 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
                     {/* Next Button */}
                     <Button
                         name="next"
-                        label="Next"
+                        label=""
                         variant="primary"
                         onClick={handleNext}
                         roundedEdges="right"
@@ -136,21 +137,23 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
                         iconPosition="right"
                         icon={
                             <svg
-                                className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
+                                className="w-6 h-6"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
                                 fill="none"
-                                viewBox="0 0 14 10"
+                                viewBox="0 0 24 24"
                             >
                                 <path
                                     stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                                />
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m10 16 4-4-4-4" />
                             </svg>
                         }
+
                     />
                 </ul>
             </div>
