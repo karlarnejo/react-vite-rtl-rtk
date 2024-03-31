@@ -24,3 +24,24 @@ export const handleRoundedChecker = (rounded: string | undefined) => {
             return '';
     }
 };
+
+export const handleButtonSize = (size: string | undefined) => {
+    switch (size) {
+        case 'xs':
+            return 'w-12';
+        case 'sm':
+            return 'w-16';
+        case 'md':
+            return 'w-24';
+        case 'lg':
+            return 'w-36';
+        case 'xl':
+            return 'w-52'
+        case 'xlg':
+            return 'w-64'
+        case 'xxl':
+            return 'w-96'
+        default:
+            return '';
+    }
+}

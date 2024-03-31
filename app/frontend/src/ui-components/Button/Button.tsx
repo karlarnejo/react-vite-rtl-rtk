@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { handleRoundedChecker, handleVariantChecker } from './Button.service';
+import { handleButtonSize, handleRoundedChecker, handleVariantChecker } from './Button.service';
 
 export interface IButtonProps {
     name: string;
@@ -9,12 +9,13 @@ export interface IButtonProps {
     icon?: ReactNode;
     selected?: boolean;
     disabled?: boolean;
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xlg' | 'xxl'
     value?: string | number;
     iconPosition?: 'left' | 'right';
     roundedEdges?: 'left' | 'right' | 'top' | 'bottom' | 'all';
 }
 
-export const Button: React.FC<IButtonProps> = ({ name, label, onClick, variant, icon, selected, disabled, value, iconPosition = 'left', roundedEdges }: IButtonProps): React.JSX.Element => {
+export const Button: React.FC<IButtonProps> = ({ name, label, onClick, variant, icon, selected, disabled, size, value, iconPosition = 'left', roundedEdges }: IButtonProps): React.JSX.Element => {
     return (
         <button
             id={name}
@@ -22,7 +23,7 @@ export const Button: React.FC<IButtonProps> = ({ name, label, onClick, variant, 
             value={value}
             onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onClick(event)}
             disabled={disabled}
-            className={`${handleVariantChecker(variant, selected, disabled)} ${handleRoundedChecker(roundedEdges)} py-2 px-4 flex items-center justify-center`}
+            className={`${handleButtonSize(size)} ${handleVariantChecker(variant, selected, disabled)} ${handleRoundedChecker(roundedEdges)} py-2 px-4 flex items-center justify-center`}
         >
             {icon && iconPosition === 'left' && icon}
             {label}

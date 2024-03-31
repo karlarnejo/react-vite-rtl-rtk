@@ -58,18 +58,6 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         setIdSelected(productData.productId);
     };
 
-    const handlePrev = () => {
-        setCurrentPage(currentPage - 1)
-    }
-
-    const handleNext = () => {
-        setCurrentPage(currentPage + 1)
-    }
-
-    const handlePages = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        setCurrentPage(parseInt(event.currentTarget.value))
-    }
-
     const onDelete = async (): Promise<void> => {
         await deleteProductFn({
             variables: { productId: idSelected },
@@ -118,13 +106,18 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                             closeable
                         />
                     ) : (
-                        <ProductTable
-                            tableData={handleActionMapper(data.getAllProducts, {
-                                viewItem: handleView,
-                                editItem: handleEdit,
-                                deleteItem: handleDelete
-                            })}
-                        />
+                        <>
+                            <ProductTable
+                                tableData={handleActionMapper(data.getAllProducts, {
+                                    viewItem: handleView,
+                                    editItem: handleEdit,
+                                    deleteItem: handleDelete
+                                })}
+                            />
+                            <div className='mt-4'>
+                                <Pagination totalRowCount={200} handlePages={setCurrentPage} itemsPerPage={10} totalPages={20} defaultPage={currentPage} />
+                            </div>
+                        </>
                     )}
                 </div>
                 <div className="mt-4 md:hidden">
@@ -146,7 +139,6 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                     </div>
                 </div>
             </div>
-            <Pagination handleNext={handleNext} handlePrev={handlePrev} handlePages={handlePages} itemsPerPage={10} totalPages={20} currentPage={currentPage} />
             <DeleteModal open={open} setOpen={setOpen} onDelete={onDelete} />
         </>
     );

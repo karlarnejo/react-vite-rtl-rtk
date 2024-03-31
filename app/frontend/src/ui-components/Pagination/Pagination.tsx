@@ -1,160 +1,230 @@
-import React, { useMemo, useCallback, MouseEvent } from "react";
+import React, { useMemo, useCallback, MouseEvent, useState } from "react";
 import { Button } from "..";
 
 interface IPaginationProps {
     itemsPerPage: number;
     totalPages: number;
-    currentPage: number;
-    siblings?: number;
-    handleNext: () => void;
-    handlePrev: () => void;
-    handlePages: (event: MouseEvent<HTMLButtonElement>) => void;
+    pageCount?: number;
+    defaultPage?: number;
+    totalRowCount?: number;
+    handlePages: React.Dispatch<React.SetStateAction<number>>;
 }
 
+// Current page state is in the user side so that the user can perform some additional logic depending on page number.
 export const Pagination: React.FC<IPaginationProps> = React.memo(({
     itemsPerPage = 10,
     totalPages,
-    currentPage,
-    siblings = 2,
-    handleNext,
-    handlePrev,
+    pageCount = 7,
+    totalRowCount,
+    defaultPage = 1,
     handlePages,
 }): JSX.Element => {
-    // Calculate if previous and next buttons should be disabled
-    const disablePrev: boolean = currentPage <= 1 || totalPages === 0;
-    const disableNext: boolean = currentPage >= totalPages || totalPages === 0;
+    const disablePrev: boolean = defaultPage === 1 || totalPages === 0;
+    const disableNext: boolean = defaultPage === totalPages || totalPages === 0;
+
+    const pageEnd: number = itemsPerPage * defaultPage;
+    const pageStart: number = (pageEnd - itemsPerPage) + 1;
+
+    const handleFirstPage = () => {
+        handlePages(1);
+    }
+
+    const handleLastPage = () => {
+        handlePages(totalPages)
+    }
+
+    const handlePrev = () => {
+        handlePages(defaultPage - 1)
+    }
+
+    const handleNext = () => {
+        handlePages(defaultPage + 1)
+    }
 
     // Memoize the pages array to avoid unnecessary recalculations
     const handleCreatePages: (number | string)[] = useMemo(() => {
         const pages: (number | string)[] = [];
 
-        pages.push(1);
-
-        if (totalPages <= 7) {
-            for (let i = 2; i < totalPages; i++) {
+        // Return pages immediately
+        if (totalPages <= pageCount) {
+            for (let i = 1; i <= totalPages; i++) {
                 pages.push(i);
             }
-        } else {
-            // first page
-            if (currentPage < 4 + siblings) {
-                for (let i = 2; i <= 4 + siblings; i++) {
-                    pages.push(i);
-                }
-                pages.push('...');
-                // last page
-            } else if (totalPages - currentPage < 4) {
-                pages.push('...');
-                for (let i = totalPages - 6 + siblings; i < totalPages; i++) {
-                    pages.push(i);
-                }
-                // middle page
-            } else {
-                pages.push('...');
-                for (let i = Math.max(2, currentPage - siblings); i <= Math.min(totalPages - 1, currentPage + siblings); i++) {
-                    pages.push(i);
-                }
-                pages.push('...');
-
-            }
+            return pages;
         }
 
-        pages.push(totalPages);
+        const halfDisplayCount: number = Math.floor(pageCount / 2);
+        let startPage: number = Math.max(1, defaultPage - halfDisplayCount);
+        let endPage: number = Math.min(totalPages, startPage + pageCount - 1);
+
+        // Adjust startPage if there are not enough pages to display
+        if (endPage - startPage < pageCount - 1) {
+            startPage = Math.max(1, endPage - pageCount + 1);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(i);
+        }
 
         return pages;
-    }, [currentPage, totalPages]);
+    }, [defaultPage, totalPages]);
 
     // Memoize event handler for clicking on pages
-    const handleClickPages = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-        handlePages(event);
+    const handleClickPages = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        handlePages(parseInt(event.currentTarget.value))
     }, [handlePages]);
 
-    // Render the Pagination component
+    const renderFirstNextButtons = (): JSX.Element => {
+        return (
+            <>
+                <Button
+                    name="first"
+                    label=""
+                    variant="primary"
+                    onClick={handleFirstPage}
+                    roundedEdges="all"
+                    disabled={disablePrev}
+                    icon={
+                        <svg
+                            className="w-6 h-6"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="m17 16-4-4 4-4m-6 8-4-4 4-4" />
+                        </svg>
+                    }
+                />
+                <Button
+                    name="prev"
+                    label=""
+                    variant="primary"
+                    onClick={handlePrev}
+                    roundedEdges="all"
+                    disabled={disablePrev}
+                    icon={
+                        <svg
+                            className="w-6 h-6"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="m14 8-4 4 4 4" />
+                        </svg>
+                    }
+                />
+            </>
+        )
+    }
+
+    const renderLastPrevButtons = (): JSX.Element => {
+        return (
+            <>
+                <Button
+                    name="next"
+                    label=""
+                    variant="primary"
+                    onClick={handleNext}
+                    roundedEdges="all"
+                    disabled={disableNext}
+                    icon={
+                        <svg
+                            className="w-6 h-6"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="m10 16 4-4-4-4" />
+                        </svg>
+                    }
+                />
+                <Button
+                    name="last"
+                    label=""
+                    variant="primary"
+                    onClick={handleLastPage}
+                    roundedEdges="all"
+                    disabled={disableNext}
+                    icon={
+                        <svg
+                            className="w-6 h-6"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="m7 16 4-4-4-4m6 8 4-4-4-4" />
+                        </svg>
+                    }
+                />
+            </>
+        );
+    }
+
     return (
         <div className="flex flex-col items-center">
-            <span className="text-sm text-gray-700">
-                Showing
-                <span className="font-semibold text-gray-900 dark:text-white"> 1 </span>
-                to
-                <span className="font-semibold text-gray-900 dark:text-white"> 10 </span>
-                of
-                <span className="font-semibold text-gray-900 dark:text-white"> 100 </span>
-                Entries
-            </span>
+            {totalRowCount && (
+                <div className="flex justify-end">
+                    <span className="text-sm text-gray-700">
+                        Showing
+                        <span className="font-semibold text-gray-900"> {pageStart} </span>
+                        to
+                        <span className="font-semibold text-gray-900"> {pageEnd} </span>
+                        of
+                        <span className="font-semibold text-gray-900"> {totalRowCount} </span>
+                        Entries
+                    </span>
+                </div>
+            )}
             <div className="inline-flex mt-2 xs:mt-0">
                 <ul className="inline-flex -space-x-px gap-x-2">
-                    {/* Previous Button */}
-                    <Button
-                        name="prev"
-                        label=""
-                        variant="primary"
-                        onClick={handlePrev}
-                        roundedEdges="left"
-                        disabled={disablePrev}
-                        icon={
-                            <svg
-                                className="w-6 h-6"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m14 8-4 4 4 4" />
-                            </svg>
-                        }
-                    />
-                    {/* Pages */}
+                    {renderFirstNextButtons()}
                     {handleCreatePages.map((page, index) => (
                         <li key={index}>
-                            {page === '...' ? (
-                                <span>{page}</span>
-                            ) : (
-                                <Button
-                                    name={page.toString()}
-                                    label={page.toString()}
-                                    value={page}
-                                    selected={currentPage === page}
-                                    variant="secondary"
-                                    onClick={handleClickPages}
-                                />
-                            )}
+                            <Button
+                                name={page.toString()}
+                                label={page.toString()}
+                                value={page}
+                                size="xs"
+                                roundedEdges="all"
+                                selected={defaultPage === page}
+                                variant="secondary"
+                                onClick={handleClickPages}
+                            />
                         </li>
                     ))}
-                    {/* Next Button */}
-                    <Button
-                        name="next"
-                        label=""
-                        variant="primary"
-                        onClick={handleNext}
-                        roundedEdges="right"
-                        disabled={disableNext}
-                        iconPosition="right"
-                        icon={
-                            <svg
-                                className="w-6 h-6"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m10 16 4-4-4-4" />
-                            </svg>
-                        }
-
-                    />
+                    {renderLastPrevButtons()}
                 </ul>
             </div>
         </div>
