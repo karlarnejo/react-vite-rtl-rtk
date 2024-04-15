@@ -22,7 +22,7 @@ npm test
 - Add Radio button
 - Add Checkbox
 - Add error handling
-- Add pagination to products page
+- Add pagination to products page (done)
 - Add search feature
 - Fix notification not removed after clicking X then navigate to another page and go back to page where notification was added.
 - Add/Fix tests

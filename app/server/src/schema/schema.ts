@@ -17,6 +17,12 @@ export const typeDefs = gql`
         description: String
     }
 
+    type ProductPaginatedResponse {
+        data: [Products]
+        totalPages: Int
+        totalItems: Int
+    }
+
     input PriceInput {
         currencyCode: String
         value: Float
@@ -47,7 +53,7 @@ export const typeDefs = gql`
     }
 
     type Query {
-        getAllProducts: [Products]
+        getAllProducts(page: Int, itemsPerPage: Int): ProductPaginatedResponse
         getProduct(productId: String): Products
     }
 

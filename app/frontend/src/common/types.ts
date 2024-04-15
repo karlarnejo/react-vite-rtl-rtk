@@ -99,3 +99,14 @@ export interface IResponseEditProduct extends IResponseStatus {
 export interface IResponseAddProduct extends IResponseStatus {
     productId: string;
 }
+
+export interface IProductPaginationParams {
+    page: number;
+    itemsPerPage: number;
+}
+
+export interface IBasePaginatedResponse<T> {
+    data: T;
+    totalPages: number;
+    totalItems: number;
+}

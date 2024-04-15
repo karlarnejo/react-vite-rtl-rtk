@@ -7,6 +7,17 @@ export interface IPrice {
     value: number;
 }
 
+export interface IProductPaginationParams {
+    page: number;
+    itemsPerPage: number;
+}
+
+export interface IBasePaginatedResponse<T> {
+    data: T;
+    totalPages: number;
+    totalItems: number;
+}
+
 export interface IProduct {
     img: string;
     // img: FileUpload;

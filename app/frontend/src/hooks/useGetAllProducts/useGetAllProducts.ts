@@ -1,23 +1,31 @@
 import { ApolloError, useQuery } from '@apollo/client';
-import { IProduct } from '../../common/types';
+import { IBasePaginatedResponse, IProduct } from '../../common/types';
 import { getAllProducts } from '../../data';
 
 export interface IGetAllProductsResponse {
-    getAllProducts: IProduct[];
+    getAllProducts: IBasePaginatedResponse<IProduct[]>;
 }
 
 export interface IUseGetAllProductsResponse {
+    fetchMore: any;
     data: IGetAllProductsResponse;
     error?: ApolloError;
     loading: boolean;
 }
 
-export const useGetAllProducts = (): IUseGetAllProductsResponse => {
-    const { loading, data, error } = useQuery<IGetAllProductsResponse>(getAllProducts);
+export const useGetAllProducts = (page: number, itemsPerPage: number) => {
+    const { fetchMore, loading, data, error } = useQuery<IGetAllProductsResponse>(getAllProducts, {
+        variables: {
+            page,
+            itemsPerPage
+        },
+        fetchPolicy: 'cache-and-network',
+        notifyOnNetworkStatusChange: true
+    });
 
     return {
-        // data, error, loading
-        data: { getAllProducts: (data && data.getAllProducts) ?? [] },
+        fetchMore,
+        data: { getAllProducts: (data && data.getAllProducts) ?? { data: [], totalItems: 0, totalPages: 0 } },
         error,
         loading
     };

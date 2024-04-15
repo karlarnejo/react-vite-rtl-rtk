@@ -12,3 +12,9 @@ export interface IProduct {
     price: IPrice;
     description?: string;
 }
+
+export interface IBasePaginatedResponse<T> {
+    data: T;
+    totalPages: number;
+    totalItems: number;
+}

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, MouseEvent, useState } from "react";
+import React, { useCallback, MouseEvent } from "react";
 import { Button } from "..";
 
 interface IPaginationProps {
@@ -7,11 +7,10 @@ interface IPaginationProps {
     pageCount?: number;
     defaultPage?: number;
     totalRowCount?: number;
-    handlePages: React.Dispatch<React.SetStateAction<number>>;
+    handlePages: (page: number) => void;
 }
 
-// Current page state is in the user side so that the user can perform some additional logic depending on page number.
-export const Pagination: React.FC<IPaginationProps> = React.memo(({
+export const Pagination: React.FC<IPaginationProps> = ({
     itemsPerPage = 10,
     totalPages,
     pageCount = 7,
@@ -25,25 +24,24 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
     const pageEnd: number = itemsPerPage * defaultPage;
     const pageStart: number = (pageEnd - itemsPerPage) + 1;
 
-    const handleFirstPage = () => {
+    const handleFirstPage: () => void = useCallback(() => {
         handlePages(1);
-    }
+    }, [handlePages])
 
-    const handleLastPage = () => {
+    const handleLastPage: () => void = useCallback(() => {
         handlePages(totalPages)
-    }
+    }, [handlePages, totalPages])
 
-    const handlePrev = () => {
+    const handlePrev: () => void = useCallback(() => {
         handlePages(defaultPage - 1)
-    }
+    }, [handlePages, defaultPage])
 
-    const handleNext = () => {
+    const handleNext: () => void = useCallback(() => {
         handlePages(defaultPage + 1)
-    }
+    }, [handlePages, defaultPage])
 
-    // Memoize the pages array to avoid unnecessary recalculations
-    const handleCreatePages: (number | string)[] = useMemo(() => {
-        const pages: (number | string)[] = [];
+    const handleCreatePages = (): number[] => {
+        const pages: number[] = [];
 
         // Return pages immediately
         if (totalPages <= pageCount) {
@@ -67,7 +65,7 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
         }
 
         return pages;
-    }, [defaultPage, totalPages]);
+    }
 
     // Memoize event handler for clicking on pages
     const handleClickPages = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -210,8 +208,8 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
             <div className="inline-flex mt-2 xs:mt-0">
                 <ul className="inline-flex -space-x-px gap-x-2">
                     {renderFirstNextButtons()}
-                    {handleCreatePages.map((page, index) => (
-                        <li key={index}>
+                    {handleCreatePages().map((page) => (
+                        <li key={page.toString()}>
                             <Button
                                 name={page.toString()}
                                 label={page.toString()}
@@ -229,4 +227,4 @@ export const Pagination: React.FC<IPaginationProps> = React.memo(({
             </div>
         </div>
     );
-});
+};

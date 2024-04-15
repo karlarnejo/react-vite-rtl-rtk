@@ -1,4 +1,4 @@
-import { IAddProductParams, IDeleteProductParams, IEditProductParams, IGetProductParams, IProduct, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../common/types";
+import { IAddProductParams, IBasePaginatedResponse, IDeleteProductParams, IEditProductParams, IGetProductParams, IProductPaginationParams, IProduct, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../common/types";
 import { IDataSources } from "../datasources";
 
 // TODO: Figure out how to import using index without using ts-loader and webpack
@@ -6,10 +6,10 @@ export const resolvers = {
     Query: {
         getAllProducts: async (
             _: any,
-            {}: any,
+            { page, itemsPerPage }: IProductPaginationParams,
             { dataSources }: { dataSources: IDataSources }
-        ): Promise<IProduct[]> => {
-            return dataSources.productApi.getAllProducts();
+        ): Promise<IBasePaginatedResponse<IProduct[]>> => {
+            return dataSources.productApi.getAllProducts(page, itemsPerPage);
         },
         getProduct: async (
             _: any,

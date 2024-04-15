@@ -1,15 +1,16 @@
 import { DownStreamApi } from "../../common/enums.js";
-import { IProduct, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../../common/types";
+import { IBasePaginatedResponse, IProductPaginationParams, IProduct, IResponseAddProduct, IResponseDeleteProduct, IResponseEditProduct } from "../../common/types";
 import { BaseDataSource } from "../base-data-source.js";
 
 // TODO: Figure out how to import using index without using ts-loader and webpack
 class ProductApi extends BaseDataSource {
 
-    public async getAllProducts(): Promise<IProduct[]> {
+    public async getAllProducts(page: number, itemsPerPage: number): Promise<IBasePaginatedResponse<IProduct[]>> {
         try {
+            console.log("aaa ", itemsPerPage)
             const baseURL: string = "http://localhost:5000";
             const productsDownstream: string = DownStreamApi.GetAllProducts;
-            return await this.get(`${baseURL}${productsDownstream}`);
+            return await this.get(`${baseURL}${productsDownstream}?page=${page}&itemsPerPage=${itemsPerPage}`);
         } catch (error) {
             //TODO: Add logger
             console.log("Error: Cannot fetch all products", error)

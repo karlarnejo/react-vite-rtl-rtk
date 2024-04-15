@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Button, LoadingSpinner, Notification, Pagination } from '../../ui-components';
 import { FormProvider, useForm } from 'react-hook-form';
-import { ProductTable, ProductList, SearchProduct, DeleteModal } from '../../components';
+import { ProductTable, ProductList, SearchProduct, DeleteModal, PaginatedTable } from '../../components';
 import { IProduct } from '../../common/types';
 import { useDeleteProduct, useGetAllProducts } from '../../hooks';
 import { handleActionMapper } from './FProducts.service';
@@ -21,6 +21,8 @@ export const FProducts: React.FC = (): React.JSX.Element => {
     const [open, setOpen] = useState(false);
     const [idSelected, setIdSelected] = useState<string>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+    const [searchQuery, setSearchQuery] = useState<string>('');
 
     const form = useForm<IProductsFormValues>();
     const {
@@ -28,12 +30,26 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         formState: { isValid }
     } = form;
 
-    const { data, error, loading } = useGetAllProducts();
+    const { fetchMore, data, error, loading } = useGetAllProducts(currentPage, itemsPerPage);
     const { deleteProductFn, error: deleteError, loading: deleteLoading } = useDeleteProduct();
 
     const handleOnSubmit = (values: IProductsFormValues): void => {
         console.log('Form Submitted: ', values, isValid);
+        if (isValid) {
+
+        }
     };
+
+    const handlePagination = (page: number) => {
+        setCurrentPage(page);
+        fetchMore({
+            variables: {
+                currentPage,
+                itemsPerPage: itemsPerPage
+            },
+            updateQuery: (_prev, { fetchMoreResult }) => fetchMoreResult
+        });
+    }
 
     const handleSearchProduct = () => {
         handleSubmit(handleOnSubmit)();
@@ -71,9 +87,10 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         setOpen(false);
     };
 
-    if (loading || deleteLoading) {
-        return <LoadingSpinner />;
-    }
+    // TODO: Find out why the entire page reloads if returning Loading spinner
+    // if (loading || deleteLoading) {
+    //     return <LoadingSpinner />;
+    // }
 
     return (
         <>
@@ -106,18 +123,17 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                             closeable
                         />
                     ) : (
-                        <>
-                            <ProductTable
-                                tableData={handleActionMapper(data.getAllProducts, {
-                                    viewItem: handleView,
-                                    editItem: handleEdit,
-                                    deleteItem: handleDelete
-                                })}
-                            />
-                            <div className='mt-4'>
-                                <Pagination totalRowCount={200} handlePages={setCurrentPage} itemsPerPage={10} totalPages={20} defaultPage={currentPage} />
-                            </div>
-                        </>
+                        <PaginatedTable
+                            tableData={handleActionMapper(data.getAllProducts.data, {
+                                viewItem: handleView,
+                                editItem: handleEdit,
+                                deleteItem: handleDelete
+                            })}
+                            handlePagination={handlePagination}
+                            currentPage={currentPage}
+                            itemsPerPage={itemsPerPage}
+                            data={data}
+                        />
                     )}
                 </div>
                 <div className="mt-4 md:hidden">
@@ -131,7 +147,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                             />
                         ) : (
                             <ProductList
-                                listData={handleActionMapper(data.getAllProducts, {
+                                listData={handleActionMapper(data.getAllProducts.data, {
                                     viewItem: handleView
                                 })}
                             />

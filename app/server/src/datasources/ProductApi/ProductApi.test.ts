@@ -59,7 +59,7 @@ describe("ProductApi", () => {
     describe('getAllProducts source success', () => {
         it('should call getAllProducts api and return its data', async () => {
             expect(sourceProductApi).toBeTruthy();
-            await sourceProductApi.getAllProducts();
+            await sourceProductApi.getAllProducts(1,2);
             expect(mockGet).toHaveBeenCalledWith('products');
         });
     });
@@ -70,7 +70,7 @@ describe("ProductApi", () => {
 
             try {
                 const productApi: ProductApi = new ProductApi(mockContext);
-                await productApi.getAllProducts();
+                await productApi.getAllProducts(1,2);
             } catch (error) {
                 expect(error).toBe('error');
             }

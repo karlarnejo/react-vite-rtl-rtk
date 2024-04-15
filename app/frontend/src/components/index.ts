@@ -13,3 +13,4 @@ export * from './FormInputQty';
 export * from './FormInputPrice';
 export * from './FormInputDescription';
 export * from './FormInputProductImg';
+export * from './PaginatedTable';
