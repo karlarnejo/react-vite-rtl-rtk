@@ -13,13 +13,14 @@ export interface IUseGetAllProductsResponse {
     loading: boolean;
 }
 
-export const useGetAllProducts = (page: number, itemsPerPage: number) => {
+export const useGetAllProducts = (searchQuery: string, page?: number, itemsPerPage?: number) => {
     const { fetchMore, loading, data, error } = useQuery<IGetAllProductsResponse>(getAllProducts, {
         variables: {
             page,
-            itemsPerPage
+            itemsPerPage,
+            searchQuery
         },
-        fetchPolicy: 'cache-and-network',
+        // fetchPolicy: 'cache-and-network',
         notifyOnNetworkStatusChange: true
     });
 

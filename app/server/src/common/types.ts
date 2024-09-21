@@ -10,6 +10,7 @@ export interface IPrice {
 export interface IProductPaginationParams {
     page: number;
     itemsPerPage: number;
+    searchQuery: string;
 }
 
 export interface IBasePaginatedResponse<T> {

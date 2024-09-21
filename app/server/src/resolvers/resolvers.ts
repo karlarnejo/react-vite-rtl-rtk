@@ -6,10 +6,10 @@ export const resolvers = {
     Query: {
         getAllProducts: async (
             _: any,
-            { page, itemsPerPage }: IProductPaginationParams,
+            { page, itemsPerPage, searchQuery}: IProductPaginationParams,
             { dataSources }: { dataSources: IDataSources }
         ): Promise<IBasePaginatedResponse<IProduct[]>> => {
-            return dataSources.productApi.getAllProducts(page, itemsPerPage);
+            return dataSources.productApi.getAllProducts(page, itemsPerPage, searchQuery);
         },
         getProduct: async (
             _: any,

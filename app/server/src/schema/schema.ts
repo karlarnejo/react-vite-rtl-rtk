@@ -53,7 +53,7 @@ export const typeDefs = gql`
     }
 
     type Query {
-        getAllProducts(page: Int, itemsPerPage: Int): ProductPaginatedResponse
+        getAllProducts(page: Int, itemsPerPage: Int, searchQuery: String): ProductPaginatedResponse
         getProduct(productId: String): Products
     }
 

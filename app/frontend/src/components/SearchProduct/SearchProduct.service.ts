@@ -23,8 +23,8 @@ export const validationSample: IFormValidationsProps[] = [
     {
         name: 'inputMaxSix',
         expression: (value: string) => {
-            return !value || value.length <= 6;
+            return !value || value.length <= 30;
         },
-        message: 'Input should not go beyond 6 characters'
+        message: 'Input should not go beyond 30 characters'
     }
 ];

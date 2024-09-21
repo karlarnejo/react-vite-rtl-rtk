@@ -9,7 +9,6 @@ export const SearchProduct: React.FC = (): React.JSX.Element => {
             validations={validationSample}
             placeholder="Search"
             description="Enter product name"
-            required
         />
     );
 };

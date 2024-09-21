@@ -7,7 +7,7 @@ import { useDeleteProduct, useGetAllProducts } from '../../hooks';
 import { handleActionMapper } from './FProducts.service';
 import { useDispatch } from 'react-redux';
 import { setDeleteProduct } from '../../store/ProductSlice';
-import { useNavigate } from 'react-router-dom';
+import { Params, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ApplicationRoutes } from '../../common/enums';
 
 export interface IProductsFormValues {
@@ -18,11 +18,19 @@ export const FProducts: React.FC = (): React.JSX.Element => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    //GET SEARCH QUERY FROM LINK. IF NULL, PASS BLANK
+
+    const location = useLocation();
+    const query: URLSearchParams = new URLSearchParams(location.search);
+
+    const currentPage = query.get('currentPage');
+    const itemsPerPage = query.get('itemsPerPage')
+    const searchQuery = query.get('searchQuery')
+
     const [open, setOpen] = useState(false);
     const [idSelected, setIdSelected] = useState<string>('');
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(2);
-    const [searchQuery, setSearchQuery] = useState<string>('');
+    // const [currentPage, setCurrentPage] = useState<number>(1);
+    // const [itemsPerPage, setItemsPerPage] = useState<number>(2);
 
     const form = useForm<IProductsFormValues>();
     const {
@@ -30,22 +38,34 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         formState: { isValid }
     } = form;
 
-    const { fetchMore, data, error, loading } = useGetAllProducts(currentPage, itemsPerPage);
+    const { fetchMore, data, error, loading } = useGetAllProducts('', Number(currentPage), Number(itemsPerPage));
     const { deleteProductFn, error: deleteError, loading: deleteLoading } = useDeleteProduct();
 
     const handleOnSubmit = (values: IProductsFormValues): void => {
         console.log('Form Submitted: ', values, isValid);
         if (isValid) {
+            const { searchProduct } = values;
+            console.log("aaa ", searchProduct, !searchProduct ? 1 : currentPage)
 
+            fetchMore({
+                variables: {
+                    currentPage: !searchProduct ? 1 : currentPage,
+                    // currentPage: 5,
+                    itemsPerPage: itemsPerPage,
+                    searchQuery: searchProduct ?? ''
+                },
+                updateQuery: (_prev, { fetchMoreResult }) => fetchMoreResult
+            });
         }
     };
 
     const handlePagination = (page: number) => {
-        setCurrentPage(page);
+        // setCurrentPage(page);
         fetchMore({
             variables: {
                 currentPage,
-                itemsPerPage: itemsPerPage
+                itemsPerPage: itemsPerPage,
+                // searchQuery: 'Toughjoyfax'
             },
             updateQuery: (_prev, { fetchMoreResult }) => fetchMoreResult
         });
@@ -130,8 +150,8 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                                 deleteItem: handleDelete
                             })}
                             handlePagination={handlePagination}
-                            currentPage={currentPage}
-                            itemsPerPage={itemsPerPage}
+                            currentPage={Number(currentPage)}
+                            itemsPerPage={Number(itemsPerPage)}
                             data={data}
                         />
                     )}

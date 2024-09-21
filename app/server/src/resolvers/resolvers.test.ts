@@ -51,7 +51,7 @@ describe('resolvers', () => {
         };
 
         it('Query - getAllProducts', async () => {
-            await resolvers.Query.getAllProducts(undefined, {page: 1, itemsPerPage: 2}, { dataSources } as any);
+            await resolvers.Query.getAllProducts(undefined, {page: 1, itemsPerPage: 2, searchQuery: 'asd'}, { dataSources } as any);
             expect(dataSources.productApi.getAllProducts).toHaveBeenCalled();
         });
 

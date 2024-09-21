@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from 'react-router-dom';
-import { Token } from '../hooks/useApolloClient';
+import { Token } from '../common/types';
 
 export interface IPrivateRouteProps {
     token: Token;
