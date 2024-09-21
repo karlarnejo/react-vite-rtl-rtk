@@ -28,7 +28,6 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
     const { productName, img, productType, qty, price, description } = getProduct || {};
     const { value } = price || {};
 
-    console.log("aaa ", data)
     const handleEdit = useCallback(() => {
         navigate(`${ApplicationRoutes.EditProductDetail}/${productId}`);
     }, [navigate, productId]);

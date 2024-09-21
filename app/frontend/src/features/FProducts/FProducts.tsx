@@ -21,7 +21,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
     const [open, setOpen] = useState(false);
     const [idSelected, setIdSelected] = useState<string>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(2);
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     const form = useForm<IProductsFormValues>();

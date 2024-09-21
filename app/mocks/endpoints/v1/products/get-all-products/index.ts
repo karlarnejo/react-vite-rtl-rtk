@@ -7,7 +7,6 @@ export const requestHandler = (req) => {
     const { params, query, path, headers } = req;
     const { page, itemsPerPage } = query;
 
-    console.log("bbb ", page, itemsPerPage)
     // Write your conditions here in switch depending on what you want to return
     return {
         status: 200,
