@@ -13,14 +13,15 @@ import {
     FormInputProductType,
     FormInputQty
 } from '../../components';
-import { IAddProductResponse, useAddProduct } from '../../hooks';
+import { useAddProduct } from '../../hooks';
 import { setAddProduct } from '../../store/ProductSlice';
+import { ProductType } from "../../common/enums";
 
 export const FAddProduct: React.FC = (): React.JSX.Element => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { addProductFn, data, loading, error } = useAddProduct();
+    const { addProductFn, data, isLoading, error } = useAddProduct();
 
     const form = useForm<IAddProductDetailsFormValues>({
         defaultValues: {
@@ -39,27 +40,30 @@ export const FAddProduct: React.FC = (): React.JSX.Element => {
 
     const handleOnSubmit = async (values: IAddProductDetailsFormValues): Promise<void> => {
         if (isValid) {
-            await addProductFn({
-                variables: {
-                    product: {
-                        ...values,
-                        qty: Number(values.qty),
-                        price: { currencyCode: 'PHP', value: Number(values.price) }
-                    }
-                },
-                onCompleted: (response: IAddProductResponse): void => {
+            try {
+                const response = await addProductFn({
+                    img: values.img,
+                    productName: values.productName,
+                    productType: ProductType[values.productType as keyof typeof ProductType],
+                    qty: Number(values.qty),
+                    price: { currencyCode: 'PHP', value: Number(values.price) },
+                    description: values.description,
+                });
+
+                if (response) {
                     dispatch(
                         setAddProduct({
                             status: 'SUCCESS',
-                            productId: response.addProduct.productId
+                            productId: response.productId
                         })
                     );
-                },
-                onError: (): void => {
-                    dispatch(setAddProduct({ status: 'FAILED' }));
+
+                    navigate(ApplicationRoutes.Products);
                 }
-            });
-            navigate(ApplicationRoutes.Products);
+            } catch (error) {
+                dispatch(setAddProduct({ status: 'FAILED' }));
+                console.error('Error adding product:', error);
+            }
         }
     };
 
@@ -71,7 +75,7 @@ export const FAddProduct: React.FC = (): React.JSX.Element => {
         navigate(ApplicationRoutes.Products);
     }, [navigate]);
 
-    if (loading) {
+    if (isLoading) {
         return <LoadingSpinner />;
     }
 

@@ -18,10 +18,10 @@ import { setEditProduct } from '../../store/ProductSlice';
 export const FEditProductDetails: React.FC = (): React.JSX.Element => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { productId } = useParams();
+    const { productId } = useParams<{ productId: string }>();
 
-    const { data, loading, error } = useGetProduct({ productId: productId || '' });
-    const { editProductFn, data: editData, loading: editLoading, error: editError } = useEditProduct();
+    const { data, isLoading, error } = useGetProduct({ productId: productId || '' });
+    const { editProductFn, data: editData, isLoading: editLoading, error: editError } = useEditProduct();
 
     const form = useForm<IEditProductDetailsFormValues>({
         defaultValues: {
@@ -40,24 +40,28 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
     } = form;
 
     const handleOnSubmit = async (values: IEditProductDetailsFormValues): Promise<void> => {
+        if (!productId) {
+            console.error('Show error notification that productId is empty');
+            return;
+        }
+
         if (isValid) {
-            await editProductFn({
-                variables: {
+            try {
+                await editProductFn({
                     productId,
                     product: {
                         ...values,
                         qty: Number(values.qty),
                         price: { currencyCode: 'PHP', value: Number(values.price) }
                     }
-                },
-                onCompleted: (): void => {
-                    dispatch(setEditProduct({ status: 'SUCCESS', productId }));
-                },
-                onError: (): void => {
-                    dispatch(setEditProduct({ status: 'FAILED', productId }));
-                }
-            });
-            navigate(`${ApplicationRoutes.ProductDetail}/${productId}`);
+                });
+
+                dispatch(setEditProduct({ status: 'SUCCESS', productId }));
+                navigate(`${ApplicationRoutes.ProductDetail}/${productId}`);
+            } catch (error) {
+                dispatch(setEditProduct({ status: 'FAILED', productId }));
+                console.error('Error editing product:', error);
+            }
         }
     };
 
@@ -71,10 +75,9 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
 
     // TODO: Transfer to a custom hook
     useEffect(() => {
-        if (data && data.getProduct) {
+        if (data) {
 
-            const { getProduct } = data || {};
-            const { img, productName, productType, qty, price, description } = getProduct || {};
+            const { img, productName, productType, qty, price, description } = data || {};
             const { value } = price || {};
 
             reset({
@@ -88,7 +91,7 @@ export const FEditProductDetails: React.FC = (): React.JSX.Element => {
         }
     }, [data, reset]);
 
-    if (loading || editLoading) {
+    if (isLoading || editLoading) {
         return <LoadingSpinner />;
     }
 

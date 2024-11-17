@@ -7,8 +7,11 @@ import { ApolloProvider } from '@apollo/client';
 import { useState } from 'react';
 import { useApolloClient } from './hooks/useApolloClient/useApolloClient';
 import { Token } from './common/types';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const App: React.FC = (): React.JSX.Element => {
+    const queryClient = new QueryClient();
+
     const [token, setToken] = useState<Token>({
         tokenValue: 'mockTokenValue'
     });
@@ -20,13 +23,15 @@ const App: React.FC = (): React.JSX.Element => {
         <>
             {/* TODO: Add more provider if necessary */}
             <div className="font-poppins min-w-[200px] min-h-[50px] mr-20 ml-20 mt-12 mb-12 md:mr-40 md:ml-40">
-                <ApolloProvider client={client}>
+                <QueryClientProvider client={queryClient}>
+                    {/* <ApolloProvider client={client}> */}
                     <Provider store={store}>
                         <BrowserRouter>
                             <AppRoute token={token} />
                         </BrowserRouter>
                     </Provider>
-                </ApolloProvider>
+                    {/* </ApolloProvider> */}
+                </QueryClientProvider>,
             </div>
         </>
     );

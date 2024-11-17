@@ -7,8 +7,8 @@ export const handleEndpoints = (server, api) => {
             return
         case 'POST':
             handlePostEndpoint(server, path, request)
-        case 'PUT':
-            handlePutEndpoint(server, path, request)
+        case 'PATCH':
+            handlePatchEndpoint(server, path, request)
         case 'DELETE':
             handleDeleteEndpoint(server, path, request)
         default:
@@ -35,8 +35,8 @@ export const handlePostEndpoint = (server, path, request) => {
     });
 };
 
-export const handlePutEndpoint = (server, path, request) => {
-    server.put(path, (req, res) => {
+export const handlePatchEndpoint = (server, path, request) => {
+    server.patch(path, (req, res) => {
         const { status, data } = request(req);
 
         res.set('Content-Type', 'application/json');                      

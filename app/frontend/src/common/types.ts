@@ -57,6 +57,16 @@ export interface IProduct {
     actions?: IActions;
 }
 
+export interface IAddProduct {
+    img: string;
+    // img: FileUpload;
+    productName: string;
+    productType: ProductType;
+    qty: number;
+    price: IPrice;
+    description?: string;
+}
+
 export interface IEditProductDetailsFormValues {
     img: string;
     // img: File;

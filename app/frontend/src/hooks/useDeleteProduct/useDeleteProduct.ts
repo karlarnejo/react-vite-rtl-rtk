@@ -1,25 +1,27 @@
-import { ApolloError, useMutation, MutationFunctionOptions, FetchResult } from '@apollo/client';
 import { IResponseDeleteProduct } from '../../common/types';
-import { deleteProduct } from '../../data';
-
-export interface IDeleteProductResponse {
-    deleteProduct: IResponseDeleteProduct;
-}
+import { useMutation } from 'react-query';
+import { axiosDelete } from '../../hooks/useAxiosInstance/useAxiosInstance';
+import { AxiosError } from 'axios';
 
 export interface IUseDeleteProductResponse {
-    deleteProductFn: (options?: MutationFunctionOptions) => Promise<FetchResult<IDeleteProductResponse>>;
-    data?: IDeleteProductResponse | undefined | null;
-    error?: ApolloError;
-    loading: boolean;
+    deleteProductFn: (productId: string) => Promise<IResponseDeleteProduct | void>;
+    data?: IResponseDeleteProduct | null;
+    error?: AxiosError | null;
+    isLoading: boolean;
 }
 
 export const useDeleteProduct = (): IUseDeleteProductResponse => {
-    const [deleteProductFn, { loading, data, error }] = useMutation<IDeleteProductResponse>(deleteProduct);
+    const { mutateAsync: deleteProductFn, data, error, isLoading } = useMutation<IResponseDeleteProduct, AxiosError, string>(deleteProduct);
 
     return {
         deleteProductFn,
         data,
         error,
-        loading
+        isLoading,
     };
+};
+
+export const deleteProduct = async (productId: string): Promise<IResponseDeleteProduct> => {
+    const response = await axiosDelete<IResponseDeleteProduct>(`http://localhost:5000/products/${productId}`);
+    return response.data;
 };

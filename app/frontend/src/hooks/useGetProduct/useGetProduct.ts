@@ -1,30 +1,35 @@
-import { ApolloError, useQuery } from '@apollo/client';
+import { AxiosError } from 'axios';
 import { IProduct } from '../../common/types';
-import { getProduct } from '../../data';
+import { axiosGet } from '../../hooks/useAxiosInstance/useAxiosInstance';
+import { useQuery } from 'react-query';
 
 export interface IUseGetProductParams {
     productId: string;
 }
 
-export interface IGetProductResponse {
-    getProduct: IProduct;
-}
-
 export interface IUseGetProductResponse {
-    data?: IGetProductResponse;
-    error?: ApolloError;
-    loading: boolean;
+    data?: IProduct;
+    error?: AxiosError | null;
+    isLoading: boolean;
 }
 
 export const useGetProduct = ({ productId }: IUseGetProductParams): IUseGetProductResponse => {
-    const { loading, data, error } = useQuery<IGetProductResponse>(getProduct, {
-        variables: { productId }
-    });
+    const { isLoading, data, error } = useQuery<IProduct, AxiosError>(
+        ["getProduct", productId],
+        () => retrieveProduct(productId),
+        {
+            enabled: !!productId,
+        }
+    );
 
     return {
-        // data, error, loading
         data,
         error,
-        loading
+        isLoading
     };
+};
+
+export const retrieveProduct = async (productId: string) => {
+    const response = await axiosGet<IProduct>(`http://localhost:5000/products/${productId}`);
+    return response.data;
 };

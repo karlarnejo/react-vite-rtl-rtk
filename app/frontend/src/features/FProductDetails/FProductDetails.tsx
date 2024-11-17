@@ -19,13 +19,12 @@ export interface IProductDetailsFormValues {
 export const FProductDetails: React.FC = (): React.JSX.Element => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { productId } = useParams();
+    const { productId } = useParams<{ productId: string }>();
 
     const [open, setOpen] = useState(false);
-    const { deleteProductFn, error: deleteError, loading: deleteLoading } = useDeleteProduct();
-    const { data, loading, error } = useGetProduct({ productId: productId || '' });
-    const { getProduct } = data || {};
-    const { productName, img, productType, qty, price, description } = getProduct || {};
+    const { deleteProductFn, error: deleteError, isLoading: deleteLoading } = useDeleteProduct();
+    const { data, isLoading, error } = useGetProduct({ productId: productId || '' });
+    const { productName, img, productType, qty, price, description } = data || {};
     const { value } = price || {};
 
     const handleEdit = useCallback(() => {
@@ -33,24 +32,28 @@ export const FProductDetails: React.FC = (): React.JSX.Element => {
     }, [navigate, productId]);
 
     const handleOnDelete = async (): Promise<void> => {
-        await deleteProductFn({
-            variables: { productId },
-            onCompleted: (): void => {
-                dispatch(setDeleteProduct({ status: 'SUCCESS', productId }));
-            },
-            onError: (): void => {
-                dispatch(setDeleteProduct({ status: 'FAILED', productId }));
-            }
-        });
-        setOpen(false);
-        navigate(ApplicationRoutes.Products);
+        if (!productId) {
+            console.error('Show error notification that productId is empty');
+            return;
+        }
+
+        try {
+            await deleteProductFn(productId);
+            dispatch(setDeleteProduct({ status: 'SUCCESS', productId }));
+        } catch (error) {
+            dispatch(setDeleteProduct({ status: 'FAILED', productId }));
+            console.error('Error deleting product:', error);
+        } finally {
+            setOpen(false);
+            // navigate(ApplicationRoutes.Products);
+        }
     };
 
     const handleBack = useCallback(() => {
         navigate(ApplicationRoutes.Products);
     }, [navigate]);
 
-    if (loading || deleteLoading) {
+    if (isLoading || deleteLoading) {
         return <LoadingSpinner />;
     }
 

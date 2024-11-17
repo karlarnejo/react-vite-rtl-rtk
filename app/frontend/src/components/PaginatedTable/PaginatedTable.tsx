@@ -1,13 +1,12 @@
 import { ProductTable } from "..";
-import { IProduct } from "../../common/types";
-import { IGetAllProductsResponse } from "../../hooks";
+import { IBasePaginatedResponse, IProduct } from "../../common/types";
 import { Pagination } from "../../ui-components";
 
 export interface IPaginatedTable {
     tableData: IProduct[]
     handlePagination: (page: number) => void
     currentPage: number
-    data: IGetAllProductsResponse;
+    data: IBasePaginatedResponse<IProduct[]>;
     itemsPerPage: number;
 }
 
@@ -19,10 +18,10 @@ export const PaginatedTable: React.FC<IPaginatedTable> = ({ tableData, handlePag
             />
             <div className='mt-4'>
                 <Pagination
-                    totalRowCount={data.getAllProducts.totalItems}
+                    totalRowCount={data.totalItems}
                     handlePages={handlePagination}
                     itemsPerPage={itemsPerPage}
-                    totalPages={data.getAllProducts.totalPages}
+                    totalPages={data.totalPages}
                     defaultPage={currentPage}
                 />
             </div>

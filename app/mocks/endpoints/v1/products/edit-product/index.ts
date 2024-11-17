@@ -27,7 +27,7 @@ export const handler = (req) => {
     // return immediately to force a response
     // return { status: 405, data:{ getAllProductsFailure}}
     switch(req.method) {
-        case 'PUT':
+        case 'PATCH':
             return requestHandler(req)
         default:
             return { status: 405, data:{ editProductFailure }}
@@ -37,7 +37,7 @@ export const handler = (req) => {
 export const path = "/products/:productId";
 
 export default {
-    requestMethod: "PUT",
+    requestMethod: "PATCH",
     path: path,
     request: handler
 }

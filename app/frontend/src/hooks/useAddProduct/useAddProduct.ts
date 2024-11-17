@@ -1,25 +1,30 @@
-import { ApolloError, useMutation, MutationFunctionOptions, FetchResult } from '@apollo/client';
-import { IResponseAddProduct } from '../../common/types';
-import { addProduct } from '../../data';
+import { IAddProduct, IResponseAddProduct } from '../../common/types';
+import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
+import { axiosPost } from '../../hooks/useAxiosInstance/useAxiosInstance';
 
-export interface IAddProductResponse {
-    addProduct: IResponseAddProduct;
-}
 
 export interface IUseAddProductResponse {
-    addProductFn: (options?: MutationFunctionOptions) => Promise<FetchResult<IAddProductResponse>>;
-    data?: IAddProductResponse | undefined | null;
-    error?: ApolloError;
-    loading: boolean;
+    addProductFn: (product: IAddProduct) => Promise<IResponseAddProduct | undefined>;
+    data?: IResponseAddProduct | undefined | null;
+    error?: AxiosError | null;
+    isLoading: boolean;
 }
 
 export const useAddProduct = (): IUseAddProductResponse => {
-    const [addProductFn, { loading, data, error }] = useMutation<IAddProductResponse>(addProduct);
+    const { mutateAsync: addProductFn, data, error, isLoading } = useMutation<IResponseAddProduct, AxiosError, IAddProduct>(
+        (product) => addProduct(product)
+    );
 
     return {
         addProductFn,
         data,
         error,
-        loading
+        isLoading,
     };
+};
+
+export const addProduct = async (product: IAddProduct): Promise<IResponseAddProduct> => {
+    const response = await axiosPost<IResponseAddProduct>('http://localhost:5000/products', product);
+    return response.data;
 };

@@ -21,7 +21,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
     const [open, setOpen] = useState(false);
     const [idSelected, setIdSelected] = useState<string>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(2);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     const form = useForm<IProductsFormValues>();
@@ -30,8 +30,8 @@ export const FProducts: React.FC = (): React.JSX.Element => {
         formState: { isValid }
     } = form;
 
-    const { fetchMore, data, error, loading } = useGetAllProducts(currentPage, itemsPerPage);
-    const { deleteProductFn, error: deleteError, loading: deleteLoading } = useDeleteProduct();
+    const { data, error, isLoading } = useGetAllProducts(currentPage, itemsPerPage);
+    const { deleteProductFn, error: deleteError, isLoading: deleteLoading } = useDeleteProduct();
 
     const handleOnSubmit = (values: IProductsFormValues): void => {
         console.log('Form Submitted: ', values, isValid);
@@ -42,13 +42,6 @@ export const FProducts: React.FC = (): React.JSX.Element => {
 
     const handlePagination = (page: number) => {
         setCurrentPage(page);
-        fetchMore({
-            variables: {
-                currentPage,
-                itemsPerPage: itemsPerPage
-            },
-            updateQuery: (_prev, { fetchMoreResult }) => fetchMoreResult
-        });
     }
 
     const handleSearchProduct = () => {
@@ -75,22 +68,26 @@ export const FProducts: React.FC = (): React.JSX.Element => {
     };
 
     const onDelete = async (): Promise<void> => {
-        await deleteProductFn({
-            variables: { productId: idSelected },
-            onCompleted: (): void => {
-                dispatch(setDeleteProduct({ status: 'SUCCESS', productId: idSelected }));
-            },
-            onError: (): void => {
-                dispatch(setDeleteProduct({ status: 'FAILED', productId: idSelected }));
-            }
-        });
-        setOpen(false);
+        if (!idSelected) {
+            console.error('Show error notification that productId is empty');
+            return;
+        }
+
+        try {
+            await deleteProductFn(idSelected);
+            dispatch(setDeleteProduct({ status: 'SUCCESS', productId: idSelected }));
+        } catch (error) {
+            dispatch(setDeleteProduct({ status: 'FAILED', productId: idSelected }));
+            console.error('Error deleting product:', error);
+        } finally {
+            setOpen(false);
+        }
     };
 
     // TODO: Find out why the entire page reloads if returning Loading spinner
-    // if (loading || deleteLoading) {
-    //     return <LoadingSpinner />;
-    // }
+    if (isLoading || deleteLoading) {
+        return <LoadingSpinner />;
+    }
 
     return (
         <>
@@ -124,7 +121,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                         />
                     ) : (
                         <PaginatedTable
-                            tableData={handleActionMapper(data.getAllProducts.data, {
+                            tableData={handleActionMapper(data.data, {
                                 viewItem: handleView,
                                 editItem: handleEdit,
                                 deleteItem: handleDelete
@@ -147,7 +144,7 @@ export const FProducts: React.FC = (): React.JSX.Element => {
                             />
                         ) : (
                             <ProductList
-                                listData={handleActionMapper(data.getAllProducts.data, {
+                                listData={handleActionMapper(data.data, {
                                     viewItem: handleView
                                 })}
                             />
